@@ -147,8 +147,10 @@
 #pragma mark - TableView Delegate
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Perform segue to candy detail
-    [self performSegueWithIdentifier:@"showEpisodeDetail" sender:tableView];
+    // Perform segue to episode detail
+    if (tableView == self.searchDisplayController.searchResultsTableView) {
+        [self performSegueWithIdentifier:@"showEpisodeDetail" sender:tableView];        
+    }
 }
 
 #pragma mark - Segues
