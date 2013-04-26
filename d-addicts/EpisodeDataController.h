@@ -12,6 +12,7 @@
 
 @interface EpisodeDataController : NSObject
 
+- (NSMutableArray *)episodes;
 - (void)refreshEpisodes:(BOOL)force;
 - (NSUInteger)countOfList;
 - (Episode *)objectInListAtIndex:(NSUInteger)index;

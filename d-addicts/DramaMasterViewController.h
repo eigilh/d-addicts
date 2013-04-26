@@ -8,9 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DramaMasterViewController : UITableViewController
+@interface DramaMasterViewController : UITableViewController <UISearchBarDelegate, UISearchDisplayDelegate>
 
-- (IBAction)done:(UIStoryboardSegue *)segue;
-- (IBAction)cancel:(UIStoryboardSegue *)segue;
+@property (weak, nonatomic) IBOutlet UISearchBar *episodeSearchBar;
+-(IBAction)goToSearch:(id)sender;
 
 @end

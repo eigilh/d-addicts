@@ -12,10 +12,9 @@
 #import "EpisodeDataController.h"
 #import "Episode.h"
 
-#import "FilterViewController.h"
-
 @interface DramaMasterViewController ()
 @property (nonatomic, strong) EpisodeDataController *dataController;
+@property (strong,nonatomic) NSArray *filteredEpisodes;
 @end
 
 @implementation DramaMasterViewController
@@ -39,6 +38,14 @@
     [self.refreshControl addTarget:self
                             action:@selector(refresh:)
                   forControlEvents:UIControlEventValueChanged];
+
+    // Hide the search bar until user scrolls up
+    CGRect newBounds = self.tableView.bounds;
+    newBounds.origin.y = newBounds.origin.y + self.episodeSearchBar.bounds.size.height;
+    self.tableView.bounds = newBounds;
+
+    self.episodeSearchBar.showsScopeBar = NO;
+    
     [self refreshEpisodesForce:NO];
 }
 
@@ -55,22 +62,78 @@
     });    
 }
 
+
+#pragma mark - Content Filtering
+
+-(void)filterContentForSearchText:(NSString*)searchText scope:(NSString*)scope {
+	// Update the filtered array based on the search text and scope.
+	// Filter the array using NSPredicate
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF.title contains[c] %@",searchText];
+    NSArray *tempArray = [[self.dataController episodes] filteredArrayUsingPredicate:predicate];
+    self.filteredEpisodes = [NSArray arrayWithArray:tempArray];
+}
+
+#pragma mark - UISearchDisplayController Delegate Methods
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
+{
+    // Hide the Search Bar behind the Navigation Bar
+    CGRect newBounds = self.tableView.bounds;
+    // Subtract a rowheight if the Search Bar has a Scope Bar
+    // newBounds.origin.y = newBounds.origin.y + searchBar.bounds.size.height - self.tableView.rowHeight;
+    newBounds.origin.y = newBounds.origin.y + searchBar.bounds.size.height;
+    self.tableView.bounds = newBounds;
+}
+
+-(BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString {
+    // Tells the table data source to reload when text changes
+    [self filterContentForSearchText:searchString scope:
+     [[self.searchDisplayController.searchBar scopeButtonTitles] objectAtIndex:[self.searchDisplayController.searchBar selectedScopeButtonIndex]]];
+    // Return YES to cause the search result table view to be reloaded.
+    return YES;
+}
+
+-(BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchScope:(NSInteger)searchOption {
+    // Tells the table data source to reload when scope bar selection changes
+    [self filterContentForSearchText:self.searchDisplayController.searchBar.text scope:
+     [[self.searchDisplayController.searchBar scopeButtonTitles] objectAtIndex:searchOption]];
+    // Return YES to cause the search result table view to be reloaded.
+    return YES;
+}
+
 #pragma mark - Table View
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    // Check to see whether the normal table or search results table is being displayed and return the count from the appropriate array
+    if (tableView == self.searchDisplayController.searchResultsTableView) {
+        return [self.filteredEpisodes count];
+    } else {
         return [self.dataController countOfList];
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"EpisodeCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if ( cell == nil ) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+    }
     
-    Episode *episodeAtIndex = [self.dataController objectInListAtIndex:indexPath.row];
-    [[cell textLabel] setText:episodeAtIndex.title];
-    [[cell detailTextLabel] setText:episodeAtIndex.type];
-    [[cell imageView] setImage:[UIImage imageNamed:episodeAtIndex.iso]];
+    // Get episode from Table View or Search Results
+    Episode *episode;
+    if (tableView == self.searchDisplayController.searchResultsTableView) {
+        episode = [self.filteredEpisodes objectAtIndex:indexPath.row];
+        [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
+    } else {
+        episode = [self.dataController objectInListAtIndex:indexPath.row];
+    }
+
+    // Configure cell
+    [[cell textLabel] setText:episode.title];
+    [[cell detailTextLabel] setText:episode.type];
+    [[cell imageView] setImage:[UIImage imageNamed:episode.iso]];
 
     return cell;
 }
@@ -81,34 +144,33 @@
     return NO;
 }
 
+#pragma mark - TableView Delegate
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    // Perform segue to candy detail
+    [self performSegueWithIdentifier:@"showEpisodeDetail" sender:tableView];
+}
+
 #pragma mark - Segues
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([[segue identifier] isEqualToString:@"showEpisodeDetail"]) {
         DramaDetailViewController *detailViewController = [segue destinationViewController];
-        detailViewController.episode = [self.dataController objectInListAtIndex:[self.tableView indexPathForSelectedRow].row];
-    } else if ([[segue identifier] isEqualToString:@"showFilter"]) {
-        // FilterViewController *filterVC = [segue destinationViewController];
-        // Pass filter to view
+        if(sender == self.searchDisplayController.searchResultsTableView) {
+            NSIndexPath *indexPath = [self.searchDisplayController.searchResultsTableView indexPathForSelectedRow];
+            detailViewController.episode = [self.filteredEpisodes objectAtIndex:indexPath.row];
+        } else {
+            detailViewController.episode = [self.dataController objectInListAtIndex:[self.tableView indexPathForSelectedRow].row];
+        }
+
     }
 }
 
-- (IBAction)done:(UIStoryboardSegue *)segue
-{
-    if ([[segue identifier] isEqualToString:@"ReturnInput"]) {
-        
-        // FilterViewController *filterVC = [segue sourceViewController];
-        // Implement filter
-
-        [self dismissViewControllerAnimated:YES completion:NULL];
-    }
+-(IBAction)goToSearch:(id)sender {
+    // If you're worried that your users might not catch on to the fact that a search bar is available if they scroll to reveal it, a search icon will help them
+    // If you don't hide your search bar in your app, don’t include this, as it would be redundant
+    [self.episodeSearchBar becomeFirstResponder];
 }
 
-- (IBAction)cancel:(UIStoryboardSegue *)segue
-{
-    if ([[segue identifier] isEqualToString:@"CancelInput"]) {
-        [self dismissViewControllerAnimated:YES completion:NULL];
-    }
-}
 @end
