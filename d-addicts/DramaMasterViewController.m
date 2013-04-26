@@ -40,13 +40,18 @@
                   forControlEvents:UIControlEventValueChanged];
 
     // Hide the search bar until user scrolls up
-    CGRect newBounds = self.tableView.bounds;
-    newBounds.origin.y = newBounds.origin.y + self.episodeSearchBar.bounds.size.height;
-    self.tableView.bounds = newBounds;
+    [self hideSearchBar];
 
     self.episodeSearchBar.showsScopeBar = NO;
     
     [self refreshEpisodesForce:NO];
+}
+
+- (void)hideSearchBar
+{
+    CGRect newBounds = self.tableView.bounds;
+    newBounds.origin.y = newBounds.origin.y + self.episodeSearchBar.bounds.size.height;
+    self.tableView.bounds = newBounds;
 }
 
 - (void)refreshEpisodesForce:(BOOL)force
@@ -73,17 +78,15 @@
     self.filteredEpisodes = [NSArray arrayWithArray:tempArray];
 }
 
-#pragma mark - UISearchDisplayController Delegate Methods
+#pragma mark - UISearchBarDelegate protocol
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
 {
     // Hide the Search Bar behind the Navigation Bar
-    CGRect newBounds = self.tableView.bounds;
-    // Subtract a rowheight if the Search Bar has a Scope Bar
-    // newBounds.origin.y = newBounds.origin.y + searchBar.bounds.size.height - self.tableView.rowHeight;
-    newBounds.origin.y = newBounds.origin.y + searchBar.bounds.size.height;
-    self.tableView.bounds = newBounds;
+    [self hideSearchBar];
 }
+
+#pragma mark - UISearchDisplayController Delegate
 
 -(BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString {
     // Tells the table data source to reload when text changes
@@ -101,7 +104,7 @@
     return YES;
 }
 
-#pragma mark - Table View
+#pragma mark - Table View delegate
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -143,8 +146,6 @@
     // Return NO if you do not want the specified item to be editable.
     return NO;
 }
-
-#pragma mark - TableView Delegate
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     // Perform segue to episode detail
