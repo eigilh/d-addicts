@@ -38,13 +38,13 @@
     [self.refreshControl addTarget:self
                             action:@selector(refresh:)
                   forControlEvents:UIControlEventValueChanged];
-
-    // Hide the search bar until user scrolls up
-    [self hideSearchBar];
-
-    self.episodeSearchBar.showsScopeBar = NO;
-    
     [self refreshEpisodesForce:NO];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
 }
 
 - (void)hideSearchBar
@@ -63,6 +63,7 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.tableView reloadData];
             [self.refreshControl endRefreshing];
+            [self hideSearchBar];
         });
     });    
 }

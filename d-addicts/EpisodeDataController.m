@@ -15,7 +15,6 @@
 
 @interface EpisodeDataController ()
 
-@property (nonatomic, strong) NSMutableArray *episodes;
 @property (nonatomic, strong) RssDataController *rssDC;
 
 @end

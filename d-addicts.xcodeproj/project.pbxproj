@@ -341,7 +341,7 @@
 		A9F074871716B1D600605669 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: Eigil Hansen (G2KBGTX9ZC)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "d-addicts/d-addicts-Prefix.pch";
 				INFOPLIST_FILE = "d-addicts/d-addicts-Info.plist";
@@ -354,7 +354,7 @@
 		A9F074881716B1D600605669 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: Eigil Hansen (G2KBGTX9ZC)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "d-addicts/d-addicts-Prefix.pch";
 				INFOPLIST_FILE = "d-addicts/d-addicts-Info.plist";
