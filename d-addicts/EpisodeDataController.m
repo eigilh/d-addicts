@@ -38,8 +38,10 @@
     return _rssDC;
 }
 
-- (void)addRssItemsToEpisodes:(NSArray *)items
+- (void)refreshEpisodes
 {
+    [self.rssDC setRssUrl:@"http://www.d-addicts.com/rss.xml"];
+    NSArray *items = [self.rssDC rssItems];
     [self.episodes removeAllObjects];
     for (NSDictionary *dict in items) {
         [self.episodes addObject:[[Episode alloc] initWithTitle:[dict valueForKey:RSS_TITLE]
@@ -47,13 +49,6 @@
                                                     description:[dict valueForKey:RSS_DESCRIPTION]
                                                            date:[dict valueForKey:RSS_PUBDATE]]];
     }
-}
-
-- (void)refreshEpisodes
-{
-    [self.rssDC setRssUrl:@"http://www.d-addicts.com/rss.xml"];
-    NSArray *items = [self.rssDC rssItems];
-    [self addRssItemsToEpisodes:items];
 }
 
 @end

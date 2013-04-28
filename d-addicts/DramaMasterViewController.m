@@ -45,7 +45,9 @@
 {
     CGRect newBounds = self.tableView.bounds;
     newBounds.origin.y = newBounds.origin.y + self.episodeSearchBar.bounds.size.height;
-    self.tableView.bounds = newBounds;
+    [UIView animateWithDuration:0.75 animations:^{
+        self.tableView.bounds = newBounds;
+    }];
 }
 
 - (void)refreshEpisodes
@@ -68,8 +70,7 @@
 	// Update the filtered array based on the search text and scope.
 	// Filter the array using NSPredicate
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF.title contains[c] %@",searchText];
-    NSArray *tempArray = [[self.dataController episodes] filteredArrayUsingPredicate:predicate];
-    self.filteredEpisodes = [NSArray arrayWithArray:tempArray];
+    self.filteredEpisodes = [[self.dataController episodes] filteredArrayUsingPredicate:predicate];
 }
 
 #pragma mark - UISearchBarDelegate protocol
