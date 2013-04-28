@@ -10,13 +10,8 @@
 #import "Episode.h"
 #import "RssDataController.h"
 
-#define FIVE_MINUTES 300.0
-#define FIFTEEN_MINUTES 900.0
-
 @interface EpisodeDataController ()
-
 @property (nonatomic, strong) RssDataController *rssDC;
-
 @end
 
 @implementation EpisodeDataController
@@ -43,21 +38,6 @@
     return _rssDC;
 }
 
-- (BOOL)useCache
-{
-    BOOL valid = NO;
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSDate *cacheDate = [defaults objectForKey:@"cacheDate"];
-    if (cacheDate) {
-        NSTimeInterval cacheAge = [[NSDate date] timeIntervalSinceDate:cacheDate];
-        NSLog(@"cacheAge : %.3f seconds", cacheAge);
-        if (cacheAge < FIFTEEN_MINUTES) {
-            valid = YES;
-        }
-    }
-    return valid;
-}
-
 - (void)addRssItemsToEpisodes:(NSArray *)items
 {
     [self.episodes removeAllObjects];
@@ -69,38 +49,11 @@
     }
 }
 
-- (void)refreshEpisodes:(BOOL)force
+- (void)refreshEpisodes
 {
-    NSDate *start = [NSDate date];
-    if ([self useCache] && !force) {
-        [self readRssFromCache];
-    } else {
-        [self.rssDC setRssUrl:@"http://www.d-addicts.com/rss.xml"];
-        NSArray *items = [self.rssDC rssItems];
-        [self addRssItemsToEpisodes:items];
-        [self writeRssToCache:items];
-    }
-    NSDate *stop = [NSDate date];
-    NSTimeInterval refreshTime = [stop timeIntervalSinceDate:start];
-    NSLog(@"Refresh RSS time : %.3f seconds", refreshTime);
+    [self.rssDC setRssUrl:@"http://www.d-addicts.com/rss.xml"];
+    NSArray *items = [self.rssDC rssItems];
+    [self addRssItemsToEpisodes:items];
 }
-
-- (void)writeRssToCache:(NSArray *)items
-{
-    NSLog(@"Write Cache");
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:items forKey:@"feeds"];
-    [defaults setObject:[NSDate date] forKey:@"cacheDate"];
-    [defaults synchronize];
-}
-
-- (void)readRssFromCache
-{
-    NSLog(@"Read Cache");
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSArray *array = [defaults objectForKey:@"feeds"];
-    [self addRssItemsToEpisodes:array];
-}
-
 
 @end

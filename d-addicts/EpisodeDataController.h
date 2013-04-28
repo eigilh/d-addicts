@@ -14,7 +14,7 @@
 
 @property (nonatomic, strong) NSMutableArray *episodes;
 
-- (void)refreshEpisodes:(BOOL)force;
+- (void)refreshEpisodes;
 - (NSUInteger)countOfList;
 - (Episode *)objectInListAtIndex:(NSUInteger)index;
 
