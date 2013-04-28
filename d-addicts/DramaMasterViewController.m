@@ -129,15 +129,15 @@
     Episode *episode;
     if (tableView == self.searchDisplayController.searchResultsTableView) {
         episode = [self.filteredEpisodes objectAtIndex:indexPath.row];
-        [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     } else {
         episode = [self.dataController objectInListAtIndex:indexPath.row];
     }
 
     // Configure cell
-    [[cell textLabel] setText:episode.title];
-    [[cell detailTextLabel] setText:episode.type];
-    [[cell imageView] setImage:[UIImage imageNamed:episode.iso]];
+    cell.textLabel.text = episode.title;
+    cell.detailTextLabel.text = episode.type;
+    cell.imageView.image = [UIImage imageNamed:episode.iso];
 
     return cell;
 }
