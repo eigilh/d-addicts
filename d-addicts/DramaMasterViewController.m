@@ -157,9 +157,11 @@
         DramaDetailViewController *detailViewController = [segue destinationViewController];
         if(sender == self.searchDisplayController.searchResultsTableView) {
             NSIndexPath *indexPath = [self.searchDisplayController.searchResultsTableView indexPathForSelectedRow];
-            detailViewController.episode = [self.filteredEpisodes objectAtIndex:indexPath.row];
+            detailViewController.torrents = self.filteredEpisodes;
+            detailViewController.currentRow = indexPath.row;
         } else {
-            detailViewController.episode = [self.dataController objectInListAtIndex:[self.tableView indexPathForSelectedRow].row];
+            detailViewController.torrents = self.dataController.episodes;
+            detailViewController.currentRow = [self.tableView indexPathForSelectedRow].row;
         }
 
     }

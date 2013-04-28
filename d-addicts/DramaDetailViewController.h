@@ -12,6 +12,8 @@
 
 @interface DramaDetailViewController : UIViewController
 
+@property (strong, nonatomic) NSArray *torrents;
+@property (nonatomic) NSInteger currentRow;
 @property (strong, nonatomic) Episode *episode;
 
 @property (weak, nonatomic) IBOutlet UIImageView *flagImage;
@@ -23,4 +25,5 @@
 @property (weak, nonatomic) IBOutlet UILabel *addedByLabel;
 //@property (weak, nonatomic) IBOutlet UILabel *infoHashLabel;
 
+- (IBAction)upDownPressed:(UISegmentedControl *)sender;
 @end

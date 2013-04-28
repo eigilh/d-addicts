@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A92A1C7D172D7F25006D8128 /* up.png in Resources */ = {isa = PBXBuildFile; fileRef = A92A1C7B172D7F25006D8128 /* up.png */; };
+		A92A1C7E172D7F25006D8128 /* down.png in Resources */ = {isa = PBXBuildFile; fileRef = A92A1C7C172D7F25006D8128 /* down.png */; };
 		A9C5240F1723E77000F8CCDE /* RssDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = A9C5240E1723E77000F8CCDE /* RssDataController.m */; };
 		A9C52417172538E000F8CCDE /* cn.png in Resources */ = {isa = PBXBuildFile; fileRef = A9C52411172538E000F8CCDE /* cn.png */; };
 		A9C52418172538E000F8CCDE /* hk.png in Resources */ = {isa = PBXBuildFile; fileRef = A9C52412172538E000F8CCDE /* hk.png */; };
@@ -37,6 +39,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A92A1C7B172D7F25006D8128 /* up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = up.png; sourceTree = "<group>"; };
+		A92A1C7C172D7F25006D8128 /* down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = down.png; sourceTree = "<group>"; };
 		A9C5240D1723E77000F8CCDE /* RssDataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RssDataController.h; sourceTree = "<group>"; };
 		A9C5240E1723E77000F8CCDE /* RssDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RssDataController.m; sourceTree = "<group>"; };
 		A9C52411172538E000F8CCDE /* cn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cn.png; sourceTree = "<group>"; };
@@ -92,6 +96,8 @@
 		A9C52410172538E000F8CCDE /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				A92A1C7B172D7F25006D8128 /* up.png */,
+				A92A1C7C172D7F25006D8128 /* down.png */,
 				A9C5241D17258EA200F8CCDE /* cn@2x.png */,
 				A9C5241E17258EA200F8CCDE /* hk@2x.png */,
 				A9C5241F17258EA200F8CCDE /* jp@2x.png */,
@@ -240,6 +246,8 @@
 				A9C5242617258EA200F8CCDE /* kr@2x.png in Resources */,
 				A9C5242717258EA200F8CCDE /* sg@2x.png in Resources */,
 				A9C5242817258EA200F8CCDE /* tw@2x.png in Resources */,
+				A92A1C7D172D7F25006D8128 /* up.png in Resources */,
+				A92A1C7E172D7F25006D8128 /* down.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

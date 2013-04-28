@@ -231,7 +231,22 @@
                             <constraint firstItem="PHY-xx-Mur" firstAttribute="leading" secondItem="HIa-fg-Pbf" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="w0R-Xx-HCg"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="File" id="26"/>
+                    <navigationItem key="navigationItem" title="File" id="26">
+                        <barButtonItem key="rightBarButtonItem" id="Qvz-Gi-sdZ">
+                            <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" momentary="YES" id="rFF-k2-uBW">
+                                <rect key="frame" x="244" y="7" width="71" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <segments>
+                                    <segment title="" image="up.png"/>
+                                    <segment title="" image="down.png"/>
+                                </segments>
+                                <color key="tintColor" red="0.62352943419999995" green="0.70980393890000004" blue="0.7607843876" alpha="1" colorSpace="deviceRGB"/>
+                                <connections>
+                                    <action selector="upDownPressed:" destination="21" eventType="valueChanged" id="h0f-w5-bon"/>
+                                </connections>
+                            </segmentedControl>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="addedByLabel" destination="rSJ-ba-cId" id="Cqm-oC-Aji"/>
                         <outlet property="flagImage" destination="DHu-zF-LYc" id="eUL-JA-4Vp"/>
@@ -248,36 +263,10 @@
         </scene>
     </scenes>
     <resources>
+        <image name="down.png" width="17" height="16"/>
         <image name="jp.png" width="32" height="32"/>
+        <image name="up.png" width="17" height="16"/>
     </resources>
-    <classes>
-        <class className="DramaDetailViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/DramaDetailViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="addedByLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="flagImage" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="pubDateLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="sizeLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="subLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="titleLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="typeLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="DramaMasterViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/DramaMasterViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="goToSearch:"/>
-                <relationship kind="action" name="refresh:" candidateClass="UIRefreshControl"/>
-                <relationship kind="outlet" name="episodeSearchBar" candidateClass="UISearchBar"/>
-            </relationships>
-        </class>
-        <class className="NSLayoutConstraint" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
-        </class>
-        <class className="UIRefreshControl" superclassName="UIControl">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UIRefreshControl.h"/>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

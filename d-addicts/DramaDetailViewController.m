@@ -9,6 +9,9 @@
 #import "DramaDetailViewController.h"
 #import "Episode.h"
 
+#define UP 0
+#define DOWN 1
+
 @interface DramaDetailViewController ()
 - (void)configureView;
 @end
@@ -27,6 +30,14 @@
     }
 }
 
+- (void)setCurrentRow:(NSInteger)newRow
+{
+    _currentRow = newRow;
+    if (self.torrents) {
+        self.episode = self.torrents[newRow];
+    }
+}
+
 - (void)configureView
 {
     // Update the user interface for the detail item.
@@ -34,6 +45,7 @@
     Episode *theEpisode = self.episode;
     
     if (theEpisode) {
+        self.navigationItem.title = [NSString stringWithFormat:@"%d of %d", self.currentRow+1, [self.torrents count]];
         self.flagImage.image = [UIImage imageNamed:theEpisode.iso];
         self.titleLabel.text = theEpisode.title;
         self.pubDateLabel.text = theEpisode.pubDate;
@@ -52,4 +64,16 @@
     [self configureView];
 }
 
+- (IBAction)upDownPressed:(UISegmentedControl *)sender {
+    NSInteger button = sender.selectedSegmentIndex;
+    if (button == UP) {
+        if (self.currentRow > 0) {
+            self.currentRow -= 1;
+        }
+    } else if (button == DOWN) {
+        if (self.currentRow < [self.torrents count] - 1) {
+            self.currentRow += 1;
+        }
+    }
+}
 @end
