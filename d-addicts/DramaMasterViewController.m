@@ -20,7 +20,7 @@
 @implementation DramaMasterViewController
 
 - (IBAction)refresh:(UIRefreshControl *)sender {
-    [self refreshEpisodesForce:YES];
+    [self refreshEpisodes];
 }
 
 - (EpisodeDataController *)dataController
@@ -38,13 +38,7 @@
     [self.refreshControl addTarget:self
                             action:@selector(refresh:)
                   forControlEvents:UIControlEventValueChanged];
-    [self refreshEpisodesForce:NO];
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    
+    [self refreshEpisodes];
 }
 
 - (void)hideSearchBar
@@ -54,12 +48,12 @@
     self.tableView.bounds = newBounds;
 }
 
-- (void)refreshEpisodesForce:(BOOL)force
+- (void)refreshEpisodes
 {
     [self.refreshControl beginRefreshing];
     dispatch_queue_t q = dispatch_queue_create("rss downloader", NULL);
     dispatch_async(q, ^{
-        [self.dataController refreshEpisodes:force];
+        [self.dataController refreshEpisodes];
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.tableView reloadData];
             [self.refreshControl endRefreshing];
@@ -67,7 +61,6 @@
         });
     });    
 }
-
 
 #pragma mark - Content Filtering
 
