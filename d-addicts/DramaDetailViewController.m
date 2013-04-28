@@ -9,9 +9,6 @@
 #import "DramaDetailViewController.h"
 #import "Episode.h"
 
-#define UP 0
-#define DOWN 1
-
 @interface DramaDetailViewController ()
 - (void)configureView;
 @end
@@ -63,6 +60,9 @@
 	// Do any additional setup after loading the view, typically from a nib.
     [self configureView];
 }
+
+#define UP 0
+#define DOWN 1
 
 - (IBAction)upDownPressed:(UISegmentedControl *)sender {
     NSInteger button = sender.selectedSegmentIndex;
