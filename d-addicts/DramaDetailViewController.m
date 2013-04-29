@@ -8,11 +8,21 @@
 
 #import "DramaDetailViewController.h"
 #import "Episode.h"
-/*
+
 @interface DramaDetailViewController ()
+
+@property (weak, nonatomic) IBOutlet UIImageView *flagImage;
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *pubDateLabel;
+@property (weak, nonatomic) IBOutlet UILabel *typeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *subLabel;
+@property (weak, nonatomic) IBOutlet UILabel *sizeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *addedByLabel;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *upDownButtons;
+
 - (void)configureView;
 @end
-*/
+
 @implementation DramaDetailViewController
 
 #pragma mark - Managing the detail item
@@ -38,7 +48,6 @@
 - (void)configureView
 {
     // Update the user interface for the detail item.
-
     Episode *theEpisode = self.episode;
     
     if (theEpisode) {
@@ -50,15 +59,14 @@
         self.subLabel.text = theEpisode.sub;
         self.sizeLabel.text = theEpisode.size;
         self.addedByLabel.text = theEpisode.addedBy;
-        //self.infoHashLabel.text = theEpisode.infoHash;
     }
     [self enableUpDownButtons];
 }
 
-- (void)viewDidLoad
+- (void)viewWillAppear:(BOOL)animated
 {
-    [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+    [super viewWillAppear:animated];
+    
     [self configureView];
 }
 
@@ -89,7 +97,6 @@
             if (self.currentRow < [self.torrents count] - 1) self.currentRow += 1;
             break;
     }
-    [self enableUpDownButtons];
 }
 
 @end

@@ -16,15 +16,5 @@
 @property (nonatomic) NSInteger currentRow;
 @property (strong, nonatomic) Episode *episode;
 
-@property (weak, nonatomic) IBOutlet UIImageView *flagImage;
-@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
-@property (weak, nonatomic) IBOutlet UILabel *pubDateLabel;
-@property (weak, nonatomic) IBOutlet UILabel *typeLabel;
-@property (weak, nonatomic) IBOutlet UILabel *subLabel;
-@property (weak, nonatomic) IBOutlet UILabel *sizeLabel;
-@property (weak, nonatomic) IBOutlet UILabel *addedByLabel;
-//@property (weak, nonatomic) IBOutlet UILabel *infoHashLabel;
-
-@property (weak, nonatomic) IBOutlet UISegmentedControl *upDownButtons;
 - (IBAction)upDownPressed:(UISegmentedControl *)sender;
 @end
