@@ -81,15 +81,15 @@
 
 - (IBAction)upDownPressed:(UISegmentedControl *)sender {
     NSInteger button = sender.selectedSegmentIndex;
-    if (button == UP) {
-        if (self.currentRow > 0) {
-            self.currentRow -= 1;
-        }
-    } else if (button == DOWN) {
-        if (self.currentRow < [self.torrents count] - 1) {
-            self.currentRow += 1;
-        }
+    switch (button) {
+        case UP:
+            if (self.currentRow > 0) self.currentRow -= 1;
+            break;
+        case DOWN:
+            if (self.currentRow < [self.torrents count] - 1) self.currentRow += 1;
+            break;
     }
     [self enableUpDownButtons];
 }
+
 @end
