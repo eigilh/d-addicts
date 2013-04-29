@@ -19,6 +19,10 @@
 
 @implementation DramaMasterViewController
 
+#define TEXT_SIZE 14.0f
+#define DETAIL_TEXT_SIZE 12.0f
+#define ROW_HEIGHT (TEXT_SIZE+DETAIL_TEXT_SIZE)*2
+
 - (IBAction)refresh:(UIRefreshControl *)sender {
     [self refreshEpisodes];
 }
@@ -38,6 +42,7 @@
     [self.refreshControl addTarget:self
                             action:@selector(refresh:)
                   forControlEvents:UIControlEventValueChanged];
+    self.tableView.rowHeight = ROW_HEIGHT;
     [self refreshEpisodes];
 }
 
@@ -45,7 +50,7 @@
 {
     CGRect newBounds = self.tableView.bounds;
     newBounds.origin.y = newBounds.origin.y + self.episodeSearchBar.bounds.size.height;
-    [UIView animateWithDuration:0.75 animations:^{
+    [UIView animateWithDuration:0.5f animations:^{
         self.tableView.bounds = newBounds;
     }];
 }
@@ -73,7 +78,7 @@
     self.filteredEpisodes = [[self.dataController episodes] filteredArrayUsingPredicate:predicate];
 }
 
-#pragma mark - UISearchBarDelegate protocol
+#pragma mark - UISearchBar Delegate
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
 {
@@ -81,7 +86,12 @@
     [self hideSearchBar];
 }
 
-#pragma mark - UISearchDisplayController Delegate
+#pragma mark - UISearchDisplay Delegate
+
+- (void)searchDisplayController:(UISearchDisplayController *)controller didLoadSearchResultsTableView:(UITableView *)tableView
+{
+    tableView.rowHeight = ROW_HEIGHT;
+}
 
 -(BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString {
     // Tells the table data source to reload when text changes
@@ -129,7 +139,9 @@
     }
 
     // Configure cell
+    cell.textLabel.font = [UIFont boldSystemFontOfSize:TEXT_SIZE];
     cell.textLabel.text = episode.title;
+    cell.detailTextLabel.font = [UIFont systemFontOfSize:DETAIL_TEXT_SIZE];
     cell.detailTextLabel.text = episode.type;
     cell.imageView.image = [UIImage imageNamed:episode.iso];
 

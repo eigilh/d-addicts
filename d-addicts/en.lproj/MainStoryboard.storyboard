@@ -24,7 +24,7 @@
         <scene sceneID="18">
             <objects>
                 <tableViewController storyboardIdentifier="" title="Master" id="12" customClass="DramaMasterViewController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="49" sectionHeaderHeight="22" sectionFooterHeight="22" id="13">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="48" sectionHeaderHeight="22" sectionFooterHeight="22" id="13">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -38,27 +38,27 @@
                             </connections>
                         </searchBar>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="EpisodeCell" textLabel="phq-AM-6qj" detailTextLabel="HW2-4o-f4i" imageView="DFc-OY-DDP" rowHeight="49" style="IBUITableViewCellStyleSubtitle" id="lJ0-d7-vTF">
-                                <rect key="frame" x="0.0" y="66" width="320" height="49"/>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="EpisodeCell" textLabel="phq-AM-6qj" detailTextLabel="HW2-4o-f4i" imageView="DFc-OY-DDP" style="IBUITableViewCellStyleSubtitle" id="lJ0-d7-vTF">
+                                <rect key="frame" x="0.0" y="66" width="320" height="48"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="300" height="48"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="300" height="47"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="phq-AM-6qj">
-                                            <rect key="frame" x="50" y="5" width="30" height="21"/>
+                                            <rect key="frame" x="49" y="7" width="29" height="18"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="15"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         </label>
                                         <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Detail" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HW2-4o-f4i">
-                                            <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="13"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <color key="textColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         </label>
                                         <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="jp.png" id="DFc-OY-DDP">
-                                            <rect key="frame" x="8" y="8" width="32" height="32"/>
+                                            <rect key="frame" x="7" y="7" width="32" height="32"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </imageView>
                                     </subviews>
@@ -119,7 +119,7 @@
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" enabled="NO" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TCG-ed-QZo">
                                 <color key="backgroundColor" red="0.87058830259999997" green="0.89019614459999996" blue="0.90588241820000004" alpha="1" colorSpace="deviceRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -127,7 +127,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="42" id="rDZ-jh-Gj1"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="15"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -135,50 +135,60 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="42" id="EW8-ZS-wHe"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="15"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Type" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bUR-qw-13X">
                                 <constraints>
                                     <constraint firstAttribute="width" constant="72" id="9VH-WN-BaK"/>
+                                    <constraint firstAttribute="height" constant="21" id="pl7-ko-ZId"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="15"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M9u-0I-SXu">
-                                <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="15"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="xJW-iC-zJq"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Size" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HIa-fg-Pbf">
-                                <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="15"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="Jzz-TT-8rw"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Added by" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1yc-yS-GC2">
-                                <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="15"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="041-N1-lik"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Type" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yne-ZZ-I25">
-                                <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="15"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Sub" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oV2-PT-396">
-                                <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="15"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Size" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PHY-xx-Mur">
-                                <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="15"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Added by" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rSJ-ba-cId">
-                                <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="15"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -191,37 +201,41 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="jBq-1C-OyJ" firstAttribute="top" secondItem="7tm-Tm-9aQ" secondAttribute="top" type="default" id="0Q1-wy-ool"/>
-                            <constraint firstItem="1yc-yS-GC2" firstAttribute="baseline" secondItem="rSJ-ba-cId" secondAttribute="baseline" type="default" id="0Yb-iw-OT2"/>
+                            <constraint firstItem="yne-ZZ-I25" firstAttribute="top" secondItem="jBq-1C-OyJ" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="2Fu-Br-G8t"/>
                             <constraint firstItem="HIa-fg-Pbf" firstAttribute="leading" secondItem="7tm-Tm-9aQ" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="4qP-aK-7WP"/>
+                            <constraint firstItem="1yc-yS-GC2" firstAttribute="baseline" secondItem="rSJ-ba-cId" secondAttribute="baseline" type="default" id="5Xb-uG-YHu"/>
                             <constraint firstItem="qeR-ge-EBW" firstAttribute="leading" secondItem="DHu-zF-LYc" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="65l-Jh-bMz"/>
                             <constraint firstAttribute="trailing" secondItem="rSJ-ba-cId" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="6UO-iB-vYa"/>
+                            <constraint firstItem="bUR-qw-13X" firstAttribute="baseline" secondItem="yne-ZZ-I25" secondAttribute="baseline" type="default" id="BOf-YV-YhH"/>
                             <constraint firstItem="DHu-zF-LYc" firstAttribute="centerY" secondItem="qeR-ge-EBW" secondAttribute="centerY" type="default" id="CBf-8w-Wfo"/>
                             <constraint firstItem="jBq-1C-OyJ" firstAttribute="leading" secondItem="7tm-Tm-9aQ" secondAttribute="leading" type="default" id="E53-uA-Pnv"/>
+                            <constraint firstItem="PHY-xx-Mur" firstAttribute="top" secondItem="oV2-PT-396" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="GQc-4L-ogH"/>
+                            <constraint firstItem="TCG-ed-QZo" firstAttribute="baseline" secondItem="Xdd-G3-lXV" secondAttribute="baseline" type="default" id="GzW-Ex-ex7"/>
                             <constraint firstItem="yne-ZZ-I25" firstAttribute="leading" secondItem="bUR-qw-13X" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="HVQ-xg-f91"/>
-                            <constraint firstItem="TCG-ed-QZo" firstAttribute="top" secondItem="1yc-yS-GC2" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="KGu-bW-Ema"/>
                             <constraint firstItem="HIa-fg-Pbf" firstAttribute="top" secondItem="M9u-0I-SXu" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="Krp-gd-z1g"/>
                             <constraint firstItem="TCG-ed-QZo" firstAttribute="leading" secondItem="7tm-Tm-9aQ" secondAttribute="leading" type="default" id="Kww-KY-Px9"/>
-                            <constraint firstItem="HIa-fg-Pbf" firstAttribute="baseline" secondItem="PHY-xx-Mur" secondAttribute="baseline" type="default" id="LCm-KM-ZJl"/>
                             <constraint firstAttribute="trailing" secondItem="Xdd-G3-lXV" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="NXC-yX-odF"/>
+                            <constraint firstItem="oV2-PT-396" firstAttribute="top" secondItem="yne-ZZ-I25" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="Ogw-Nj-d6a"/>
+                            <constraint firstItem="TCG-ed-QZo" firstAttribute="top" secondItem="1yc-yS-GC2" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="OyA-5n-GBP"/>
                             <constraint firstItem="jBq-1C-OyJ" firstAttribute="trailing" secondItem="7tm-Tm-9aQ" secondAttribute="trailing" type="default" id="PTa-pp-fwO"/>
                             <constraint firstAttribute="trailing" secondItem="yne-ZZ-I25" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="Sd1-3a-Vjw"/>
                             <constraint firstItem="M9u-0I-SXu" firstAttribute="width" secondItem="1yc-yS-GC2" secondAttribute="width" type="user" id="UlR-zY-9Zl"/>
-                            <constraint firstItem="Xdd-G3-lXV" firstAttribute="bottom" secondItem="TCG-ed-QZo" secondAttribute="bottom" type="default" id="VXI-eK-84r"/>
-                            <constraint firstItem="oV2-PT-396" firstAttribute="baseline" secondItem="M9u-0I-SXu" secondAttribute="baseline" type="default" id="WXS-6M-ioD"/>
+                            <constraint firstItem="PHY-xx-Mur" firstAttribute="baseline" secondItem="HIa-fg-Pbf" secondAttribute="baseline" type="default" id="V8T-h6-8x6"/>
                             <constraint firstAttribute="trailing" secondItem="oV2-PT-396" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="Wa8-Eh-jtm"/>
                             <constraint firstItem="bUR-qw-13X" firstAttribute="top" secondItem="jBq-1C-OyJ" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="Zco-p9-LQK"/>
                             <constraint firstItem="1yc-yS-GC2" firstAttribute="leading" secondItem="7tm-Tm-9aQ" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="a1X-I1-jgT"/>
                             <constraint firstItem="M9u-0I-SXu" firstAttribute="width" secondItem="HIa-fg-Pbf" secondAttribute="width" type="user" id="bMn-XD-9X1"/>
-                            <constraint firstItem="yne-ZZ-I25" firstAttribute="baseline" secondItem="bUR-qw-13X" secondAttribute="baseline" type="default" id="cty-KL-vmv"/>
                             <constraint firstItem="DHu-zF-LYc" firstAttribute="leading" secondItem="7tm-Tm-9aQ" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="g4R-7A-guM"/>
-                            <constraint firstItem="Xdd-G3-lXV" firstAttribute="top" secondItem="1yc-yS-GC2" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="hPs-fW-4Qn"/>
                             <constraint firstItem="qeR-ge-EBW" firstAttribute="top" secondItem="7tm-Tm-9aQ" secondAttribute="top" constant="20" symbolic="YES" type="default" id="hQX-zF-fYf"/>
                             <constraint firstItem="rSJ-ba-cId" firstAttribute="leading" secondItem="1yc-yS-GC2" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="hsf-E9-VwD"/>
+                            <constraint firstItem="M9u-0I-SXu" firstAttribute="baseline" secondItem="oV2-PT-396" secondAttribute="baseline" type="default" id="isB-kU-pI9"/>
                             <constraint firstItem="oV2-PT-396" firstAttribute="leading" secondItem="M9u-0I-SXu" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="jAT-JB-PsX"/>
                             <constraint firstAttribute="trailing" secondItem="qeR-ge-EBW" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="jba-BL-Y47"/>
                             <constraint firstItem="M9u-0I-SXu" firstAttribute="width" secondItem="bUR-qw-13X" secondAttribute="width" type="user" id="ks3-fs-mqw"/>
                             <constraint firstItem="qeR-ge-EBW" firstAttribute="centerY" secondItem="jBq-1C-OyJ" secondAttribute="centerY" type="default" id="lNM-9u-mJ8"/>
+                            <constraint firstItem="Xdd-G3-lXV" firstAttribute="top" secondItem="1yc-yS-GC2" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="mk3-Ln-xox"/>
                             <constraint firstItem="TCG-ed-QZo" firstAttribute="trailing" secondItem="7tm-Tm-9aQ" secondAttribute="trailing" type="default" id="p9w-1u-1eK"/>
+                            <constraint firstItem="rSJ-ba-cId" firstAttribute="top" secondItem="PHY-xx-Mur" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="pYX-De-dlW"/>
                             <constraint firstItem="M9u-0I-SXu" firstAttribute="top" secondItem="bUR-qw-13X" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="reJ-Ja-QJM"/>
                             <constraint firstItem="bUR-qw-13X" firstAttribute="leading" secondItem="7tm-Tm-9aQ" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="rnN-EP-9sR"/>
                             <constraint firstItem="1yc-yS-GC2" firstAttribute="top" secondItem="HIa-fg-Pbf" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="snN-Rc-Bea"/>
@@ -267,6 +281,35 @@
         <image name="jp.png" width="32" height="32"/>
         <image name="up.png" width="17" height="16"/>
     </resources>
+    <classes>
+        <class className="DramaDetailViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/DramaDetailViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="upDownPressed:" candidateClass="UISegmentedControl"/>
+                <relationship kind="outlet" name="addedByLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="flagImage" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="pubDateLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="sizeLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="subLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="titleLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="typeLabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="DramaMasterViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/DramaMasterViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="goToSearch:"/>
+                <relationship kind="action" name="refresh:" candidateClass="UIRefreshControl"/>
+                <relationship kind="outlet" name="episodeSearchBar" candidateClass="UISearchBar"/>
+            </relationships>
+        </class>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+        <class className="UIRefreshControl" superclassName="UIControl">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UIRefreshControl.h"/>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
