@@ -25,5 +25,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *addedByLabel;
 //@property (weak, nonatomic) IBOutlet UILabel *infoHashLabel;
 
+@property (weak, nonatomic) IBOutlet UISegmentedControl *upDownButtons;
 - (IBAction)upDownPressed:(UISegmentedControl *)sender;
 @end

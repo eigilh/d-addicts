@@ -8,11 +8,11 @@
 
 #import "DramaDetailViewController.h"
 #import "Episode.h"
-
+/*
 @interface DramaDetailViewController ()
 - (void)configureView;
 @end
-
+*/
 @implementation DramaDetailViewController
 
 #pragma mark - Managing the detail item
@@ -52,6 +52,7 @@
         self.addedByLabel.text = theEpisode.addedBy;
         //self.infoHashLabel.text = theEpisode.infoHash;
     }
+    [self enableUpDownButtons];
 }
 
 - (void)viewDidLoad
@@ -64,6 +65,20 @@
 #define UP 0
 #define DOWN 1
 
+- (void)enableUpDownButtons
+{
+    if (self.currentRow == 0) {
+        [self.upDownButtons setEnabled:NO forSegmentAtIndex:UP];
+    } else {
+        [self.upDownButtons setEnabled:YES forSegmentAtIndex:UP];
+    }
+    if (self.currentRow == [self.torrents count]-1) {
+        [self.upDownButtons setEnabled:NO forSegmentAtIndex:DOWN];
+    } else {
+        [self.upDownButtons setEnabled:YES forSegmentAtIndex:DOWN];
+    }
+}
+
 - (IBAction)upDownPressed:(UISegmentedControl *)sender {
     NSInteger button = sender.selectedSegmentIndex;
     if (button == UP) {
@@ -75,5 +90,6 @@
             self.currentRow += 1;
         }
     }
+    [self enableUpDownButtons];
 }
 @end
