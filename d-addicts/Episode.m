@@ -13,20 +13,26 @@
 
 @implementation Episode
 
++ (NSString *)isoNameFromType:(NSString *)t
+{
+    NSString *isoName = nil;
+    
+    if ([t isEqualToString:@"jdrama"]) isoName = @"jp";
+    else if ([t isEqualToString:@"kdrama"]) isoName = @"kr";
+    else if ([t isEqualToString:@"hkdrama"]) isoName = @"hk";
+    else if ([t isEqualToString:@"twdrama"]) isoName = @"tw";
+    else if ([t isEqualToString:@"cdrama"]) isoName = @"cn";
+    else if ([t isEqualToString:@"sgdrama"]) isoName = @"sg";
+    else if ([t isEqualToString:@"j-tv"]) isoName = @"jp";
+    else if ([t isEqualToString:@"k-tv"]) isoName = @"kr";
+    else if ([t isEqualToString:@"hk-tv"]) isoName = @"hk";
+    
+    return isoName;
+}
+
 - (NSString *)iso
 {
-    NSDictionary *dramaIso = @{
-                               @"jdrama"  : @"jp",
-                               @"kdrama"  : @"kr",
-                               @"hkdrama" : @"hk",
-                               @"twdrama" : @"tw",
-                               @"cdrama"  : @"cn",
-                               @"sgdrama" : @"sg",
-                               @"j-tv"  : @"jp",
-                               @"k-tv"  : @"kr",
-                               @"hk-tv" : @"hk"
-                               };
-    return dramaIso[self.type];
+    return [Episode isoNameFromType:self.type];
 }
 
 - (NSDictionary *)descriptionItemList:(NSString *)description
