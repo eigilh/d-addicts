@@ -21,11 +21,7 @@
 
 #define TEXT_SIZE 14.0f
 #define DETAIL_TEXT_SIZE 12.0f
-#define ROW_HEIGHT (TEXT_SIZE+DETAIL_TEXT_SIZE)*2
-
-- (IBAction)refresh:(UIRefreshControl *)sender {
-    [self refreshEpisodes];
-}
+#define ROW_HEIGHT (TEXT_SIZE+DETAIL_TEXT_SIZE)*2.0f
 
 - (EpisodeDataController *)dataController
 {
@@ -48,11 +44,13 @@
 
 - (void)hideSearchBar
 {
-    CGRect newBounds = self.tableView.bounds;
-    newBounds.origin.y = newBounds.origin.y + self.episodeSearchBar.bounds.size.height;
-    [UIView animateWithDuration:0.5f animations:^{
-        self.tableView.bounds = newBounds;
-    }];
+    if (self.tableView.bounds.origin.y <= 0.0) {
+        CGRect newBounds = self.tableView.bounds;
+        newBounds.origin.y = newBounds.origin.y + self.episodeSearchBar.bounds.size.height;
+        [UIView animateWithDuration:0.5f animations:^{
+            self.tableView.bounds = newBounds;
+        }];
+    }
 }
 
 - (void)refreshEpisodes
@@ -68,8 +66,6 @@
         });
     });    
 }
-
-#pragma mark - Content Filtering
 
 -(void)filterContentForSearchText:(NSString*)searchText scope:(NSString*)scope {
 	// Update the filtered array based on the search text and scope.
@@ -93,7 +89,7 @@
     tableView.rowHeight = ROW_HEIGHT;
 }
 
--(BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString {
+- (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString {
     // Tells the table data source to reload when text changes
     [self filterContentForSearchText:searchString scope:
      [[self.searchDisplayController.searchBar scopeButtonTitles] objectAtIndex:[self.searchDisplayController.searchBar selectedScopeButtonIndex]]];
@@ -101,7 +97,7 @@
     return YES;
 }
 
--(BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchScope:(NSInteger)searchOption {
+- (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchScope:(NSInteger)searchOption {
     // Tells the table data source to reload when scope bar selection changes
     [self filterContentForSearchText:self.searchDisplayController.searchBar.text scope:
      [[self.searchDisplayController.searchBar scopeButtonTitles] objectAtIndex:searchOption]];
@@ -109,7 +105,15 @@
     return YES;
 }
 
-#pragma mark - Table View delegate
+#pragma mark - Table View Data Source
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    if (tableView == self.searchDisplayController.searchResultsTableView) {
+        return 1;
+    } else {
+        return [self.dataController countOfList] ? 1 : 0;
+    }
+}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -154,7 +158,9 @@
     return NO;
 }
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+#pragma mark - Table View Delegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     // Perform segue to episode detail
     if (tableView == self.searchDisplayController.searchResultsTableView) {
         [self performSegueWithIdentifier:@"showEpisodeDetail" sender:tableView];        
@@ -163,7 +169,7 @@
 
 #pragma mark - Segues
 
--(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([[segue identifier] isEqualToString:@"showEpisodeDetail"]) {
         DramaDetailViewController *detailViewController = [segue destinationViewController];
@@ -175,14 +181,23 @@
             detailViewController.torrents = self.dataController.episodes;
             detailViewController.currentRow = [self.tableView indexPathForSelectedRow].row;
         }
-
     }
 }
 
--(IBAction)goToSearch:(id)sender {
+#pragma mark - Target Action
+
+- (IBAction)refresh:(UIRefreshControl *)sender {
+    [self refreshEpisodes];
+}
+
+- (IBAction)goToSearch:(id)sender {
     // If you're worried that your users might not catch on to the fact that a search bar is available if they scroll to reveal it, a search icon will help them
     // If you don't hide your search bar in your app, don’t include this, as it would be redundant
     [self.episodeSearchBar becomeFirstResponder];
+}
+
+- (IBAction)refreshPressed:(UIBarButtonItem *)sender {
+    [self refreshEpisodes];
 }
 
 @end

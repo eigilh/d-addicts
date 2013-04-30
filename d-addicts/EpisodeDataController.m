@@ -24,7 +24,10 @@
 
 - (Episode *)objectInListAtIndex:(NSUInteger)theIndex
 {
-    return [self.episodes objectAtIndex:theIndex];
+    if (theIndex < [self countOfList]) {
+        return [self.episodes objectAtIndex:theIndex];
+    }
+    return nil;
 }
 
 - (void)refreshEpisodes

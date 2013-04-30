@@ -12,5 +12,5 @@
 
 @property (weak, nonatomic) IBOutlet UISearchBar *episodeSearchBar;
 -(IBAction)goToSearch:(id)sender;
-
+- (IBAction)refreshPressed:(UIBarButtonItem *)sender;
 @end

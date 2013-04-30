@@ -76,6 +76,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="d-addicts" id="36">
+                        <barButtonItem key="leftBarButtonItem" systemItem="refresh" id="abV-tM-mO2">
+                            <connections>
+                                <action selector="refreshPressed:" destination="12" id="NaP-2S-B9f"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="search" id="u6l-pK-12p">
                             <connections>
                                 <action selector="goToSearch:" destination="12" id="YK5-Kw-H1y"/>
@@ -282,6 +287,37 @@
         <image name="jp.png" width="32" height="32"/>
         <image name="up.png" width="17" height="16"/>
     </resources>
+    <classes>
+        <class className="DramaDetailViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/DramaDetailViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="upDownPressed:" candidateClass="UISegmentedControl"/>
+                <relationship kind="outlet" name="addedByLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="flagImage" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="pubDateLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="sizeLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="subLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="titleLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="typeLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="upDownButtons" candidateClass="UISegmentedControl"/>
+            </relationships>
+        </class>
+        <class className="DramaMasterViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/DramaMasterViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="goToSearch:"/>
+                <relationship kind="action" name="refresh:" candidateClass="UIRefreshControl"/>
+                <relationship kind="action" name="refreshPressed:" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="episodeSearchBar" candidateClass="UISearchBar"/>
+            </relationships>
+        </class>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+        <class className="UIRefreshControl" superclassName="UIControl">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UIRefreshControl.h"/>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
