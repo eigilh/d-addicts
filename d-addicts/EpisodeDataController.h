@@ -7,10 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "RssDataController.h"
 
 @class Episode;
 
-@interface EpisodeDataController : NSObject
+@interface EpisodeDataController : NSObject <RssDelegate>
 
 @property (nonatomic, strong) NSMutableArray *episodes;
 

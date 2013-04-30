@@ -14,9 +14,14 @@
 #define RSS_DESCRIPTION @"description"
 #define RSS_PUBDATE @"pubDate"
 
+@protocol RssDelegate;
+
 @interface RssDataController : NSObject <NSXMLParserDelegate>
+- (RssDataController *)initWithURL:(NSString *)url;
+- (void)parseRSS;
+@property (weak) id <RssDelegate> delegate;
+@end
 
-@property (nonatomic, strong) NSString *rssUrl;
-@property (nonatomic, strong) NSArray *rssItems; // of Dictionary
-
+@protocol RssDelegate <NSObject>
+- (void)didFindItem:(NSDictionary *)dictionary;
 @end

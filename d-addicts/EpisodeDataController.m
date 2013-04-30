@@ -8,11 +8,6 @@
 
 #import "EpisodeDataController.h"
 #import "Episode.h"
-#import "RssDataController.h"
-
-@interface EpisodeDataController ()
-@property (nonatomic, strong) RssDataController *rssDC;
-@end
 
 @implementation EpisodeDataController
 
@@ -32,23 +27,24 @@
     return [self.episodes objectAtIndex:theIndex];
 }
 
-- (RssDataController *)rssDC
-{
-    if (!_rssDC) _rssDC = [[RssDataController alloc] init];
-    return _rssDC;
-}
-
 - (void)refreshEpisodes
 {
-    [self.rssDC setRssUrl:@"http://www.d-addicts.com/rss.xml"];
-    NSArray *items = [self.rssDC rssItems];
-    [self.episodes removeAllObjects];
-    for (NSDictionary *dict in items) {
-        [self.episodes addObject:[[Episode alloc] initWithTitle:[dict valueForKey:RSS_TITLE]
-                                                           link:[dict valueForKey:RSS_LINK]
-                                                    description:[dict valueForKey:RSS_DESCRIPTION]
-                                                           date:[dict valueForKey:RSS_PUBDATE]]];
+    RssDataController *rssDC = [[RssDataController alloc] initWithURL:@"http://www.d-addicts.com/rss.xml"];
+    if (rssDC != nil) {
+        [self.episodes removeAllObjects];
+        [rssDC setDelegate:self];
+        [rssDC parseRSS];
     }
+}
+
+#pragma mark - RssDelegate
+
+- (void)didFindItem:(NSDictionary *)dict
+{
+    [self.episodes addObject:[[Episode alloc] initWithTitle:[dict valueForKey:RSS_TITLE]
+                                                       link:[dict valueForKey:RSS_LINK]
+                                                description:[dict valueForKey:RSS_DESCRIPTION]
+                                                       date:[dict valueForKey:RSS_PUBDATE]]];
 }
 
 @end

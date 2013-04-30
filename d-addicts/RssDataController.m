@@ -11,7 +11,6 @@
 @interface RssDataController ()
 {
     NSXMLParser *parser;
-    NSMutableArray *feeds;
     NSMutableDictionary *item;
     NSMutableString *title;
     NSMutableString *link;
@@ -19,42 +18,33 @@
     NSMutableString *pubDate;
     NSString *element;
 }
+@property (nonatomic, strong) NSString *rssUrl;
+
 @end
 
 @implementation RssDataController
 
-- (RssDataController *)init
+- (RssDataController *)initWithURL:(NSString *)url
 {
     self = [super init];
     if (self) {
-        feeds = [[NSMutableArray alloc] init];
+        self.rssUrl = url;
     }
-    
     return self;
 }
 
-- (void)setRssUrl:(NSString *)newUrl
+- (void)parseRSS
 {
-    _rssUrl = newUrl;
-    
     UIApplication *myApp = [UIApplication sharedApplication];
     myApp.networkActivityIndicatorVisible = YES;
-    NSURL *url = [NSURL URLWithString:newUrl];
-    parser = [[NSXMLParser alloc] initWithContentsOfURL:url];
     
+    NSURL *url = [NSURL URLWithString:self.rssUrl];
+    parser = [[NSXMLParser alloc] initWithContentsOfURL:url];
     [parser setDelegate:self];
     [parser setShouldResolveExternalEntities:NO];
-
-    if (feeds.count > 0) {
-        [feeds removeAllObjects];
-    }
     [parser parse];
+    
     myApp.networkActivityIndicatorVisible = NO;
-}
-
-- (NSArray *)rssItems
-{
-    return [NSArray arrayWithArray:feeds];
 }
 
 #pragma mark - XML Parser Delegate
@@ -94,7 +84,8 @@
         [item setObject:[link stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] forKey:RSS_LINK];
         [item setObject:description forKey:RSS_DESCRIPTION];
         [item setObject:pubDate forKey:RSS_PUBDATE];
-        [feeds addObject:[item copy]];        
+        [self.delegate didFindItem:item];
+        
     }
 }
 
