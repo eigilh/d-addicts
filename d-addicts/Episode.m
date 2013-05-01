@@ -38,27 +38,34 @@
 - (NSDictionary *)descriptionItemList:(NSString *)description
 {
     NSArray *descriptionItems = [description componentsSeparatedByString:@"<br/>"];
-    NSMutableDictionary *dictionary = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
     for (NSString *item in descriptionItems) {
         NSArray *keyValue = [item componentsSeparatedByString:@": "];
+        if (keyValue.count != 2) {
+            NSLog(@"Bad item data: %@", keyValue);
+            continue;
+        }
         [dictionary setObject:keyValue[1] forKey:keyValue[0]];
     }
     return dictionary;
 }
 
-- (id)initWithTitle:(NSString *)title link:(NSString *)link description:(NSString *)description date:(NSString *)date
+- (id)initWithTitle:(NSString *)title
+               link:(NSString *)link
+        description:(NSString *)description
+               date:(NSString *)date
 {
     self = [super init];
     if (self) {
-        _title = title;
-        _link = link;
-        _pubDate = date;
+        self.title = title;
+        self.link = link;
+        self.pubDate = date;
         NSDictionary *itemList = [self descriptionItemList:description];
-        _infoHash = [itemList valueForKey:@"Info_hash"];
-        _size = [itemList valueForKey:@"Size"];
-        _addedBy = [itemList valueForKey:@"Added by"];
-        _type = [itemList valueForKey:@"Type"];
-        _sub = [itemList valueForKey:@"Sub"];
+        self.infoHash = [itemList valueForKey:@"Info_hash"];
+        self.size = [itemList valueForKey:@"Size"];
+        self.addedBy = [itemList valueForKey:@"Added by"];
+        self.type = [itemList valueForKey:@"Type"];
+        self.sub = [itemList valueForKey:@"Sub"];
     }
     return self;
 }

@@ -10,14 +10,14 @@
 
 @interface Episode : NSObject
 
-@property (nonatomic, copy) NSString *title;
-@property (nonatomic, copy) NSString *link;
-@property (nonatomic, copy) NSString *pubDate;
-@property (nonatomic, copy) NSString *infoHash;
-@property (nonatomic, copy) NSString *size;
-@property (nonatomic, copy) NSString *addedBy;
-@property (nonatomic, copy) NSString *type;
-@property (nonatomic, copy) NSString *sub;
+@property (nonatomic, strong) NSString *title;
+@property (nonatomic, strong) NSString *link;
+@property (nonatomic, strong) NSString *pubDate;
+@property (nonatomic, strong) NSString *infoHash;
+@property (nonatomic, strong) NSString *size;
+@property (nonatomic, strong) NSString *addedBy;
+@property (nonatomic, strong) NSString *type;
+@property (nonatomic, strong) NSString *sub;
 
 @property (readonly) NSString *iso;
 

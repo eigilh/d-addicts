@@ -32,7 +32,10 @@
 
 - (void)refreshEpisodes
 {
-    RssDataController *rssDC = [[RssDataController alloc] initWithURL:@"http://www.d-addicts.com/rss.xml"];
+    //RssDataController *rssDC = [[RssDataController alloc] initWithURL:@"http://www.d-addicts.com/rss.xml"];
+    NSURL *url = [[NSBundle bundleForClass:[self class]] URLForResource:@"rss" withExtension:@"xml"];
+    NSString *urlString = [url absoluteString];
+    RssDataController *rssDC = [[RssDataController alloc] initWithURL:urlString];
     if (rssDC != nil) {
         [self.episodes removeAllObjects];
         [rssDC setDelegate:self];

@@ -9,15 +9,14 @@
 #import "RssDataController.h"
 
 @interface RssDataController ()
-{
-    NSXMLParser *parser;
-    NSMutableDictionary *item;
-    NSMutableString *title;
-    NSMutableString *link;
-    NSMutableString *description;
-    NSMutableString *pubDate;
-    NSString *element;
-}
+@property (nonatomic, strong) NSXMLParser *parser;
+@property (nonatomic, strong) NSMutableDictionary *item;
+@property (nonatomic, strong) NSMutableString *title;
+@property (nonatomic, strong) NSMutableString *link;
+@property (nonatomic, strong) NSMutableString *description;
+@property (nonatomic, strong) NSMutableString *pubDate;
+@property (nonatomic, strong) NSString *element;
+
 @property (nonatomic, strong) NSString *rssUrl;
 
 @end
@@ -33,46 +32,53 @@
     return self;
 }
 
-- (void)parseRSS
+- (BOOL)parseRSS
 {
+    BOOL succes = NO;
     UIApplication *myApp = [UIApplication sharedApplication];
     myApp.networkActivityIndicatorVisible = YES;
     
     NSURL *url = [NSURL URLWithString:self.rssUrl];
-    parser = [[NSXMLParser alloc] initWithContentsOfURL:url];
-    [parser setDelegate:self];
-    [parser setShouldResolveExternalEntities:NO];
-    [parser parse];
+    self.parser = [[NSXMLParser alloc] initWithContentsOfURL:url];
+    if (self.parser != nil) {
+        [self.parser setDelegate:self];
+        [self.parser setShouldResolveExternalEntities:NO];
+        succes = [self.parser parse];
+        if (!succes) {
+            NSLog(@"Fejl i parseRSS");
+        }
+    }
     
     myApp.networkActivityIndicatorVisible = NO;
+    return succes;
 }
 
 #pragma mark - XML Parser Delegate
 
 - (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict {
     
-    element = elementName;
+    self.element = elementName;
     
-    if ([element isEqualToString:RSS_ITEM]) {
+    if ([self.element isEqualToString:RSS_ITEM]) {
         
-        item    = [[NSMutableDictionary alloc] init];
-        title   = [[NSMutableString alloc] init];
-        link    = [[NSMutableString alloc] init];
-        description = [[NSMutableString alloc] init];
-        pubDate = [[NSMutableString alloc] init];
+        self.item    = [[NSMutableDictionary alloc] init];
+        self.title   = [[NSMutableString alloc] init];
+        self.link    = [[NSMutableString alloc] init];
+        self.description = [[NSMutableString alloc] init];
+        self.pubDate = [[NSMutableString alloc] init];
     }
 }
 
 - (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string {
     
-    if ([element isEqualToString:RSS_TITLE]) {
-        [title appendString:string];
-    } else if ([element isEqualToString:RSS_LINK]) {
-        [link appendString:string];
-    } else if ([element isEqualToString:RSS_DESCRIPTION]) {
-        [description appendString:string];
-    } else if ([element isEqualToString:RSS_PUBDATE]) {
-        [pubDate appendString:string];
+    if ([self.element isEqualToString:RSS_TITLE]) {
+        [self.title appendString:string];
+    } else if ([self.element isEqualToString:RSS_LINK]) {
+        [self.link appendString:string];
+    } else if ([self.element isEqualToString:RSS_DESCRIPTION]) {
+        [self.description appendString:string];
+    } else if ([self.element isEqualToString:RSS_PUBDATE]) {
+        [self.pubDate appendString:string];
     }
 }
 
@@ -80,19 +86,23 @@
     
     if ([elementName isEqualToString:RSS_ITEM]) {
         
-        [item setObject:title forKey:RSS_TITLE];
-        [item setObject:[link stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] forKey:RSS_LINK];
-        [item setObject:description forKey:RSS_DESCRIPTION];
-        [item setObject:pubDate forKey:RSS_PUBDATE];
-        [self.delegate didFindItem:item];
+        [self.item setObject:self.title forKey:RSS_TITLE];
+        [self.item setObject:[self.link stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] forKey:RSS_LINK];
+        [self.item setObject:self.description forKey:RSS_DESCRIPTION];
+        [self.item setObject:self.pubDate forKey:RSS_PUBDATE];
+        [self.delegate didFindItem:self.item];
         
     }
 }
-
+/*
 - (void)parserDidEndDocument:(NSXMLParser *)parser
 {
-    // End 
+    // End
 }
-
+*/
+- (void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError
+{
+    NSLog(@"Error: %@", [parseError localizedDescription] );
+}
 
 @end

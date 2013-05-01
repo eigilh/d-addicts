@@ -119,9 +119,9 @@
 {
     // Check to see whether the normal table or search results table is being displayed and return the count from the appropriate array
     if (tableView == self.searchDisplayController.searchResultsTableView) {
-        return [self.filteredEpisodes count];
+        return self.filteredEpisodes.count;
     } else {
-        return [self.dataController countOfList];
+        return self.dataController.countOfList;
     }
 }
 
