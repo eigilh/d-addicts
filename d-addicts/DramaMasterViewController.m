@@ -7,14 +7,12 @@
 //
 
 #import "DramaMasterViewController.h"
-
 #import "DramaDetailViewController.h"
-#import "EpisodeDataController.h"
 #import "Episode.h"
 
 @interface DramaMasterViewController ()
-@property (nonatomic, strong) EpisodeDataController *dataController;
-@property (strong,nonatomic) NSArray *filteredEpisodes;
+@property (nonatomic, strong) NSMutableArray *episodes;
+@property (nonatomic, strong) NSArray *filteredEpisodes;
 @end
 
 @implementation DramaMasterViewController
@@ -22,14 +20,6 @@
 #define TEXT_SIZE 14.0f
 #define DETAIL_TEXT_SIZE 12.0f
 #define ROW_HEIGHT (TEXT_SIZE+DETAIL_TEXT_SIZE)*2.0f
-
-- (EpisodeDataController *)dataController
-{
-    if (!_dataController) {
-        _dataController = [[EpisodeDataController alloc] init];
-    }
-    return _dataController;
-}
 
 - (void)viewDidLoad
 {
@@ -56,22 +46,67 @@
 - (void)refreshEpisodes
 {
     [self.refreshControl beginRefreshing];
-    dispatch_queue_t q = dispatch_queue_create("rss downloader", NULL);
-    dispatch_async(q, ^{
-        [self.dataController refreshEpisodes];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.tableView reloadData];
-            [self.refreshControl endRefreshing];
-            [self hideSearchBar];
-        });
-    });    
+    //dispatch_queue_t q = dispatch_queue_create("rss downloader", NULL);
+    //dispatch_async(q, ^{
+        [self fetchRSS];
+    //});
+}
+
+- (NSMutableArray *)episodes
+{
+    if (!_episodes) _episodes = [[NSMutableArray alloc] init];
+    return _episodes;
+}
+
+- (Episode *)objectInListAtIndex:(NSUInteger)theIndex
+{
+    if (theIndex < self.episodes.count) {
+        return [self.episodes objectAtIndex:theIndex];
+    }
+    return nil;
+}
+
+- (void)fetchRSS
+{
+    //RssDataController *rssDC = [[RssDataController alloc] initWithURL:@"http://www.d-addicts.com/rss.xml"];
+    NSURL *url = [[NSBundle bundleForClass:[self class]] URLForResource:@"rss" withExtension:@"xml"];
+    NSString *urlString = [url absoluteString];
+    RssDataController *rssDC = [[RssDataController alloc] initWithURL:urlString];
+    if (rssDC != nil) {
+        [self.episodes removeAllObjects];
+        [rssDC setDelegate:self];
+        [rssDC parseRSS];
+    }
+}
+
+#pragma mark - RssDelegate
+
+- (void)didFindItem:(NSDictionary *)dict
+{
+    Episode *episode = [[Episode alloc] initWithTitle:[dict valueForKey:RSS_TITLE]
+                                                 link:[dict valueForKey:RSS_LINK]
+                                          description:[dict valueForKey:RSS_DESCRIPTION]
+                                                 date:[dict valueForKey:RSS_PUBDATE]];
+    if (episode) {
+        [self.episodes addObject:episode];
+    }
+}
+
+- (void)didEndParse
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.tableView reloadData];
+        [self.refreshControl endRefreshing];
+        [self hideSearchBar];
+    });
+
 }
 
 -(void)filterContentForSearchText:(NSString*)searchText scope:(NSString*)scope {
 	// Update the filtered array based on the search text and scope.
 	// Filter the array using NSPredicate
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF.title contains[c] %@",searchText];
-    self.filteredEpisodes = [[self.dataController episodes] filteredArrayUsingPredicate:predicate];
+    self.filteredEpisodes = [self.episodes filteredArrayUsingPredicate:predicate];
 }
 
 #pragma mark - UISearchBar Delegate
@@ -118,7 +153,7 @@
     if (tableView == self.searchDisplayController.searchResultsTableView) {
         return self.filteredEpisodes.count;
     } else {
-        return self.dataController.countOfList;
+        return self.episodes.count;
     }
 }
 
@@ -136,7 +171,7 @@
         episode = [self.filteredEpisodes objectAtIndex:indexPath.row];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     } else {
-        episode = [self.dataController objectInListAtIndex:indexPath.row];
+        episode = [self objectInListAtIndex:indexPath.row];
     }
 
     // Configure cell
@@ -175,7 +210,7 @@
             detailViewController.torrents = self.filteredEpisodes;
             detailViewController.currentRow = indexPath.row;
         } else {
-            detailViewController.torrents = self.dataController.episodes;
+            detailViewController.torrents = self.episodes;
             detailViewController.currentRow = [self.tableView indexPathForSelectedRow].row;
         }
     }

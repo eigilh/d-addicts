@@ -36,7 +36,6 @@
 		A9F074801716B1D600605669 /* DramaMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A9F0747F1716B1D600605669 /* DramaMasterViewController.m */; };
 		A9F074831716B1D600605669 /* DramaDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A9F074821716B1D600605669 /* DramaDetailViewController.m */; };
 		A9F0748B1716B20100605669 /* Episode.m in Sources */ = {isa = PBXBuildFile; fileRef = A9F0748A1716B20100605669 /* Episode.m */; };
-		A9F0748E1716B4F100605669 /* EpisodeDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = A9F0748D1716B4F100605669 /* EpisodeDataController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -77,8 +76,6 @@
 		A9F074821716B1D600605669 /* DramaDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DramaDetailViewController.m; sourceTree = "<group>"; };
 		A9F074891716B20100605669 /* Episode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Episode.h; sourceTree = "<group>"; };
 		A9F0748A1716B20100605669 /* Episode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Episode.m; sourceTree = "<group>"; };
-		A9F0748C1716B4F100605669 /* EpisodeDataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EpisodeDataController.h; sourceTree = "<group>"; };
-		A9F0748D1716B4F100605669 /* EpisodeDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EpisodeDataController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,8 +145,6 @@
 			children = (
 				A9F074891716B20100605669 /* Episode.h */,
 				A9F0748A1716B20100605669 /* Episode.m */,
-				A9F0748C1716B4F100605669 /* EpisodeDataController.h */,
-				A9F0748D1716B4F100605669 /* EpisodeDataController.m */,
 				A9C5240D1723E77000F8CCDE /* RssDataController.h */,
 				A9C5240E1723E77000F8CCDE /* RssDataController.m */,
 				A9F0747B1716B1D600605669 /* MainStoryboard.storyboard */,
@@ -267,7 +262,6 @@
 				A9F074801716B1D600605669 /* DramaMasterViewController.m in Sources */,
 				A9F074831716B1D600605669 /* DramaDetailViewController.m in Sources */,
 				A9F0748B1716B20100605669 /* Episode.m in Sources */,
-				A9F0748E1716B4F100605669 /* EpisodeDataController.m in Sources */,
 				A9C5240F1723E77000F8CCDE /* RssDataController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

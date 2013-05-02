@@ -18,7 +18,8 @@
 @property (nonatomic, strong) NSString *element;
 
 @property (nonatomic, strong) NSString *rssUrl;
-
+@property (nonatomic, strong) NSMutableData *buffer;
+@property (nonatomic, strong) NSURLConnection *connection;
 @end
 
 @implementation RssDataController
@@ -32,25 +33,58 @@
     return self;
 }
 
-- (BOOL)parseRSS
+- (void)parseRSS
 {
-    BOOL succes = NO;
-    UIApplication *myApp = [UIApplication sharedApplication];
-    myApp.networkActivityIndicatorVisible = YES;
+    // Create the request.
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:self.rssUrl]];
+
+    // Create url connection and fire request
+    self.connection = [NSURLConnection connectionWithRequest:request delegate:self];
+    if (self.connection) {
+        self.buffer = [NSMutableData data];
+        [self.connection start];
+    }
+}
+
+#pragma mark NSURLConnection Delegate Methods
+
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
+    // A response has been received, this is where we initialize the instance var you created
+    // so that we can append data to it in the didReceiveData method
+    // Furthermore, this method is called each time there is a redirect so reinitializing it
+    // also serves to clear it
+    [self.buffer setLength:0];
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
+    // Append the new data to the instance variable you declared
+    [self.buffer appendData:data];
+}
+
+- (NSCachedURLResponse *)connection:(NSURLConnection *)connection
+                  willCacheResponse:(NSCachedURLResponse*)cachedResponse {
+    // Return nil to indicate not necessary to store a cached response for this connection
+    return nil;
+}
+
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
+    // The request is complete and data has been received
+    // You can parse the stuff in your instance variable now
     
-    NSURL *url = [NSURL URLWithString:self.rssUrl];
-    self.parser = [[NSXMLParser alloc] initWithContentsOfURL:url];
+    //NSURL *url = [NSURL URLWithString:self.rssUrl];
+    self.parser = [[NSXMLParser alloc] initWithData:self.buffer];
     if (self.parser != nil) {
         [self.parser setDelegate:self];
         [self.parser setShouldResolveExternalEntities:NO];
-        succes = [self.parser parse];
-        if (!succes) {
+        if (![self.parser parse]) {
             NSLog(@"Fejl i parseRSS");
         }
     }
-    
-    myApp.networkActivityIndicatorVisible = NO;
-    return succes;
+}
+
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
+    // The request has failed for some reason!
+    // Check the error var
 }
 
 #pragma mark - XML Parser Delegate
@@ -69,8 +103,8 @@
     }
 }
 
-- (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string {
-    
+- (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string
+{
     if ([self.element isEqualToString:RSS_TITLE]) {
         [self.title appendString:string];
     } else if ([self.element isEqualToString:RSS_LINK]) {
@@ -82,24 +116,26 @@
     }
 }
 
-- (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName {
+- (void)parser:(NSXMLParser *)parser
+ didEndElement:(NSString *)elementName
+  namespaceURI:(NSString *)namespaceURI
+ qualifiedName:(NSString *)qName
+{
     
     if ([elementName isEqualToString:RSS_ITEM]) {
-        
         [self.item setObject:self.title forKey:RSS_TITLE];
         [self.item setObject:[self.link stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] forKey:RSS_LINK];
         [self.item setObject:self.description forKey:RSS_DESCRIPTION];
         [self.item setObject:self.pubDate forKey:RSS_PUBDATE];
         [self.delegate didFindItem:self.item];
-        
     }
 }
-/*
+
 - (void)parserDidEndDocument:(NSXMLParser *)parser
 {
-    // End
+    [self.delegate didEndParse];
 }
-*/
+
 - (void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError
 {
     NSLog(@"Error: %@", [parseError localizedDescription] );
