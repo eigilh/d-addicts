@@ -19,7 +19,6 @@
 
 @property (nonatomic, strong) NSString *rssUrl;
 @property (nonatomic, strong) NSMutableData *buffer;
-@property (nonatomic, strong) NSURLConnection *connection;
 @end
 
 @implementation RssDataController
@@ -33,31 +32,37 @@
     return self;
 }
 
-- (void)parseRSS
+- (NSMutableData *)buffer
+{
+    if (!_buffer) {
+        _buffer = [NSMutableData data];
+    }
+    return _buffer;
+}
+
+- (void)fetch
 {
     // Create the request.
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:self.rssUrl]];
-
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:self.rssUrl]
+                                             cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                         timeoutInterval:10.0];
     // Create url connection and fire request
-    self.connection = [NSURLConnection connectionWithRequest:request delegate:self];
-    if (self.connection) {
-        self.buffer = [NSMutableData data];
-        [self.connection start];
+    NSURLConnection *connection = [NSURLConnection connectionWithRequest:request delegate:self];
+    if (connection) {
+        [connection start];
     }
 }
 
 #pragma mark NSURLConnection Delegate Methods
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
-    // A response has been received, this is where we initialize the instance var you created
-    // so that we can append data to it in the didReceiveData method
-    // Furthermore, this method is called each time there is a redirect so reinitializing it
-    // also serves to clear it
+    // A response has been received
+    // Furthermore, this method is called each time there is a redirect so set length to 0
     [self.buffer setLength:0];
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
-    // Append the new data to the instance variable you declared
+    // Append the new data to the buffer
     [self.buffer appendData:data];
 }
 
@@ -69,9 +74,7 @@
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
     // The request is complete and data has been received
-    // You can parse the stuff in your instance variable now
-    
-    //NSURL *url = [NSURL URLWithString:self.rssUrl];
+    // You can parse the stuff in your buffer now
     self.parser = [[NSXMLParser alloc] initWithData:self.buffer];
     if (self.parser != nil) {
         [self.parser setDelegate:self];
@@ -85,6 +88,8 @@
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
     // The request has failed for some reason!
     // Check the error var
+    NSLog(@"didFailWithError: %@", error.localizedDescription);
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 }
 
 #pragma mark - XML Parser Delegate
@@ -127,7 +132,7 @@
         [self.item setObject:[self.link stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] forKey:RSS_LINK];
         [self.item setObject:self.description forKey:RSS_DESCRIPTION];
         [self.item setObject:self.pubDate forKey:RSS_PUBDATE];
-        [self.delegate didFindItem:self.item];
+        [self.delegate didParseItem:self.item];
     }
 }
 
@@ -138,6 +143,7 @@
 
 - (void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError
 {
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     NSLog(@"Error: %@", [parseError localizedDescription] );
 }
 

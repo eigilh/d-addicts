@@ -46,10 +46,8 @@
 - (void)refreshEpisodes
 {
     [self.refreshControl beginRefreshing];
-    //dispatch_queue_t q = dispatch_queue_create("rss downloader", NULL);
-    //dispatch_async(q, ^{
-        [self fetchRSS];
-    //});
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+    [self fetchRSS];
 }
 
 - (NSMutableArray *)episodes
@@ -68,20 +66,20 @@
 
 - (void)fetchRSS
 {
-    //RssDataController *rssDC = [[RssDataController alloc] initWithURL:@"http://www.d-addicts.com/rss.xml"];
-    NSURL *url = [[NSBundle bundleForClass:[self class]] URLForResource:@"rss" withExtension:@"xml"];
-    NSString *urlString = [url absoluteString];
-    RssDataController *rssDC = [[RssDataController alloc] initWithURL:urlString];
+    RssDataController *rssDC = [[RssDataController alloc] initWithURL:@"http://www.d-addicts.com/rss.xml"];
+    //NSURL *url = [[NSBundle bundleForClass:[self class]] URLForResource:@"rss" withExtension:@"xml"];
+    //NSString *urlString = [url absoluteString];
+    //RssDataController *rssDC = [[RssDataController alloc] initWithURL:urlString];
     if (rssDC != nil) {
         [self.episodes removeAllObjects];
         [rssDC setDelegate:self];
-        [rssDC parseRSS];
+        [rssDC fetch];
     }
 }
 
 #pragma mark - RssDelegate
 
-- (void)didFindItem:(NSDictionary *)dict
+- (void)didParseItem:(NSDictionary *)dict
 {
     Episode *episode = [[Episode alloc] initWithTitle:[dict valueForKey:RSS_TITLE]
                                                  link:[dict valueForKey:RSS_LINK]
@@ -94,19 +92,10 @@
 
 - (void)didEndParse
 {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.tableView reloadData];
-        [self.refreshControl endRefreshing];
-        [self hideSearchBar];
-    });
-
-}
-
--(void)filterContentForSearchText:(NSString*)searchText scope:(NSString*)scope {
-	// Update the filtered array based on the search text and scope.
-	// Filter the array using NSPredicate
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF.title contains[c] %@",searchText];
-    self.filteredEpisodes = [self.episodes filteredArrayUsingPredicate:predicate];
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+    [self.tableView reloadData];
+    [self.refreshControl endRefreshing];
+    [self hideSearchBar];
 }
 
 #pragma mark - UISearchBar Delegate
@@ -115,6 +104,15 @@
 {
     // Hide the Search Bar behind the Navigation Bar
     [self hideSearchBar];
+}
+
+#pragma mark - UISearchDisplay
+
+-(void)filterContentForSearchText:(NSString*)searchText scope:(NSString*)scope {
+	// Update the filtered array based on the search text and scope.
+	// Filter the array using NSPredicate
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF.title contains[c] %@",searchText];
+    self.filteredEpisodes = [self.episodes filteredArrayUsingPredicate:predicate];
 }
 
 #pragma mark - UISearchDisplay Delegate

@@ -54,6 +54,18 @@
         self.navigationItem.title = [NSString stringWithFormat:@"%d of %d", self.currentRow+1, [self.torrents count]];
         self.flagImage.image = [UIImage imageNamed:theEpisode.iso];
         self.titleLabel.text = theEpisode.title;
+        
+        /*
+        NSDateFormatter *df = [[NSDateFormatter alloc] init];
+        [df setDateFormat:@"EEEEE, dd MMMMM yyyy HH:mm:ss zzz"];
+        NSLocale *enLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"en"];
+        [df setLocale:enLocale];
+        [df setFormatterBehavior:NSDateFormatterBehaviorDefault];
+        NSDate *date = [df dateFromString:theEpisode.pubDate];
+        NSDateFormatter *df2 = [[NSDateFormatter alloc] init];
+        [df2 setDateStyle:NSDateFormatterMediumStyle];
+        self.pubDateLabel.text = [theEpisode.pubDate substringToIndex:16];
+         */
         self.pubDateLabel.text = theEpisode.pubDate;
         self.typeLabel.text = theEpisode.type;
         self.subLabel.text = theEpisode.sub;
