@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "RssDataController.h"
+#import "RssParser.h"
 
 @interface DramaMasterViewController : UITableViewController <UISearchBarDelegate, UISearchDisplayDelegate, RssDelegate>
 

@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 Eigil Hansen. All rights reserved.
 //
 
-#import "RssDataController.h"
+#import "RssParser.h"
 
-@interface RssDataController ()
+@interface RssParser ()
 @property (nonatomic, strong) NSXMLParser *parser;
 @property (nonatomic, strong) NSMutableDictionary *item;
 @property (nonatomic, strong) NSMutableString *title;
@@ -21,9 +21,9 @@
 @property (nonatomic, strong) NSMutableData *buffer;
 @end
 
-@implementation RssDataController
+@implementation RssParser
 
-- (RssDataController *)initWithURL:(NSString *)url
+- (RssParser *)initWithURL:(NSString *)url
 {
     self = [super init];
     if (self) {

@@ -10,7 +10,7 @@
 		A92A1C7D172D7F25006D8128 /* up.png in Resources */ = {isa = PBXBuildFile; fileRef = A92A1C7B172D7F25006D8128 /* up.png */; };
 		A92A1C7E172D7F25006D8128 /* down.png in Resources */ = {isa = PBXBuildFile; fileRef = A92A1C7C172D7F25006D8128 /* down.png */; };
 		A9587A0817319AA100FD5629 /* rss.xml in Resources */ = {isa = PBXBuildFile; fileRef = A9587A0717319AA100FD5629 /* rss.xml */; };
-		A9C5240F1723E77000F8CCDE /* RssDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = A9C5240E1723E77000F8CCDE /* RssDataController.m */; };
+		A9C5240F1723E77000F8CCDE /* RssParser.m in Sources */ = {isa = PBXBuildFile; fileRef = A9C5240E1723E77000F8CCDE /* RssParser.m */; };
 		A9C52417172538E000F8CCDE /* cn.png in Resources */ = {isa = PBXBuildFile; fileRef = A9C52411172538E000F8CCDE /* cn.png */; };
 		A9C52418172538E000F8CCDE /* hk.png in Resources */ = {isa = PBXBuildFile; fileRef = A9C52412172538E000F8CCDE /* hk.png */; };
 		A9C52419172538E000F8CCDE /* jp.png in Resources */ = {isa = PBXBuildFile; fileRef = A9C52413172538E000F8CCDE /* jp.png */; };
@@ -42,8 +42,8 @@
 		A92A1C7B172D7F25006D8128 /* up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = up.png; sourceTree = "<group>"; };
 		A92A1C7C172D7F25006D8128 /* down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = down.png; sourceTree = "<group>"; };
 		A9587A0717319AA100FD5629 /* rss.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = rss.xml; sourceTree = "<group>"; };
-		A9C5240D1723E77000F8CCDE /* RssDataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RssDataController.h; sourceTree = "<group>"; };
-		A9C5240E1723E77000F8CCDE /* RssDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RssDataController.m; sourceTree = "<group>"; };
+		A9C5240D1723E77000F8CCDE /* RssParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RssParser.h; sourceTree = "<group>"; };
+		A9C5240E1723E77000F8CCDE /* RssParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RssParser.m; sourceTree = "<group>"; };
 		A9C52411172538E000F8CCDE /* cn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cn.png; sourceTree = "<group>"; };
 		A9C52412172538E000F8CCDE /* hk.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hk.png; sourceTree = "<group>"; };
 		A9C52413172538E000F8CCDE /* jp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jp.png; sourceTree = "<group>"; };
@@ -145,8 +145,8 @@
 			children = (
 				A9F074891716B20100605669 /* Episode.h */,
 				A9F0748A1716B20100605669 /* Episode.m */,
-				A9C5240D1723E77000F8CCDE /* RssDataController.h */,
-				A9C5240E1723E77000F8CCDE /* RssDataController.m */,
+				A9C5240D1723E77000F8CCDE /* RssParser.h */,
+				A9C5240E1723E77000F8CCDE /* RssParser.m */,
 				A9F0747B1716B1D600605669 /* MainStoryboard.storyboard */,
 				A9F0747E1716B1D600605669 /* DramaMasterViewController.h */,
 				A9F0747F1716B1D600605669 /* DramaMasterViewController.m */,
@@ -262,7 +262,7 @@
 				A9F074801716B1D600605669 /* DramaMasterViewController.m in Sources */,
 				A9F074831716B1D600605669 /* DramaDetailViewController.m in Sources */,
 				A9F0748B1716B20100605669 /* Episode.m in Sources */,
-				A9C5240F1723E77000F8CCDE /* RssDataController.m in Sources */,
+				A9C5240F1723E77000F8CCDE /* RssParser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

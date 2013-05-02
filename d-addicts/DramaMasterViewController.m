@@ -66,14 +66,14 @@
 
 - (void)fetchRSS
 {
-    RssDataController *rssDC = [[RssDataController alloc] initWithURL:@"http://www.d-addicts.com/rss.xml"];
+    RssParser *parser = [[RssParser alloc] initWithURL:@"http://www.d-addicts.com/rss.xml"];
     //NSURL *url = [[NSBundle bundleForClass:[self class]] URLForResource:@"rss" withExtension:@"xml"];
     //NSString *urlString = [url absoluteString];
-    //RssDataController *rssDC = [[RssDataController alloc] initWithURL:urlString];
-    if (rssDC != nil) {
+    //RssParser *rssDC = [[RssParser alloc] initWithURL:urlString];
+    if (parser != nil) {
         [self.episodes removeAllObjects];
-        [rssDC setDelegate:self];
-        [rssDC fetch];
+        [parser setDelegate:self];
+        [parser fetch];
     }
 }
 
