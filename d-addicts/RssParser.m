@@ -99,12 +99,11 @@
     self.element = elementName;
     
     if ([self.element isEqualToString:RSS_ITEM]) {
-        
-        self.item    = [[NSMutableDictionary alloc] init];
-        self.title   = [[NSMutableString alloc] init];
-        self.link    = [[NSMutableString alloc] init];
+        self.item       = [[NSMutableDictionary alloc] init];
+        self.title      = [[NSMutableString alloc] init];
+        self.link       = [[NSMutableString alloc] init];
         self.description = [[NSMutableString alloc] init];
-        self.pubDate = [[NSMutableString alloc] init];
+        self.pubDate    = [[NSMutableString alloc] init];
     }
 }
 
