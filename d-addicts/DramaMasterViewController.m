@@ -90,8 +90,11 @@
     }
 }
 
-- (void)didEndParse
+- (void)didEndParseWithError:(NSError *)error
 {
+    if (error) {
+        NSLog(@"Error: %@", [error localizedDescription]);
+    }
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     [self.tableView reloadData];
     [self.refreshControl endRefreshing];
@@ -151,14 +154,28 @@
     if (tableView == self.searchDisplayController.searchResultsTableView) {
         return self.filteredEpisodes.count;
     } else {
-        return self.episodes.count;
+        if (self.episodes.count != 0)
+            return self.episodes.count;
+        else
+            return 1; // to show a message to the user in the first cell
     }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"EpisodeCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    UITableViewCell *cell;
+    
+    // Show message if no items
+    if (self.episodes.count == 0) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell.textLabel.text = @"No Items";
+        cell.textLabel.textAlignment = NSTextAlignmentCenter;
+        cell.textLabel.textColor = [UIColor grayColor];
+        return cell;
+    }
+    
+    cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if ( cell == nil ) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }

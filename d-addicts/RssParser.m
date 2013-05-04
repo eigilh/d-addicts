@@ -75,21 +75,19 @@
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
     // The request is complete and data has been received
     // You can parse the stuff in your buffer now
+    // NSLog(@"buffer.length: %d", self.buffer.length);
     self.parser = [[NSXMLParser alloc] initWithData:self.buffer];
     if (self.parser != nil) {
         [self.parser setDelegate:self];
         [self.parser setShouldResolveExternalEntities:NO];
-        if (![self.parser parse]) {
-            NSLog(@"Fejl i parseRSS");
-        }
+        [self.parser parse];
     }
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
     // The request has failed for some reason!
     // Check the error var
-    NSLog(@"didFailWithError: %@", error.localizedDescription);
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+    [self.delegate didEndParseWithError:error];
 }
 
 #pragma mark - XML Parser Delegate
@@ -137,13 +135,12 @@
 
 - (void)parserDidEndDocument:(NSXMLParser *)parser
 {
-    [self.delegate didEndParse];
+    [self.delegate didEndParseWithError:nil];
 }
 
 - (void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError
 {
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-    NSLog(@"Error: %@", [parseError localizedDescription] );
+    [self.delegate didEndParseWithError:parseError];
 }
 
 @end

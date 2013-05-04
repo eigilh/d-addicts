@@ -112,6 +112,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A93CD59317346F8500D73506 /* Icons */ = {
+			isa = PBXGroup;
+			children = (
+				A93CD57F17346DCB00D73506 /* Icon-72.png */,
+				A93CD58017346DCB00D73506 /* Icon-72@2x.png */,
+				A93CD58117346DCB00D73506 /* Icon-Small-50.png */,
+				A93CD58217346DCB00D73506 /* Icon-Small-50@2x.png */,
+				A93CD58317346DCB00D73506 /* Icon-Small.png */,
+				A93CD58417346DCB00D73506 /* Icon-Small@2x.png */,
+				A93CD58517346DCB00D73506 /* Icon.png */,
+				A93CD58617346DCB00D73506 /* Icon@2x.png */,
+				A93CD58717346DCB00D73506 /* iTunesArtwork */,
+				A93CD58817346DCB00D73506 /* iTunesArtwork@2x */,
+			);
+			name = Icons;
+			sourceTree = "<group>";
+		};
 		A9C52410172538E000F8CCDE /* Images */ = {
 			isa = PBXGroup;
 			children = (
@@ -181,16 +198,7 @@
 		A9F0746A1716B1D500605669 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				A93CD57F17346DCB00D73506 /* Icon-72.png */,
-				A93CD58017346DCB00D73506 /* Icon-72@2x.png */,
-				A93CD58117346DCB00D73506 /* Icon-Small-50.png */,
-				A93CD58217346DCB00D73506 /* Icon-Small-50@2x.png */,
-				A93CD58317346DCB00D73506 /* Icon-Small.png */,
-				A93CD58417346DCB00D73506 /* Icon-Small@2x.png */,
-				A93CD58517346DCB00D73506 /* Icon.png */,
-				A93CD58617346DCB00D73506 /* Icon@2x.png */,
-				A93CD58717346DCB00D73506 /* iTunesArtwork */,
-				A93CD58817346DCB00D73506 /* iTunesArtwork@2x */,
+				A93CD59317346F8500D73506 /* Icons */,
 				A9587A0717319AA100FD5629 /* rss.xml */,
 				A9F074721716B1D500605669 /* DramaAppDelegate.h */,
 				A9F074731716B1D600605669 /* DramaAppDelegate.m */,
