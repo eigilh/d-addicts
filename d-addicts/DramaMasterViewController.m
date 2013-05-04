@@ -164,18 +164,16 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"EpisodeCell";
-    UITableViewCell *cell;
     
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     // Show message if no items
     if (self.episodes.count == 0) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         cell.textLabel.text = @"No Items";
         cell.textLabel.textAlignment = NSTextAlignmentCenter;
         cell.textLabel.textColor = [UIColor grayColor];
         return cell;
     }
     
-    cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if ( cell == nil ) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
@@ -192,6 +190,8 @@
     // Configure cell
     cell.textLabel.font = [UIFont boldSystemFontOfSize:TEXT_SIZE];
     cell.textLabel.text = episode.title;
+    cell.textLabel.textAlignment = NSTextAlignmentLeft;
+    cell.textLabel.textColor = [UIColor blackColor];
     cell.detailTextLabel.font = [UIFont systemFontOfSize:DETAIL_TEXT_SIZE];
     cell.detailTextLabel.text = episode.type;
     cell.imageView.image = [UIImage imageNamed:episode.iso];
