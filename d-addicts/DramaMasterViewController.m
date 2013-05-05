@@ -92,12 +92,14 @@
 
 - (void)didEndParseWithError:(NSError *)error
 {
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+    [self.refreshControl endRefreshing];
     if (error) {
         NSLog(@"Error: %@", [error localizedDescription]);
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:nil];
+        [alert show];
     }
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     [self.tableView reloadData];
-    [self.refreshControl endRefreshing];
     [self hideSearchBar];
 }
 
