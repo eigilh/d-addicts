@@ -50,6 +50,13 @@
     [self fetchRSS];
 }
 
+- (void)endRefreshEpisodes
+{
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+    [self.refreshControl endRefreshing];
+    [self hideSearchBar];
+}
+
 - (NSMutableArray *)episodes
 {
     if (!_episodes) _episodes = [[NSMutableArray alloc] init];
@@ -66,8 +73,9 @@
 
 - (void)fetchRSS
 {
-// For offline testing
+// For offline and error testing
 //    NSURL *url = [[NSBundle bundleForClass:[self class]] URLForResource:@"rss" withExtension:@"xml"];
+//    NSURL *url = [[NSBundle bundleForClass:[self class]] URLForResource:@"bad" withExtension:@"xml"];
 //    NSString *urlString = [url absoluteString];
 //    RssParser *parser = [[RssParser alloc] initWithURL:urlString];
     
@@ -92,21 +100,24 @@
     }
 }
 
-- (void)didEndParseWithError:(NSError *)error
+- (void)didEndParse
 {
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-    [self.refreshControl endRefreshing];
+    [self.tableView reloadData];
+    [self endRefreshEpisodes];
+}
+
+- (void)didFailParseWithError:(NSError *)error
+{
     if (error) {
         NSLog(@"Error: %@", [error localizedDescription]);
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error while fetching feed"
                                                         message:[error localizedDescription]
                                                        delegate:self
-                                              cancelButtonTitle:@"Cancel"
-                                              otherButtonTitles:nil];
+                                              cancelButtonTitle:@"Ok"
+                                              otherButtonTitles:nil, nil];
         [alert show];
     }
-    [self.tableView reloadData];
-    [self hideSearchBar];
+    [self endRefreshEpisodes];
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex

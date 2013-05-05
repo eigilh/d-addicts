@@ -84,7 +84,7 @@
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
     // The request has failed for some reason!
     // Check the error var
-    [self.delegate didEndParseWithError:error];
+    [self.delegate didFailParseWithError:error];
 }
 
 #pragma mark - XML Parser Delegate
@@ -132,12 +132,12 @@
 
 - (void)parserDidEndDocument:(NSXMLParser *)parser
 {
-    [self.delegate didEndParseWithError:nil];
+    [self.delegate didEndParse];
 }
 
 - (void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError
 {
-    [self.delegate didEndParseWithError:parseError];
+    [self.delegate didFailParseWithError:parseError];
 }
 
 @end

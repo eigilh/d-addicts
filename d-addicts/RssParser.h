@@ -27,5 +27,6 @@
 
 @protocol RssDelegate <NSObject>
 - (void)didParseItem:(NSDictionary *)dictionary;
-- (void)didEndParseWithError:(NSError *)error; // pass nil if no error
+- (void)didEndParse;
+- (void)didFailParseWithError:(NSError *)error;
 @end

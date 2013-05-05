@@ -1,0 +1,68 @@
+2013-05-05 00:11:45,725 ERROR [com.daddicts.util.DbUtils] - <*** Cannot create db connection>
+com.mysql.jdbc.exceptions.jdbc4.MySQLNonTransientConnectionException: Could not create connection to database server. Attempted reconnect 3 times. Giving up.
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:57)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:532)
+	at com.mysql.jdbc.Util.handleNewInstance(Util.java:406)
+	at com.mysql.jdbc.Util.getInstance(Util.java:381)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:984)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:956)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:926)
+	at com.mysql.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:2359)
+	at com.mysql.jdbc.ConnectionImpl.<init>(ConnectionImpl.java:776)
+	at com.mysql.jdbc.JDBC4Connection.<init>(JDBC4Connection.java:46)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:57)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:532)
+	at com.mysql.jdbc.Util.handleNewInstance(Util.java:406)
+	at com.mysql.jdbc.ConnectionImpl.getInstance(ConnectionImpl.java:352)
+	at com.mysql.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:284)
+	at java.sql.DriverManager.getConnection(DriverManager.java:620)
+	at java.sql.DriverManager.getConnection(DriverManager.java:200)
+	at com.daddicts.util.DbUtils.getConnection(DbUtils.java:49)
+	at com.daddicts.util.RssUtils.getLatestTorrents(RssUtils.java:68)
+	at com.daddicts.util.RssUtils.createRssFeed(RssUtils.java:123)
+	at com.daddicts.util.RssUtils.main(RssUtils.java:179)
+Caused by: com.mysql.jdbc.exceptions.jdbc4.CommunicationsException: Communications link failure
+
+The last packet successfully received from the server was 61,476 milliseconds ago.  The last packet sent successfully to the server was 0 milliseconds ago.
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:57)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:532)
+	at com.mysql.jdbc.Util.handleNewInstance(Util.java:406)
+	at com.mysql.jdbc.SQLError.createCommunicationsException(SQLError.java:1074)
+	at com.mysql.jdbc.MysqlIO.reuseAndReadPacket(MysqlIO.java:3052)
+	at com.mysql.jdbc.MysqlIO.reuseAndReadPacket(MysqlIO.java:2938)
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:3481)
+	at com.mysql.jdbc.MysqlIO.sendCommand(MysqlIO.java:1959)
+	at com.mysql.jdbc.MysqlIO.sqlQueryDirect(MysqlIO.java:2109)
+	at com.mysql.jdbc.ConnectionImpl.execSQL(ConnectionImpl.java:2637)
+	at com.mysql.jdbc.ConnectionImpl.configureClientCharacterSet(ConnectionImpl.java:1813)
+	at com.mysql.jdbc.ConnectionImpl.initializePropsFromServer(ConnectionImpl.java:3539)
+	at com.mysql.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:2302)
+	... 15 more
+Caused by: java.io.EOFException: Can not read response from server. Expected to read 4 bytes, read 0 bytes before connection was unexpectedly lost.
+	at com.mysql.jdbc.MysqlIO.readFully(MysqlIO.java:2497)
+	at com.mysql.jdbc.MysqlIO.reuseAndReadPacket(MysqlIO.java:2949)
+	... 23 more
+2013-05-05 00:13:01,919 ERROR [com.daddicts.util.RssUtils] - <Error retrieving latest torrents>
+java.lang.NullPointerException
+	at com.daddicts.util.RssUtils.getLatestTorrents(RssUtils.java:70)
+	at com.daddicts.util.RssUtils.createRssFeed(RssUtils.java:123)
+	at com.daddicts.util.RssUtils.main(RssUtils.java:179)
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>D-Addicts RSS Feed</title>
+    <link>http://www.d-addicts.com</link>
+    <description>D-Addicts RSS Feed</description>
+    <language>en-us</language>
+    <pubDate>Sat, 04 May 2013 22:03:33 GMT</pubDate>
+    <ttl>60</ttl>
+  </channel>
+</rss>
+
+
