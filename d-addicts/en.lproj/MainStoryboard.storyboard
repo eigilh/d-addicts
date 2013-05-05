@@ -38,26 +38,26 @@
                             </connections>
                         </searchBar>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="EpisodeCell" textLabel="phq-AM-6qj" detailTextLabel="HW2-4o-f4i" imageView="DFc-OY-DDP" style="IBUITableViewCellStyleSubtitle" id="lJ0-d7-vTF">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="gray" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="EpisodeCell" textLabel="phq-AM-6qj" detailTextLabel="HW2-4o-f4i" imageView="XJH-aJ-BgN" style="IBUITableViewCellStyleSubtitle" id="lJ0-d7-vTF">
                                 <rect key="frame" x="0.0" y="66" width="320" height="48"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="300" height="47"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="phq-AM-6qj">
-                                            <rect key="frame" x="49" y="7" width="29" height="18"/>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="No Items" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="phq-AM-6qj">
+                                            <rect key="frame" x="49" y="7" width="60" height="18"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         </label>
-                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Detail" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HW2-4o-f4i">
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Placeholder" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HW2-4o-f4i">
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <color key="textColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         </label>
-                                        <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="jp.png" id="DFc-OY-DDP">
+                                        <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="jp.png" id="XJH-aJ-BgN">
                                             <rect key="frame" x="7" y="7" width="32" height="32"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </imageView>
@@ -287,6 +287,37 @@
         <image name="jp.png" width="32" height="32"/>
         <image name="up.png" width="17" height="16"/>
     </resources>
+    <classes>
+        <class className="DramaDetailViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/DramaDetailViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="upDownPressed:" candidateClass="UISegmentedControl"/>
+                <relationship kind="outlet" name="addedByLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="flagImage" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="pubDateLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="sizeLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="subLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="titleLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="typeLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="upDownButtons" candidateClass="UISegmentedControl"/>
+            </relationships>
+        </class>
+        <class className="DramaMasterViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/DramaMasterViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="goToSearch:"/>
+                <relationship kind="action" name="refresh:" candidateClass="UIRefreshControl"/>
+                <relationship kind="action" name="refreshPressed:" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="episodeSearchBar" candidateClass="UISearchBar"/>
+            </relationships>
+        </class>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+        <class className="UIRefreshControl" superclassName="UIControl">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UIRefreshControl.h"/>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

@@ -58,18 +58,20 @@
 
 - (Episode *)objectInListAtIndex:(NSUInteger)theIndex
 {
-    if (theIndex < self.episodes.count) {
+    if (theIndex < self.episodes.count)
         return [self.episodes objectAtIndex:theIndex];
-    }
-    return nil;
+    else
+        return nil;
 }
 
 - (void)fetchRSS
 {
+// For offline testing
+//    NSURL *url = [[NSBundle bundleForClass:[self class]] URLForResource:@"rss" withExtension:@"xml"];
+//    NSString *urlString = [url absoluteString];
+//    RssParser *parser = [[RssParser alloc] initWithURL:urlString];
+    
     RssParser *parser = [[RssParser alloc] initWithURL:@"http://www.d-addicts.com/rss.xml"];
-    //NSURL *url = [[NSBundle bundleForClass:[self class]] URLForResource:@"rss" withExtension:@"xml"];
-    //NSString *urlString = [url absoluteString];
-    //RssParser *rssDC = [[RssParser alloc] initWithURL:urlString];
     if (parser != nil) {
         [self.episodes removeAllObjects];
         [parser setDelegate:self];
@@ -96,11 +98,20 @@
     [self.refreshControl endRefreshing];
     if (error) {
         NSLog(@"Error: %@", [error localizedDescription]);
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                        message:[error localizedDescription]
+                                                       delegate:self
+                                              cancelButtonTitle:@"Cancel"
+                                              otherButtonTitles:nil];
         [alert show];
     }
     [self.tableView reloadData];
     [self hideSearchBar];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    
 }
 
 #pragma mark - UISearchBar Delegate
@@ -156,10 +167,7 @@
     if (tableView == self.searchDisplayController.searchResultsTableView) {
         return self.filteredEpisodes.count;
     } else {
-        if (self.episodes.count != 0)
-            return self.episodes.count;
-        else
-            return 1; // to show a message to the user in the first cell
+        return self.episodes.count;
     }
 }
 
@@ -167,15 +175,7 @@
 {
     static NSString *CellIdentifier = @"EpisodeCell";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    // Show message if no items
-    if (self.episodes.count == 0) {
-        cell.textLabel.text = @"No Items";
-        cell.textLabel.textAlignment = NSTextAlignmentCenter;
-        cell.textLabel.textColor = [UIColor grayColor];
-        return cell;
-    }
-    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];    
     if ( cell == nil ) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
@@ -184,7 +184,6 @@
     Episode *episode;
     if (tableView == self.searchDisplayController.searchResultsTableView) {
         episode = [self.filteredEpisodes objectAtIndex:indexPath.row];
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     } else {
         episode = [self objectInListAtIndex:indexPath.row];
     }
@@ -192,11 +191,10 @@
     // Configure cell
     cell.textLabel.font = [UIFont boldSystemFontOfSize:TEXT_SIZE];
     cell.textLabel.text = episode.title;
-    cell.textLabel.textAlignment = NSTextAlignmentLeft;
-    cell.textLabel.textColor = [UIColor blackColor];
     cell.detailTextLabel.font = [UIFont systemFontOfSize:DETAIL_TEXT_SIZE];
     cell.detailTextLabel.text = episode.type;
     cell.imageView.image = [UIImage imageNamed:episode.iso];
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 
     return cell;
 }

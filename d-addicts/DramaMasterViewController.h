@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "RssParser.h"
 
-@interface DramaMasterViewController : UITableViewController <UISearchBarDelegate, UISearchDisplayDelegate, RssDelegate>
+@interface DramaMasterViewController : UITableViewController <UISearchBarDelegate, UISearchDisplayDelegate, UIAlertViewDelegate, RssDelegate>
 
 @property (weak, nonatomic) IBOutlet UISearchBar *episodeSearchBar;
 -(IBAction)goToSearch:(id)sender;
