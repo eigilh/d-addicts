@@ -102,8 +102,12 @@
     
     UITableView *tv = self.tableView;
     [tv beginUpdates];
-    [tv insertRowsAtIndexPaths:insertIndexPaths withRowAnimation:UITableViewRowAnimationTop];
-    [tv deleteRowsAtIndexPaths:deleteIndexPaths withRowAnimation:UITableViewRowAnimationFade];
+    if (self.episodes.count == self.countBeforeRefresh) {
+        [tv reloadRowsAtIndexPaths:insertIndexPaths withRowAnimation:UITableViewRowAnimationTop];
+    } else {
+        [tv insertRowsAtIndexPaths:insertIndexPaths withRowAnimation:UITableViewRowAnimationTop];
+        [tv deleteRowsAtIndexPaths:deleteIndexPaths withRowAnimation:UITableViewRowAnimationBottom];
+    }
     [tv endUpdates];
 }
 
