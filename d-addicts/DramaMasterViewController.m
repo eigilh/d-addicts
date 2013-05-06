@@ -13,6 +13,7 @@
 @interface DramaMasterViewController ()
 @property (nonatomic, strong) NSMutableArray *episodes;
 @property (nonatomic, strong) NSArray *filteredEpisodes;
+@property (nonatomic) NSUInteger countBeforeRefresh;
 @end
 
 @implementation DramaMasterViewController
@@ -47,11 +48,9 @@
 {
     [self.refreshControl beginRefreshing];
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+    // save the number of items in the table
+    self.countBeforeRefresh = self.episodes.count;
     [self fetchRSS];
-}
-
-- (void)endRefreshEpisodes
-{
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     [self.refreshControl endRefreshing];
     [self hideSearchBar];
@@ -87,6 +86,27 @@
     }
 }
 
+- (void)insertAndDeleteRows
+{
+    NSMutableArray *deleteIndexPaths = [[NSMutableArray alloc] initWithCapacity:self.countBeforeRefresh];
+    if (self.countBeforeRefresh > 0) {
+        for (NSInteger index=0; index < self.countBeforeRefresh; index += 1) {
+            [deleteIndexPaths addObject:[NSIndexPath indexPathForItem:index inSection:0]];
+        }
+    }
+
+    NSMutableArray *insertIndexPaths = [[NSMutableArray alloc] initWithCapacity:25];
+    for (NSInteger index=0; index < self.episodes.count; index += 1) {
+        [insertIndexPaths addObject:[NSIndexPath indexPathForItem:index inSection:0]];
+    }
+    
+    UITableView *tv = self.tableView;
+    [tv beginUpdates];
+    [tv insertRowsAtIndexPaths:insertIndexPaths withRowAnimation:UITableViewRowAnimationTop];
+    [tv deleteRowsAtIndexPaths:deleteIndexPaths withRowAnimation:UITableViewRowAnimationFade];
+    [tv endUpdates];
+}
+
 #pragma mark - RssDelegate
 
 - (void)didParseItem:(NSDictionary *)dict
@@ -102,8 +122,8 @@
 
 - (void)didEndParse
 {
-    [self.tableView reloadData];
-    [self endRefreshEpisodes];
+    [self insertAndDeleteRows];
+//    [self.tableView reloadData];
 }
 
 - (void)didFailParseWithError:(NSError *)error
@@ -117,7 +137,6 @@
                                               otherButtonTitles:nil, nil];
         [alert show];
     }
-    [self endRefreshEpisodes];
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
