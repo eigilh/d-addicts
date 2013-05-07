@@ -51,6 +51,10 @@
     // save the number of items in the table
     self.countBeforeRefresh = self.episodes.count;
     [self fetchRSS];
+}
+
+- (void)endRefreshEpisodes
+{
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     [self.refreshControl endRefreshing];
     [self hideSearchBar];
@@ -128,6 +132,8 @@
 {
     [self insertAndDeleteRows];
 //    [self.tableView reloadData];
+    [self endRefreshEpisodes];
+
 }
 
 - (void)didFailParseWithError:(NSError *)error
@@ -141,6 +147,7 @@
                                               otherButtonTitles:nil, nil];
         [alert show];
     }
+    [self endRefreshEpisodes];
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
