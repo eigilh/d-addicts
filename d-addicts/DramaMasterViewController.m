@@ -131,7 +131,6 @@
 - (void)didEndParse
 {
     [self insertAndDeleteRows];
-//    [self.tableView reloadData];
     [self endRefreshEpisodes];
 
 }
@@ -147,6 +146,8 @@
                                               otherButtonTitles:nil, nil];
         [alert show];
     }
+    // Clear out any old data in the table view
+    [self.tableView reloadData];
     [self endRefreshEpisodes];
 }
 
