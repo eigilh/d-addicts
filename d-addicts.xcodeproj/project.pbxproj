@@ -47,6 +47,8 @@
 		A9F074801716B1D600605669 /* DramaMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A9F0747F1716B1D600605669 /* DramaMasterViewController.m */; };
 		A9F074831716B1D600605669 /* DramaDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A9F074821716B1D600605669 /* DramaDetailViewController.m */; };
 		A9F0748B1716B20100605669 /* Episode.m in Sources */ = {isa = PBXBuildFile; fileRef = A9F0748A1716B20100605669 /* Episode.m */; };
+		A9F5B5191741506100CBDDDB /* up@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A9F5B5181741506100CBDDDB /* up@2x.png */; };
+		A9F5B51B1741518700CBDDDB /* down@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A9F5B51A1741518700CBDDDB /* down@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -98,6 +100,8 @@
 		A9F074821716B1D600605669 /* DramaDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DramaDetailViewController.m; sourceTree = "<group>"; };
 		A9F074891716B20100605669 /* Episode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Episode.h; sourceTree = "<group>"; };
 		A9F0748A1716B20100605669 /* Episode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Episode.m; sourceTree = "<group>"; };
+		A9F5B5181741506100CBDDDB /* up@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "up@2x.png"; sourceTree = "<group>"; };
+		A9F5B51A1741518700CBDDDB /* down@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "down@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,6 +140,8 @@
 			children = (
 				A92A1C7B172D7F25006D8128 /* up.png */,
 				A92A1C7C172D7F25006D8128 /* down.png */,
+				A9F5B5181741506100CBDDDB /* up@2x.png */,
+				A9F5B51A1741518700CBDDDB /* down@2x.png */,
 				A9C5241D17258EA200F8CCDE /* cn@2x.png */,
 				A9C5241E17258EA200F8CCDE /* hk@2x.png */,
 				A9C5241F17258EA200F8CCDE /* jp@2x.png */,
@@ -299,6 +305,8 @@
 				A93CD59117346DCB00D73506 /* iTunesArtwork in Resources */,
 				A93CD59217346DCB00D73506 /* iTunesArtwork@2x in Resources */,
 				A9B5586F17368C46001CFDEB /* bad.xml in Resources */,
+				A9F5B5191741506100CBDDDB /* up@2x.png in Resources */,
+				A9F5B51B1741518700CBDDDB /* down@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

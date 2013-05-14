@@ -19,7 +19,7 @@
 @implementation DramaMasterViewController
 
 #define TEXT_SIZE 14.0f
-#define DETAIL_TEXT_SIZE 12.0f
+#define DETAIL_TEXT_SIZE 13.0f
 #define ROW_HEIGHT (TEXT_SIZE+DETAIL_TEXT_SIZE)*2.0f
 
 - (void)viewDidLoad
