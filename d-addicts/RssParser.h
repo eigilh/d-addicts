@@ -18,8 +18,8 @@
 
 @interface RssParser : NSObject <NSURLConnectionDataDelegate, NSXMLParserDelegate>
 
-- (RssParser *)initWithURL:(NSString *)url;
-- (void)fetch;
+- (RssParser *)initWithURL:(NSURL *)url;
+- (void)start;
 
 @property (weak) id <RssDelegate> delegate;
 

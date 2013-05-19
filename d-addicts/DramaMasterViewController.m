@@ -37,7 +37,7 @@
 {
     if (self.tableView.bounds.origin.y <= 0.0) {
         CGRect newBounds = self.tableView.bounds;
-        newBounds.origin.y = newBounds.origin.y + self.episodeSearchBar.bounds.size.height;
+        newBounds.origin.y = newBounds.origin.y + self.searchBar.bounds.size.height;
         [UIView animateWithDuration:0.5f animations:^{
             self.tableView.bounds = newBounds;
         }];
@@ -79,14 +79,13 @@
 // For offline and error testing
 //    NSURL *url = [[NSBundle bundleForClass:[self class]] URLForResource:@"rss" withExtension:@"xml"];
 //    NSURL *url = [[NSBundle bundleForClass:[self class]] URLForResource:@"bad" withExtension:@"xml"];
-//    NSString *urlString = [url absoluteString];
-//    RssParser *parser = [[RssParser alloc] initWithURL:urlString];
+//    RssParser *parser = [[RssParser alloc] initWithURL:url];
     
-    RssParser *parser = [[RssParser alloc] initWithURL:@"http://www.d-addicts.com/rss.xml"];
+    RssParser *parser = [[RssParser alloc] initWithURL:[NSURL URLWithString:@"http://www.d-addicts.com/rss.xml"]];
     if (parser != nil) {
         [self.episodes removeAllObjects];
         [parser setDelegate:self];
-        [parser fetch];
+        [parser start];
     }
 }
 
@@ -282,7 +281,7 @@
 - (IBAction)goToSearch:(id)sender {
     // If you're worried that your users might not catch on to the fact that a search bar is available if they scroll to reveal it, a search icon will help them
     // If you don't hide your search bar in your app, don’t include this, as it would be redundant
-    [self.episodeSearchBar becomeFirstResponder];
+    [self.searchBar becomeFirstResponder];
 }
 
 - (IBAction)refreshPressed:(UIBarButtonItem *)sender {

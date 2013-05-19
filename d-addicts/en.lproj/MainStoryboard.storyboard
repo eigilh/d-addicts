@@ -91,7 +91,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </refreshControl>
                     <connections>
-                        <outlet property="episodeSearchBar" destination="eKm-C9-nij" id="rti-VL-1RU"/>
+                        <outlet property="searchBar" destination="eKm-C9-nij" id="TBk-ua-u3u"/>
                         <outlet property="searchDisplayController" destination="M7C-MA-w3v" id="1zx-if-6NV"/>
                     </connections>
                 </tableViewController>

@@ -17,17 +17,17 @@
 @property (nonatomic, strong) NSMutableString *pubDate;
 @property (nonatomic, strong) NSString *element;
 
-@property (nonatomic, strong) NSString *rssURL;
+@property (nonatomic, strong) NSURL *url;
 @property (nonatomic, strong) NSMutableData *buffer;
 @end
 
 @implementation RssParser
 
-- (RssParser *)initWithURL:(NSString *)url
+- (RssParser *)initWithURL:(NSURL *)url
 {
     self = [super init];
     if (self) {
-        self.rssURL = url;
+        self.url = url;
     }
     return self;
 }
@@ -40,10 +40,10 @@
     return _buffer;
 }
 
-- (void)fetch
+- (void)start
 {
     // Create the request.
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:self.rssURL]
+    NSURLRequest *request = [NSURLRequest requestWithURL:self.url
                                              cachePolicy:NSURLRequestUseProtocolCachePolicy
                                          timeoutInterval:10.0];
     // Create url connection and fire request

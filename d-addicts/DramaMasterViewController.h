@@ -11,7 +11,7 @@
 
 @interface DramaMasterViewController : UITableViewController <UISearchBarDelegate, UISearchDisplayDelegate, UIAlertViewDelegate, RssDelegate>
 
-@property (weak, nonatomic) IBOutlet UISearchBar *episodeSearchBar;
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 -(IBAction)goToSearch:(id)sender;
 - (IBAction)refreshPressed:(UIBarButtonItem *)sender;
 @end
