@@ -150,6 +150,8 @@
     [self endRefreshEpisodes];
 }
 
+#pragma mark - UIAlertView Delegate
+
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     

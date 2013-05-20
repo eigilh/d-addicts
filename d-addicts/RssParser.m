@@ -18,6 +18,7 @@
 @property (nonatomic, strong) NSString *element;
 
 @property (nonatomic, strong) NSURL *url;
+@property (nonatomic, strong) NSURLConnection *connection;
 @property (nonatomic, strong) NSMutableData *buffer;
 @end
 
@@ -47,7 +48,7 @@
                                              cachePolicy:NSURLRequestUseProtocolCachePolicy
                                          timeoutInterval:10.0];
     // Create url connection and fire request
-    [NSURLConnection connectionWithRequest:request delegate:self];
+    self.connection = [NSURLConnection connectionWithRequest:request delegate:self];
 }
 
 #pragma mark NSURLConnection Delegate Methods
@@ -120,12 +121,15 @@
   namespaceURI:(NSString *)namespaceURI
  qualifiedName:(NSString *)qName
 {
-    
     if ([elementName isEqualToString:RSS_ITEM]) {
-        [self.item setObject:self.title forKey:RSS_TITLE];
-        [self.item setObject:[self.link stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] forKey:RSS_LINK];
-        [self.item setObject:self.description forKey:RSS_DESCRIPTION];
-        [self.item setObject:self.pubDate forKey:RSS_PUBDATE];
+        [self.item setObject:self.title
+                      forKey:RSS_TITLE];
+        [self.item setObject:[self.link stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]
+                      forKey:RSS_LINK];
+        [self.item setObject:self.description
+                      forKey:RSS_DESCRIPTION];
+        [self.item setObject:self.pubDate
+                      forKey:RSS_PUBDATE];
         [self.delegate didParseItem:self.item];
     }
 }

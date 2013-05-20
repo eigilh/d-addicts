@@ -306,9 +306,8 @@
             <source key="sourceIdentifier" type="project" relativePath="./Classes/DramaMasterViewController.h"/>
             <relationships>
                 <relationship kind="action" name="goToSearch:"/>
-                <relationship kind="action" name="refresh:" candidateClass="UIRefreshControl"/>
                 <relationship kind="action" name="refreshPressed:" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="episodeSearchBar" candidateClass="UISearchBar"/>
+                <relationship kind="outlet" name="searchBar" candidateClass="UISearchBar"/>
             </relationships>
         </class>
         <class className="NSLayoutConstraint" superclassName="NSObject">
