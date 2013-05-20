@@ -1,22 +1,27 @@
 //
-//  DramaMasterViewController.m
+//  DramaViewController.m
 //  d-addicts
 //
-//  Created by Eigil Hansen on 11/04/13.
+//  Created by Eigil Hansen on 20/05/13.
 //  Copyright (c) 2013 Eigil Hansen. All rights reserved.
 //
 
-#import "DramaMasterViewController.h"
+#import "DramaViewController.h"
 #import "DramaDetailViewController.h"
 #import "Episode.h"
 
-@interface DramaMasterViewController ()
+@interface DramaViewController ()
+
 @property (nonatomic, strong) NSMutableArray *episodes;
 @property (nonatomic, strong) NSArray *filteredEpisodes;
 @property (nonatomic) NSUInteger countBeforeRefresh;
+
+@property (nonatomic, strong) NSDateFormatter *dateFormatter;
+
 @end
 
-@implementation DramaMasterViewController
+@implementation DramaViewController
+
 
 #define TEXT_SIZE 14.0f
 #define DETAIL_TEXT_SIZE 13.0f
@@ -26,11 +31,11 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    [self.refreshControl addTarget:self
-                            action:@selector(refresh:)
-                  forControlEvents:UIControlEventValueChanged];
+//    [self.refreshControl addTarget:self
+//                            action:@selector(refresh:)
+//                  forControlEvents:UIControlEventValueChanged];
     self.tableView.rowHeight = ROW_HEIGHT;
-    [self refreshEpisodes];
+    [self beginRefresh];
 }
 
 - (void)hideSearchBar
@@ -44,19 +49,34 @@
     }
 }
 
-- (void)refreshEpisodes
+- (NSDateFormatter *)dateFormatter
 {
-    [self.refreshControl beginRefreshing];
+    if (_dateFormatter == nil) {
+        _dateFormatter = [[NSDateFormatter alloc] init];
+        [_dateFormatter setDateStyle:NSDateFormatterShortStyle];
+        [_dateFormatter setTimeStyle:NSDateFormatterShortStyle];
+        [_dateFormatter setLocale:[NSLocale currentLocale]];
+    }
+    return _dateFormatter;
+}
+
+- (void)beginRefresh
+{
+//    [self.refreshControl beginRefreshing];
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     // save the number of items in the table
     self.countBeforeRefresh = self.episodes.count;
+    // self.status.text = @"Updating...";
+    self.status.text = NSLocalizedString(@"Updating...", @"Status text while updating view");
     [self fetchRSS];
 }
 
-- (void)endRefreshEpisodes
+- (void)endRefresh
 {
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-    [self.refreshControl endRefreshing];
+//    [self.refreshControl endRefreshing];
+    NSString *status = NSLocalizedString(@"Updated", @"Status text suffixed with date");
+    self.status.text = [NSString stringWithFormat:@"%@ %@", status, [self.dateFormatter stringFromDate:[NSDate date]]];
     [self hideSearchBar];
 }
 
@@ -76,10 +96,10 @@
 
 - (void)fetchRSS
 {
-// For offline and error testing
-//    NSURL *url = [[NSBundle bundleForClass:[self class]] URLForResource:@"rss" withExtension:@"xml"];
-//    NSURL *url = [[NSBundle bundleForClass:[self class]] URLForResource:@"bad" withExtension:@"xml"];
-//    RssParser *parser = [[RssParser alloc] initWithURL:url];
+    // For offline and error testing
+    //    NSURL *url = [[NSBundle bundleForClass:[self class]] URLForResource:@"rss" withExtension:@"xml"];
+    //    NSURL *url = [[NSBundle bundleForClass:[self class]] URLForResource:@"bad" withExtension:@"xml"];
+    //    RssParser *parser = [[RssParser alloc] initWithURL:url];
     
     RssParser *parser = [[RssParser alloc] initWithURL:[NSURL URLWithString:@"http://www.d-addicts.com/rss.xml"]];
     if (parser != nil) {
@@ -97,7 +117,7 @@
             [deleteIndexPaths addObject:[NSIndexPath indexPathForItem:index inSection:0]];
         }
     }
-
+    
     NSMutableArray *insertIndexPaths = [[NSMutableArray alloc] initWithCapacity:25];
     for (NSInteger index=0; index < self.episodes.count; index += 1) {
         [insertIndexPaths addObject:[NSIndexPath indexPathForItem:index inSection:0]];
@@ -130,8 +150,8 @@
 - (void)didEndParse
 {
     [self insertAndDeleteRows];
-    [self endRefreshEpisodes];
-
+    [self endRefresh];
+    
 }
 
 - (void)didFailParseWithError:(NSError *)error
@@ -147,7 +167,7 @@
     }
     // Clear out any old data in the table view
     [self.tableView reloadData];
-    [self endRefreshEpisodes];
+    [self endRefresh];
 }
 
 #pragma mark - UIAlertView Delegate
@@ -218,7 +238,7 @@
 {
     static NSString *CellIdentifier = @"EpisodeCell";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if ( cell == nil ) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
@@ -230,7 +250,7 @@
     } else {
         episode = [self objectInListAtIndex:indexPath.row];
     }
-
+    
     // Configure cell
     cell.textLabel.font = [UIFont boldSystemFontOfSize:TEXT_SIZE];
     cell.textLabel.text = episode.title;
@@ -238,7 +258,7 @@
     cell.detailTextLabel.text = episode.type;
     cell.imageView.image = [UIImage imageNamed:episode.iso];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-
+    
     return cell;
 }
 
@@ -252,8 +272,9 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     // Perform segue to episode detail
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (tableView == self.searchDisplayController.searchResultsTableView) {
-        [self performSegueWithIdentifier:@"showEpisodeDetail" sender:tableView];        
+        [self performSegueWithIdentifier:@"showEpisodeDetail" sender:tableView];
     }
 }
 
@@ -276,10 +297,6 @@
 
 #pragma mark - Target Action
 
-- (IBAction)refresh:(UIRefreshControl *)sender {
-    [self refreshEpisodes];
-}
-
 - (IBAction)goToSearch:(id)sender {
     // If you're worried that your users might not catch on to the fact that a search bar is available if they scroll to reveal it, a search icon will help them
     // If you don't hide your search bar in your app, don’t include this, as it would be redundant
@@ -287,7 +304,7 @@
 }
 
 - (IBAction)refreshPressed:(UIBarButtonItem *)sender {
-    [self refreshEpisodes];
+    [self beginRefresh];
 }
 
 @end

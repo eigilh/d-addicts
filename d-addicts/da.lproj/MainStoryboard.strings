@@ -1,0 +1,51 @@
+
+/* Class = "IBUIViewController"; title = "Detail"; ObjectID = "21"; */
+"21.title" = "Detail";
+
+/* Class = "IBUINavigationItem"; title = "File"; ObjectID = "26"; */
+"26.title" = "File";
+
+/* Class = "IBUILabel"; text = "Added by"; ObjectID = "1yc-yS-GC2"; */
+"1yc-yS-GC2.text" = "Added by";
+
+/* Class = "IBUINavigationItem"; title = "d-addicts"; ObjectID = "8hU-qx-cQ7"; */
+"8hU-qx-cQ7.title" = "d-addicts";
+
+/* Class = "IBUILabel"; text = "Size"; ObjectID = "HIa-fg-Pbf"; */
+"HIa-fg-Pbf.text" = "Size";
+
+/* Class = "IBUILabel"; text = "Placeholder"; ObjectID = "HW2-4o-f4i"; */
+"HW2-4o-f4i.text" = "Placeholder";
+
+/* Class = "IBUILabel"; text = "Subtitle"; ObjectID = "M9u-0I-SXu"; */
+"M9u-0I-SXu.text" = "Subtitle";
+
+/* Class = "IBUILabel"; text = "Size"; ObjectID = "PHY-xx-Mur"; */
+"PHY-xx-Mur.text" = "Size";
+
+/* Class = "IBUILabel"; text = "Date"; ObjectID = "Xdd-G3-lXV"; */
+"Xdd-G3-lXV.text" = "Date";
+
+/* Class = "IBUILabel"; text = "Type"; ObjectID = "bUR-qw-13X"; */
+"bUR-qw-13X.text" = "Type";
+
+/* Class = "IBUISearchBar"; placeholder = "Search latest files"; ObjectID = "eKm-C9-nij"; */
+"eKm-C9-nij.placeholder" = "Search latest files";
+
+/* Class = "IBUILabel"; text = "status"; ObjectID = "iht-XO-IPt"; */
+"iht-XO-IPt.text" = "status";
+
+/* Class = "IBUILabel"; text = "Sub"; ObjectID = "oV2-PT-396"; */
+"oV2-PT-396.text" = "Sub";
+
+/* Class = "IBUILabel"; text = "No Items"; ObjectID = "phq-AM-6qj"; */
+"phq-AM-6qj.text" = "No Items";
+
+/* Class = "IBUILabel"; text = "Title"; ObjectID = "qeR-ge-EBW"; */
+"qeR-ge-EBW.text" = "Title";
+
+/* Class = "IBUILabel"; text = "Added by"; ObjectID = "rSJ-ba-cId"; */
+"rSJ-ba-cId.text" = "Added by";
+
+/* Class = "IBUILabel"; text = "Type"; ObjectID = "yne-ZZ-I25"; */
+"yne-ZZ-I25.text" = "Type";

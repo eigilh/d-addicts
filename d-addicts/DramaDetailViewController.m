@@ -75,6 +75,12 @@
     [self enableUpDownButtons];
 }
 
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    [self.scrollView setContentSize:self.contentView.bounds.size];
+}
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];

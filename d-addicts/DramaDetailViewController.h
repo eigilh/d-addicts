@@ -15,6 +15,8 @@
 @property (strong, nonatomic) NSArray *torrents;
 @property (nonatomic) NSInteger currentRow;
 @property (strong, nonatomic) Episode *episode;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (weak, nonatomic) IBOutlet UIView *contentView;
 
 - (IBAction)upDownPressed:(UISegmentedControl *)sender;
 @end
