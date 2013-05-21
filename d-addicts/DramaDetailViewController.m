@@ -12,24 +12,11 @@
 @interface DramaDetailViewController ()
 
 @property (weak, nonatomic) IBOutlet UISegmentedControl *upDownButtons;
-@property (strong, nonatomic) NSDateFormatter *dateParser;
 @property (strong, nonatomic) NSDateFormatter *dateFormatter;
 
 @end
 
 @implementation DramaDetailViewController
-
-- (NSDateFormatter *)dateParser
-{
-    if (_dateParser == nil) {
-        _dateParser = [[NSDateFormatter alloc] init];
-        [_dateParser setDateFormat:@"EEEEE, dd MMMMM yyyy HH:mm:ss zzz"];
-        NSLocale *enLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"en"];
-        [_dateParser setLocale:enLocale];
-        [_dateParser setFormatterBehavior:NSDateFormatterBehaviorDefault];
-    }
-    return _dateParser;
-}
 
 - (NSDateFormatter *)dateFormatter
 {
@@ -118,8 +105,7 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
 {
-    NSDate *date = [self.dateParser dateFromString:self.episode.pubDate];
-    return [self.dateFormatter stringFromDate:date];
+    return [self.dateFormatter stringFromDate:self.episode.pubDate];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section

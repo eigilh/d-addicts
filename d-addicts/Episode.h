@@ -12,7 +12,7 @@
 
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) NSString *link;
-@property (nonatomic, strong) NSString *pubDate;
+@property (nonatomic, strong) NSDate *pubDate;
 @property (nonatomic, strong) NSString *infoHash;
 @property (nonatomic, strong) NSString *size;
 @property (nonatomic, strong) NSString *addedBy;

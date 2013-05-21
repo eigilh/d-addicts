@@ -126,7 +126,7 @@
                       forKey:RSS_TITLE];
         [self.item setObject:[self.link stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]
                       forKey:RSS_LINK];
-        [self.item setObject:self.description
+        [self.item setObject:[self.description stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]
                       forKey:RSS_DESCRIPTION];
         [self.item setObject:[self.pubDate stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]
                       forKey:RSS_PUBDATE];

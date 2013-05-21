@@ -9,6 +9,7 @@
 #import "Episode.h"
 
 @interface Episode ()
+@property (strong, nonatomic) NSDateFormatter *dateParser;
 @end
 
 @implementation Episode
@@ -35,6 +36,18 @@
     return [Episode isoNameFromType:self.type];
 }
 
+- (NSDateFormatter *)dateParser
+{
+    if (_dateParser == nil) {
+        _dateParser = [[NSDateFormatter alloc] init];
+        [_dateParser setDateFormat:@"EEEEE, dd MMMMM yyyy HH:mm:ss zzz"];
+        NSLocale *enLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"en"];
+        [_dateParser setLocale:enLocale];
+        [_dateParser setFormatterBehavior:NSDateFormatterBehaviorDefault];
+    }
+    return _dateParser;
+}
+
 - (NSDictionary *)descriptionItemList:(NSString *)description
 {
     NSArray *descriptionItems = [description componentsSeparatedByString:@"<br/>"];
@@ -59,7 +72,7 @@
     if (self) {
         self.title = title;
         self.link = link;
-        self.pubDate = date;
+        self.pubDate = [self.dateParser dateFromString:date];
         NSDictionary *itemList = [self descriptionItemList:description];
         self.infoHash = [itemList valueForKey:@"Info_hash"];
         self.size = [itemList valueForKey:@"Size"];
