@@ -59,7 +59,7 @@
                                     <outlet property="delegate" destination="Ck5-sg-2Z2" id="7iA-CT-mVr"/>
                                 </connections>
                             </tableView>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Un-wY-Y4n">
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Un-wY-Y4n">
                                 <items/>
                                 <color key="tintColor" red="0.62352943419999995" green="0.70980393890000004" blue="0.7607843876" alpha="1" colorSpace="deviceRGB"/>
                             </toolbar>
@@ -138,14 +138,14 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="dVM-ji-JF1">
-                                                    <rect key="frame" x="10" y="2" width="38" height="22"/>
+                                                    <rect key="frame" x="10" y="4" width="31" height="19"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="wXo-bt-WBU">
-                                                    <rect key="frame" x="10" y="24" width="47" height="18"/>
+                                                    <rect key="frame" x="10" y="23" width="44" height="16"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <color key="textColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="1" colorSpace="calibratedRGB"/>
@@ -237,14 +237,7 @@
             <source key="sourceIdentifier" type="project" relativePath="./Classes/DramaDetailViewController.h"/>
             <relationships>
                 <relationship kind="action" name="upDownPressed:" candidateClass="UISegmentedControl"/>
-                <relationship kind="outlet" name="addedByLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="flagImage" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="pubDateLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="sizeLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="subLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="titleLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="typeLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="upDownButtons" candidateClass="UISegmentedControl"/>
             </relationships>
         </class>

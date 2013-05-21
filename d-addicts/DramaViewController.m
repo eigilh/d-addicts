@@ -62,11 +62,9 @@
 
 - (void)beginRefresh
 {
-//    [self.refreshControl beginRefreshing];
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     // save the number of items in the table
     self.countBeforeRefresh = self.episodes.count;
-    // self.status.text = @"Updating...";
     self.status.text = NSLocalizedString(@"Updating...", @"Status text while updating view");
     [self fetchRSS];
 }
@@ -74,7 +72,6 @@
 - (void)endRefresh
 {
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-//    [self.refreshControl endRefreshing];
     NSString *status = NSLocalizedString(@"Updated", @"Status text suffixed with date");
     self.status.text = [NSString stringWithFormat:@"%@ %@", status, [self.dateFormatter stringFromDate:[NSDate date]]];
     [self hideSearchBar];
@@ -151,7 +148,6 @@
 {
     [self insertAndDeleteRows];
     [self endRefresh];
-    
 }
 
 - (void)didFailParseWithError:(NSError *)error
