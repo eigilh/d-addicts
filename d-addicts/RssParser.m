@@ -122,13 +122,13 @@
  qualifiedName:(NSString *)qName
 {
     if ([elementName isEqualToString:RSS_ITEM]) {
-        [self.item setObject:self.title
+        [self.item setObject:[self.title stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]
                       forKey:RSS_TITLE];
         [self.item setObject:[self.link stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]
                       forKey:RSS_LINK];
         [self.item setObject:self.description
                       forKey:RSS_DESCRIPTION];
-        [self.item setObject:self.pubDate
+        [self.item setObject:[self.pubDate stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]
                       forKey:RSS_PUBDATE];
         [self.delegate didParseItem:self.item];
     }

@@ -10,13 +10,12 @@
 
 @class Episode;
 
-@interface DramaDetailViewController : UIViewController
+@interface DramaDetailViewController : UIViewController <UITableViewDataSource>
 
 @property (strong, nonatomic) NSArray *torrents;
 @property (nonatomic) NSInteger currentRow;
 @property (strong, nonatomic) Episode *episode;
-@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
-@property (weak, nonatomic) IBOutlet UIView *contentView;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 - (IBAction)upDownPressed:(UISegmentedControl *)sender;
 @end

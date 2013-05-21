@@ -11,19 +11,35 @@
 
 @interface DramaDetailViewController ()
 
-@property (weak, nonatomic) IBOutlet UIImageView *flagImage;
-@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
-@property (weak, nonatomic) IBOutlet UILabel *pubDateLabel;
-@property (weak, nonatomic) IBOutlet UILabel *typeLabel;
-@property (weak, nonatomic) IBOutlet UILabel *subLabel;
-@property (weak, nonatomic) IBOutlet UILabel *sizeLabel;
-@property (weak, nonatomic) IBOutlet UILabel *addedByLabel;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *upDownButtons;
+@property (strong, nonatomic) NSDateFormatter *dateParser;
+@property (strong, nonatomic) NSDateFormatter *dateFormatter;
 
-- (void)configureView;
 @end
 
 @implementation DramaDetailViewController
+
+- (NSDateFormatter *)dateParser
+{
+    if (_dateParser == nil) {
+        _dateParser = [[NSDateFormatter alloc] init];
+        [_dateParser setDateFormat:@"EEEEE, dd MMMMM yyyy HH:mm:ss zzz"];
+        NSLocale *enLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"en"];
+        [_dateParser setLocale:enLocale];
+        [_dateParser setFormatterBehavior:NSDateFormatterBehaviorDefault];
+    }
+    return _dateParser;
+}
+
+- (NSDateFormatter *)dateFormatter
+{
+    if (_dateFormatter == nil) {
+        _dateFormatter = [[NSDateFormatter alloc] init];
+        [_dateFormatter setDateStyle:NSDateFormatterLongStyle];
+        [_dateFormatter setTimeStyle:NSDateFormatterShortStyle];
+    }
+    return _dateFormatter;
+}
 
 #pragma mark - Managing the detail item
 
@@ -42,50 +58,80 @@
     _currentRow = newRow;
     if (self.torrents) {
         self.episode = self.torrents[newRow];
+        [self.tableView reloadData];
     }
 }
 
 - (void)configureView
 {
-    // Update the user interface for the detail item.
-    Episode *theEpisode = self.episode;
-    
-    if (theEpisode) {
+    if (self.episode) {
         self.navigationItem.title = [NSString stringWithFormat:@"%d of %d", self.currentRow+1, [self.torrents count]];
-        self.flagImage.image = [UIImage imageNamed:theEpisode.iso];
-        self.titleLabel.text = theEpisode.title;
-        
-        /*
-        NSDateFormatter *df = [[NSDateFormatter alloc] init];
-        [df setDateFormat:@"EEEEE, dd MMMMM yyyy HH:mm:ss zzz"];
-        NSLocale *enLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"en"];
-        [df setLocale:enLocale];
-        [df setFormatterBehavior:NSDateFormatterBehaviorDefault];
-        NSDate *date = [df dateFromString:theEpisode.pubDate];
-        NSDateFormatter *df2 = [[NSDateFormatter alloc] init];
-        [df2 setDateStyle:NSDateFormatterMediumStyle];
-        self.pubDateLabel.text = [theEpisode.pubDate substringToIndex:16];
-         */
-        self.pubDateLabel.text = theEpisode.pubDate;
-        self.typeLabel.text = theEpisode.type;
-        self.subLabel.text = theEpisode.sub;
-        self.sizeLabel.text = theEpisode.size;
-        self.addedByLabel.text = theEpisode.addedBy;
     }
     [self enableUpDownButtons];
 }
 
-- (void)viewDidLoad
+#define TYPE 0
+#define SUBTITLE 1
+#define SIZE 2
+#define ADDED_BY 3
+
+- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
-    [super viewDidLoad];
-    [self.scrollView setContentSize:self.contentView.bounds.size];
+    switch (indexPath.row) {
+        case TYPE:
+            cell.imageView.image = [UIImage imageNamed:self.episode.iso];
+            cell.textLabel.text = self.episode.type;
+            cell.detailTextLabel.text = @"Type";
+            break;
+            
+        case SUBTITLE:
+            cell.textLabel.text = self.episode.sub;
+            cell.detailTextLabel.text = @"Subtitle";
+            break;
+            
+        case SIZE:
+            cell.textLabel.text = self.episode.size;
+            cell.detailTextLabel.text = @"Size";
+            break;
+            
+        case ADDED_BY:
+            cell.textLabel.text = self.episode.addedBy;
+            cell.detailTextLabel.text = @"Added by";
+            break;
+            
+        default:
+            break;
+    }
 }
 
-- (void)viewWillAppear:(BOOL)animated
+#pragma mark - Table View Date Source
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    [super viewWillAppear:animated];
-    
-    [self configureView];
+    return 1;
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    return self.episode.title;
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
+{
+    NSDate *date = [self.dateParser dateFromString:self.episode.pubDate];
+    return [self.dateFormatter stringFromDate:date];
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 4;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"detail" forIndexPath:indexPath];
+    [self configureCell:cell atIndexPath:indexPath];
+    return cell;
 }
 
 #define UP 0
