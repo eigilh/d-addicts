@@ -62,7 +62,6 @@
 
 - (void)beginRefresh
 {
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     // save the number of items in the table
     self.countBeforeRefresh = self.episodes.count;
     self.status.text = NSLocalizedString(@"Updating...", @"Status text while updating view");
@@ -71,7 +70,6 @@
 
 - (void)endRefresh
 {
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     NSString *status = NSLocalizedString(@"Updated", @"Status text suffixed with date");
     self.status.text = [NSString stringWithFormat:@"%@ %@", status, [self.dateFormatter stringFromDate:[NSDate date]]];
     [self hideSearchBar];

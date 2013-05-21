@@ -49,6 +49,7 @@
                                          timeoutInterval:10.0];
     // Create url connection and fire request
     self.connection = [NSURLConnection connectionWithRequest:request delegate:self];
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
 }
 
 #pragma mark NSURLConnection Delegate Methods
@@ -72,8 +73,12 @@
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
     // The request is complete and data has been received
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+    
+    // We don't need the connection any more
+    self.connection = nil;
+    
     // You can parse the stuff in your buffer now
-    // NSLog(@"buffer.length: %d", self.buffer.length);
     self.parser = [[NSXMLParser alloc] initWithData:self.buffer];
     if (self.parser != nil) {
         [self.parser setDelegate:self];
@@ -84,6 +89,8 @@
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
     // The request has failed for some reason!
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+    self.connection = nil;
     // Check the error var
     [self.delegate didFailParseWithError:error];
 }

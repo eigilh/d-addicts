@@ -115,7 +115,8 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"detail" forIndexPath:indexPath];
+    static NSString *detailID = @"detail";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:detailID forIndexPath:indexPath];
     [self configureCell:cell atIndexPath:indexPath];
     return cell;
 }
