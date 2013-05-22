@@ -14,26 +14,26 @@
 
 @implementation Episode
 
-+ (NSString *)isoNameFromType:(NSString *)t
++ (NSString *)isoFromType:(NSString *)t
 {
-    NSString *isoName = nil;
+    NSString *isoCode = nil;
     
-    if ([t isEqualToString:@"jdrama"]) isoName = @"jp";
-    else if ([t isEqualToString:@"kdrama"]) isoName = @"kr";
-    else if ([t isEqualToString:@"hkdrama"]) isoName = @"hk";
-    else if ([t isEqualToString:@"twdrama"]) isoName = @"tw";
-    else if ([t isEqualToString:@"cdrama"]) isoName = @"cn";
-    else if ([t isEqualToString:@"sgdrama"]) isoName = @"sg";
-    else if ([t isEqualToString:@"j-tv"]) isoName = @"jp";
-    else if ([t isEqualToString:@"k-tv"]) isoName = @"kr";
-    else if ([t isEqualToString:@"hk-tv"]) isoName = @"hk";
+    if ([t isEqualToString:@"jdrama"]) isoCode = @"jp";
+    else if ([t isEqualToString:@"kdrama"]) isoCode = @"kr";
+    else if ([t isEqualToString:@"hkdrama"]) isoCode = @"hk";
+    else if ([t isEqualToString:@"twdrama"]) isoCode = @"tw";
+    else if ([t isEqualToString:@"cdrama"]) isoCode = @"cn";
+    else if ([t isEqualToString:@"sgdrama"]) isoCode = @"sg";
+    else if ([t isEqualToString:@"j-tv"]) isoCode = @"jp";
+    else if ([t isEqualToString:@"k-tv"]) isoCode = @"kr";
+    else if ([t isEqualToString:@"hk-tv"]) isoCode = @"hk";
     
-    return isoName;
+    return isoCode;
 }
 
 - (NSString *)iso
 {
-    return [Episode isoNameFromType:self.type];
+    return [Episode isoFromType:self.type];
 }
 
 - (NSDateFormatter *)dateParser
