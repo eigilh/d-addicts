@@ -13,7 +13,8 @@
 
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
-@property (weak, nonatomic) IBOutlet UILabel *status;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *statusBarItem;
+@property (strong, nonatomic) IBOutlet UILabel *statusLabel;
 - (IBAction)goToSearch:(id)sender;
 - (IBAction)refreshPressed:(UIBarButtonItem *)sender;
 

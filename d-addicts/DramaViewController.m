@@ -35,6 +35,7 @@
 //                            action:@selector(refresh:)
 //                  forControlEvents:UIControlEventValueChanged];
     self.tableView.rowHeight = ROW_HEIGHT;
+    [self.statusBarItem setCustomView:self.statusLabel];
     [self beginRefresh];
 }
 
@@ -71,14 +72,14 @@
 {
     // save the number of items in the table
     self.countBeforeRefresh = self.episodes.count;
-    self.status.text = NSLocalizedString(@"Updating...", @"Status text while updating view");
+    self.statusLabel.text = NSLocalizedString(@"Updating...", @"Status text while updating view");
     [self fetchRSS];
 }
 
 - (void)endRefresh
 {
     NSString *status = NSLocalizedString(@"Updated", @"Status text suffixed with date");
-    self.status.text = [NSString stringWithFormat:@"%@ %@", status, [self.dateFormatter stringFromDate:[NSDate date]]];
+    self.statusLabel.text = [NSString stringWithFormat:@"%@ %@", status, [self.dateFormatter stringFromDate:[NSDate date]]];
     [self hideSearchBar];
 }
 
@@ -273,7 +274,6 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     // Perform segue to episode detail
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (tableView == self.searchDisplayController.searchResultsTableView) {
         [self performSegueWithIdentifier:@"showEpisodeDetail" sender:tableView];
     }
@@ -285,13 +285,16 @@
 {
     if ([[segue identifier] isEqualToString:@"showEpisodeDetail"]) {
         DramaDetailViewController *detailViewController = [segue destinationViewController];
-        if(sender == self.searchDisplayController.searchResultsTableView) {
-            NSIndexPath *indexPath = [self.searchDisplayController.searchResultsTableView indexPathForSelectedRow];
+        if (sender == self.searchDisplayController.searchResultsTableView) {
+            NSIndexPath *indexPath = [sender indexPathForSelectedRow];
             detailViewController.torrents = self.filteredEpisodes;
             detailViewController.currentRow = indexPath.row;
+            [sender deselectRowAtIndexPath:indexPath animated:YES];
         } else {
             detailViewController.torrents = self.episodes;
-            detailViewController.currentRow = [self.tableView indexPathForSelectedRow].row;
+            NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+            detailViewController.currentRow = indexPath.row;
+            [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
         }
     }
 }
