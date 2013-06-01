@@ -47,11 +47,10 @@
 
 - (void)hideSearchBar
 {
-    NSLog(@"origin.y: %f", self.tableView.bounds.origin.y);
-    if (self.tableView.bounds.origin.y <= 0.0) {
+    if (self.tableView.bounds.origin.y == 0.0) {
         CGRect newBounds = self.tableView.bounds;
         newBounds.origin.y = newBounds.origin.y + self.searchBar.bounds.size.height;
-        [UIView animateWithDuration:0.3f animations:^{
+        [UIView animateWithDuration:0.4f animations:^{
             self.tableView.bounds = newBounds;
         }];
     }
