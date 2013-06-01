@@ -9,7 +9,7 @@
             <objects>
                 <viewController id="Ck5-sg-2Z2" customClass="DramaViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="eUh-NB-tlU">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="372"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <tableView opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="48" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="13">
@@ -21,7 +21,7 @@
                                     <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                                 </searchBar>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="gray" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="EpisodeCell" textLabel="phq-AM-6qj" detailTextLabel="HW2-4o-f4i" imageView="XJH-aJ-BgN" style="IBUITableViewCellStyleSubtitle" id="lJ0-d7-vTF">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="EpisodeCell" textLabel="phq-AM-6qj" detailTextLabel="HW2-4o-f4i" imageView="XJH-aJ-BgN" style="IBUITableViewCellStyleSubtitle" id="lJ0-d7-vTF">
                                         <rect key="frame" x="0.0" y="66" width="320" height="48"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -59,34 +59,20 @@
                                     <outlet property="delegate" destination="Ck5-sg-2Z2" id="7iA-CT-mVr"/>
                                 </connections>
                             </tableView>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Un-wY-Y4n">
-                                <items/>
-                                <color key="tintColor" red="0.62352943419999995" green="0.70980393890000004" blue="0.7607843876" alpha="1" colorSpace="deviceRGB"/>
-                            </toolbar>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="status" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iht-XO-IPt">
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="21" id="ab7-fG-jxL"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.40000000000000002" colorSpace="calibratedRGB"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="0Un-wY-Y4n" firstAttribute="trailing" secondItem="eUh-NB-tlU" secondAttribute="trailing" type="default" id="0G8-6e-QHN"/>
                             <constraint firstItem="13" firstAttribute="top" secondItem="eUh-NB-tlU" secondAttribute="top" type="default" id="3l5-JZ-NxZ"/>
-                            <constraint firstAttribute="bottom" secondItem="iht-XO-IPt" secondAttribute="bottom" constant="12" id="4wC-3x-oWN"/>
-                            <constraint firstItem="0Un-wY-Y4n" firstAttribute="leading" secondItem="eUh-NB-tlU" secondAttribute="leading" type="default" id="RR8-S5-QRR"/>
-                            <constraint firstItem="0Un-wY-Y4n" firstAttribute="bottom" secondItem="eUh-NB-tlU" secondAttribute="bottom" type="default" id="SYg-8I-LKS"/>
+                            <constraint firstItem="13" firstAttribute="bottom" secondItem="eUh-NB-tlU" secondAttribute="bottom" type="default" id="Mb3-bd-TDy"/>
                             <constraint firstItem="13" firstAttribute="trailing" secondItem="eUh-NB-tlU" secondAttribute="trailing" type="default" id="bfH-6t-0Gk"/>
-                            <constraint firstItem="0Un-wY-Y4n" firstAttribute="top" secondItem="13" secondAttribute="bottom" type="default" id="fTG-b6-YY4"/>
                             <constraint firstItem="13" firstAttribute="leading" secondItem="eUh-NB-tlU" secondAttribute="leading" type="default" id="niX-gt-ca3"/>
-                            <constraint firstItem="iht-XO-IPt" firstAttribute="leading" secondItem="eUh-NB-tlU" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="o3A-PG-P6P"/>
-                            <constraint firstAttribute="trailing" secondItem="iht-XO-IPt" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="zJX-FS-j6t"/>
                         </constraints>
                     </view>
+                    <toolbarItems>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="ZjN-OM-pgq"/>
+                        <barButtonItem title="Status" style="plain" id="S8M-mi-jFt"/>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="zSK-uF-Fcg"/>
+                    </toolbarItems>
                     <navigationItem key="navigationItem" title="d-addicts" id="8hU-qx-cQ7">
                         <barButtonItem key="leftBarButtonItem" systemItem="refresh" id="abV-tM-mO2">
                             <connections>
@@ -99,14 +85,24 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="searchBar" destination="eKm-C9-nij" id="OD3-Az-BaT"/>
                         <outlet property="searchDisplayController" destination="M7C-MA-w3v" id="kqP-5V-ffS"/>
-                        <outlet property="status" destination="iht-XO-IPt" id="PTL-gh-FIA"/>
+                        <outlet property="statusBarItem" destination="S8M-mi-jFt" id="ve2-Uj-a3i"/>
+                        <outlet property="statusLabel" destination="zUD-IH-Ai9" id="Kwf-wc-I6b"/>
                         <outlet property="tableView" destination="13" id="TMz-RD-eTI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qTd-3t-gRH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="statusLabel" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="zUD-IH-Ai9">
+                    <rect key="frame" x="-111" y="0.0" width="264" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                    <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.48999999999999999" colorSpace="calibratedRGB"/>
+                </label>
                 <searchDisplayController id="M7C-MA-w3v">
                     <connections>
                         <outlet property="delegate" destination="Ck5-sg-2Z2" id="SBs-V2-mkR"/>
@@ -124,7 +120,7 @@
             <objects>
                 <viewController storyboardIdentifier="" title="Detail" id="21" customClass="DramaDetailViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="7tm-Tm-9aQ">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="372"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="singleLineEtched" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="okT-u4-7wn">
@@ -162,25 +158,20 @@
                                     <outlet property="delegate" destination="21" id="PV0-7f-s0f"/>
                                 </connections>
                             </tableView>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pDX-UG-1Xs">
-                                <items>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="pIn-bN-7fz"/>
-                                    <barButtonItem style="plain" systemItem="action" id="NMV-xK-cNj"/>
-                                </items>
-                                <color key="tintColor" red="0.62352943419999995" green="0.70980393890000004" blue="0.7607843876" alpha="1" colorSpace="deviceRGB"/>
-                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="okT-u4-7wn" firstAttribute="trailing" secondItem="7tm-Tm-9aQ" secondAttribute="trailing" type="default" id="DPs-Mf-d0F"/>
                             <constraint firstItem="okT-u4-7wn" firstAttribute="leading" secondItem="7tm-Tm-9aQ" secondAttribute="leading" type="default" id="NUT-nT-5CK"/>
-                            <constraint firstItem="pDX-UG-1Xs" firstAttribute="bottom" secondItem="7tm-Tm-9aQ" secondAttribute="bottom" type="default" id="Xim-S1-ZgL"/>
-                            <constraint firstItem="pDX-UG-1Xs" firstAttribute="leading" secondItem="7tm-Tm-9aQ" secondAttribute="leading" type="default" id="gM6-Gc-0v3"/>
-                            <constraint firstItem="okT-u4-7wn" firstAttribute="bottom" secondItem="pDX-UG-1Xs" secondAttribute="top" type="default" id="jm9-WS-794"/>
-                            <constraint firstItem="pDX-UG-1Xs" firstAttribute="trailing" secondItem="7tm-Tm-9aQ" secondAttribute="trailing" type="default" id="p6G-Um-luD"/>
+                            <constraint firstItem="okT-u4-7wn" firstAttribute="bottom" secondItem="7tm-Tm-9aQ" secondAttribute="bottom" type="default" id="Xi4-mV-LmN"/>
                             <constraint firstItem="okT-u4-7wn" firstAttribute="top" secondItem="7tm-Tm-9aQ" secondAttribute="top" type="default" id="y8D-Np-nJO"/>
                         </constraints>
                     </view>
+                    <toolbarItems>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="ULJ-bF-XUk"/>
+                        <barButtonItem style="plain" systemItem="action" id="TXJ-CY-Aq2"/>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="2r4-eS-TRR"/>
+                    </toolbarItems>
                     <navigationItem key="navigationItem" title="File" id="26">
                         <barButtonItem key="rightBarButtonItem" id="Qvz-Gi-sdZ">
                             <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" momentary="YES" id="rFF-k2-uBW">
@@ -198,6 +189,7 @@
                             <color key="tintColor" red="0.62352943419999995" green="0.70980393890000004" blue="0.7607843876" alpha="1" colorSpace="deviceRGB"/>
                         </barButtonItem>
                     </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="tableView" destination="okT-u4-7wn" id="TxG-zV-ICx"/>
                         <outlet property="upDownButtons" destination="rFF-k2-uBW" id="9Mu-bi-8s2"/>
@@ -210,7 +202,7 @@
         <!--Navigation Controller-->
         <scene sceneID="uK6-7R-oSf">
             <objects>
-                <navigationController id="gOa-Xz-3Ac" sceneMemberID="viewController">
+                <navigationController toolbarHidden="NO" id="gOa-Xz-3Ac" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="8XA-cl-Tap">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -218,6 +210,11 @@
                         <color key="tintColor" red="0.62352943419999995" green="0.70980393890000004" blue="0.7607843876" alpha="1" colorSpace="deviceRGB"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="QfE-Rv-kIh">
+                        <rect key="frame" x="0.0" y="436" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="0.62352943419999995" green="0.70980393890000004" blue="0.7607843876" alpha="1" colorSpace="deviceRGB"/>
+                    </toolbar>
                     <connections>
                         <segue destination="Ck5-sg-2Z2" kind="relationship" relationship="rootViewController" id="NLw-3m-tdD"/>
                     </connections>
@@ -247,7 +244,8 @@
                 <relationship kind="action" name="goToSearch:"/>
                 <relationship kind="action" name="refreshPressed:" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="searchBar" candidateClass="UISearchBar"/>
-                <relationship kind="outlet" name="status" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="statusBarItem" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="statusLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
             </relationships>
         </class>
