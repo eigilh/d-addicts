@@ -38,12 +38,19 @@
     [self beginRefresh];
 }
 
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    self.dateFormatter = nil;
+}
+
 - (void)hideSearchBar
 {
+    NSLog(@"origin.y: %f", self.tableView.bounds.origin.y);
     if (self.tableView.bounds.origin.y <= 0.0) {
         CGRect newBounds = self.tableView.bounds;
         newBounds.origin.y = newBounds.origin.y + self.searchBar.bounds.size.height;
-        [UIView animateWithDuration:0.5f animations:^{
+        [UIView animateWithDuration:0.3f animations:^{
             self.tableView.bounds = newBounds;
         }];
     }
