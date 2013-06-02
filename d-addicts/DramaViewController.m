@@ -44,6 +44,7 @@
 {
     [super didReceiveMemoryWarning];
     self.dateFormatter = nil;
+    self.dateParser = nil;
 }
 
 - (void)hideSearchBar
@@ -251,11 +252,11 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"EpisodeCell";
+    static NSString *episodeCell = @"EpisodeCell";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:episodeCell];
     if ( cell == nil ) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:episodeCell];
     }
     
     // Get episode from Table View or Search Results
