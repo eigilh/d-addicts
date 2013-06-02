@@ -17,6 +17,7 @@
 @property (nonatomic) NSUInteger countBeforeRefresh;
 
 @property (nonatomic, strong) NSDateFormatter *dateFormatter;
+@property (nonatomic, strong) NSDateFormatter *dateParser;
 
 @end
 
@@ -65,6 +66,18 @@
         [_dateFormatter setLocale:[NSLocale currentLocale]];
     }
     return _dateFormatter;
+}
+
+- (NSDateFormatter *)dateParser
+{
+    if (_dateParser == nil) {
+        _dateParser = [[NSDateFormatter alloc] init];
+        [_dateParser setDateFormat:@"EEEEE, dd MMMMM yyyy HH:mm:ss zzz"];
+        NSLocale *enLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"en"];
+        [_dateParser setLocale:enLocale];
+        [_dateParser setFormatterBehavior:NSDateFormatterBehaviorDefault];
+    }
+    return _dateParser;
 }
 
 - (void)beginRefresh
@@ -140,10 +153,11 @@
 
 - (void)didParseItem:(NSDictionary *)dict
 {
+    NSDate *date = [self.dateParser dateFromString:[dict valueForKey:RSS_PUBDATE]];
     Episode *episode = [[Episode alloc] initWithTitle:[dict valueForKey:RSS_TITLE]
                                                  link:[dict valueForKey:RSS_LINK]
                                           description:[dict valueForKey:RSS_DESCRIPTION]
-                                                 date:[dict valueForKey:RSS_PUBDATE]];
+                                                 date:date];
     if (episode) {
         [self.episodes addObject:episode];
     }

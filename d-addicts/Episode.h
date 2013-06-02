@@ -21,6 +21,6 @@
 
 @property (readonly) NSString *iso;
 
-- (id)initWithTitle:(NSString *)title link:(NSString *)link description:(NSString *)description date:(NSString *)date;
+- (id)initWithTitle:(NSString *)title link:(NSString *)link description:(NSString *)description date:(NSDate *)date;
 
 @end
