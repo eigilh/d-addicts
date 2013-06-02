@@ -32,9 +32,9 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-//    [self.refreshControl addTarget:self
-//                            action:@selector(refresh:)
-//                  forControlEvents:UIControlEventValueChanged];
+    [self.refreshControl addTarget:self
+                            action:@selector(beginRefresh)
+                  forControlEvents:UIControlEventValueChanged];
     self.tableView.rowHeight = ROW_HEIGHT;
     [self.statusBarItem setCustomView:self.statusLabel];
     [self beginRefresh];
@@ -49,9 +49,11 @@
 
 - (void)hideSearchBar
 {
-    if (self.tableView.bounds.origin.y == 0.0) {
-        CGRect newBounds = self.tableView.bounds;
-        newBounds.origin.y = newBounds.origin.y + self.searchBar.bounds.size.height;
+    CGRect bounds = self.tableView.bounds;
+    if (bounds.origin.y == 0.0f || bounds.origin.y == -44.0f) {
+        CGRect newBounds = bounds;
+        newBounds.origin.y = newBounds.origin.y + self.searchBar.bounds.size.height
+        + [self.refreshControl isRefreshing] ? self.refreshControl.bounds.size.height : 0;
         [UIView animateWithDuration:0.4f animations:^{
             self.tableView.bounds = newBounds;
         }];
@@ -94,6 +96,7 @@
     NSString *status = NSLocalizedString(@"Updated", @"Status text suffixed with date");
     self.statusLabel.text = [NSString stringWithFormat:@"%@ %@", status, [self.dateFormatter stringFromDate:[NSDate date]]];
     [self hideSearchBar];
+    [self.refreshControl endRefreshing];
 }
 
 - (NSMutableArray *)episodes
