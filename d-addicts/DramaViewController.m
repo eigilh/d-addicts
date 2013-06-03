@@ -50,10 +50,9 @@
 - (void)hideSearchBar
 {
     CGRect bounds = self.tableView.bounds;
-    if (bounds.origin.y == 0.0f || bounds.origin.y == -44.0f) {
+    if (bounds.origin.y <= 0.0f) {
         CGRect newBounds = bounds;
-        newBounds.origin.y = newBounds.origin.y + self.searchBar.bounds.size.height
-        + [self.refreshControl isRefreshing] ? self.refreshControl.bounds.size.height : 0;
+        newBounds.origin.y = self.searchBar.bounds.size.height;
         [UIView animateWithDuration:0.4f animations:^{
             self.tableView.bounds = newBounds;
         }];
@@ -256,14 +255,14 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *episodeCell = @"EpisodeCell";
+    UITableViewCell *cell;
+    Episode *episode;
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:episodeCell];
-    if ( cell == nil ) {
+    cell = [tableView dequeueReusableCellWithIdentifier:episodeCell];
+    if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:episodeCell];
     }
-    
-    // Get episode from Table View or Search Results
-    Episode *episode;
+    // Get cell and episode for Table View or Search Results
     if (tableView == self.searchDisplayController.searchResultsTableView) {
         episode = [self.filteredEpisodes objectAtIndex:indexPath.row];
     } else {
@@ -303,8 +302,8 @@
     if ([[segue identifier] isEqualToString:@"showEpisodeDetail"]) {
         DramaDetailViewController *detailViewController = [segue destinationViewController];
         if (sender == self.searchDisplayController.searchResultsTableView) {
-            NSIndexPath *indexPath = [sender indexPathForSelectedRow];
             detailViewController.torrents = self.filteredEpisodes;
+            NSIndexPath *indexPath = [sender indexPathForSelectedRow];
             detailViewController.currentRow = indexPath.row;
             [sender deselectRowAtIndexPath:indexPath animated:YES];
         } else {
@@ -314,18 +313,6 @@
             [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
         }
     }
-}
-
-#pragma mark - Target Action
-
-- (IBAction)goToSearch:(id)sender {
-    // If you're worried that your users might not catch on to the fact that a search bar is available if they scroll to reveal it, a search icon will help them
-    // If you don't hide your search bar in your app, don’t include this, as it would be redundant
-    [self.searchBar becomeFirstResponder];
-}
-
-- (IBAction)refreshPressed:(UIBarButtonItem *)sender {
-    [self beginRefresh];
 }
 
 @end
