@@ -12,7 +12,5 @@
 @interface DramaViewController : UITableViewController <UISearchBarDelegate, UISearchDisplayDelegate, UIAlertViewDelegate, RssDelegate>
 
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *statusBarItem;
-@property (strong, nonatomic) IBOutlet UILabel *statusLabel;
 
 @end

@@ -36,7 +36,7 @@
                             action:@selector(beginRefresh)
                   forControlEvents:UIControlEventValueChanged];
     self.tableView.rowHeight = ROW_HEIGHT;
-    [self.statusBarItem setCustomView:self.statusLabel];
+    [self.refreshControl beginRefreshing];
     [self beginRefresh];
 }
 
@@ -86,14 +86,14 @@
 {
     // save the number of items in the table
     self.countBeforeRefresh = self.episodes.count;
-    self.statusLabel.text = NSLocalizedString(@"Updating...", @"Status text while updating view");
+    self.refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:@"Fetching RSS feed..."];
     [self fetchRSS];
 }
 
 - (void)endRefresh
 {
     NSString *status = NSLocalizedString(@"Updated", @"Status text suffixed with date");
-    self.statusLabel.text = [NSString stringWithFormat:@"%@ %@", status, [self.dateFormatter stringFromDate:[NSDate date]]];
+    self.refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@ %@", status, [self.dateFormatter stringFromDate:[NSDate date]]]];
     [self hideSearchBar];
     [self.refreshControl endRefreshing];
 }
