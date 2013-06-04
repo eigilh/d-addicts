@@ -64,7 +64,6 @@
                         <attributedString key="attributedTitle"/>
                     </refreshControl>
                     <connections>
-                        <outlet property="searchBar" destination="odf-rN-TsS" id="ExI-rj-cdL"/>
                         <outlet property="searchDisplayController" destination="5ag-i9-4cy" id="Q3K-ex-sll"/>
                     </connections>
                 </tableViewController>
@@ -181,11 +180,6 @@
         </class>
         <class className="DramaViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/DramaViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="searchBar" candidateClass="UISearchBar"/>
-                <relationship kind="outlet" name="statusBarItem" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="statusLabel" candidateClass="UILabel"/>
-            </relationships>
         </class>
         <class className="UIRefreshControl" superclassName="UIControl">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/UIRefreshControl.h"/>
