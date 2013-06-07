@@ -40,11 +40,25 @@
     [self beginRefresh];
 }
 
+- (void)viewDidLayoutSubviews
+{
+    if (self.refreshControl.isRefreshing) {
+        [self showRefreshControl];
+    }
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     self.dateFormatter = nil;
     self.dateParser = nil;
+}
+
+- (void)showRefreshControl
+{
+    CGRect newBounds = self.tableView.bounds;
+    newBounds.origin.y = -(self.refreshControl.bounds.size.height);
+    self.tableView.bounds = newBounds;
 }
 
 - (void)hideSearchBar
@@ -86,7 +100,7 @@
 {
     // save the number of items in the table
     self.countBeforeRefresh = self.episodes.count;
-    self.refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:@"Fetching RSS feed..."];
+    self.refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:@"Updating RSS feed..."];
     [self fetchRSS];
 }
 
