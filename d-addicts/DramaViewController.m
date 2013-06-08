@@ -65,10 +65,9 @@
 {
     CGRect bounds = self.tableView.bounds;
     if (bounds.origin.y <= 0.0f) {
-        CGRect newBounds = bounds;
-        newBounds.origin.y = self.searchDisplayController.searchBar.bounds.size.height;
+        bounds.origin.y = self.searchDisplayController.searchBar.bounds.size.height;
         [UIView animateWithDuration:0.4f animations:^{
-            self.tableView.bounds = newBounds;
+            self.tableView.bounds = bounds;
         }];
     }
 }
