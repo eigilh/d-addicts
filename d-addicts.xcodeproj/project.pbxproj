@@ -64,13 +64,13 @@
 		A93028AE1763B1D60072BB86 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon@2x.png"; path = "Icons/Icon@2x.png"; sourceTree = "<group>"; };
 		A93028AF1763B1D60072BB86 /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; name = iTunesArtwork; path = Icons/iTunesArtwork; sourceTree = "<group>"; };
 		A93028B01763B1D60072BB86 /* iTunesArtwork@2x */ = {isa = PBXFileReference; lastKnownFileType = file; name = "iTunesArtwork@2x"; path = "Icons/iTunesArtwork@2x"; sourceTree = "<group>"; };
-		A9587A0717319AA100FD5629 /* rss.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = rss.xml; sourceTree = "<group>"; };
+		A9587A0717319AA100FD5629 /* rss.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = rss.xml; path = Resources/rss.xml; sourceTree = "<group>"; };
 		A97A25FA174A61FB00B3CEBC /* DramaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DramaViewController.h; sourceTree = "<group>"; };
 		A97A25FB174A61FB00B3CEBC /* DramaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DramaViewController.m; sourceTree = "<group>"; };
 		A97A25FD174A784B00B3CEBC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		A97A25FF174A78AA00B3CEBC /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A97A2600174A7A3B00B3CEBC /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/MainStoryboard.strings; sourceTree = "<group>"; };
-		A9B5586E17368C46001CFDEB /* bad.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = bad.xml; sourceTree = "<group>"; };
+		A9B5586E17368C46001CFDEB /* bad.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = bad.xml; path = Resources/bad.xml; sourceTree = "<group>"; };
 		A9C5240D1723E77000F8CCDE /* RssParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RssParser.h; sourceTree = "<group>"; };
 		A9C5240E1723E77000F8CCDE /* RssParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RssParser.m; sourceTree = "<group>"; };
 		A9C52411172538E000F8CCDE /* cn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cn.png; sourceTree = "<group>"; };
