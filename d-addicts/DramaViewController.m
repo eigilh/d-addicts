@@ -143,12 +143,10 @@
 - (void)insertAndDeleteRows
 {
     NSMutableArray *deleteIndexPaths = [[NSMutableArray alloc] initWithCapacity:self.countBeforeRefresh];
-    if (self.countBeforeRefresh > 0) {
-        for (NSInteger index=0; index < self.countBeforeRefresh; index += 1) {
-            [deleteIndexPaths addObject:[NSIndexPath indexPathForItem:index inSection:0]];
-        }
+    for (NSInteger index=0; index < self.countBeforeRefresh; index += 1) {
+        [deleteIndexPaths addObject:[NSIndexPath indexPathForItem:index inSection:0]];
     }
-    
+
     NSMutableArray *insertIndexPaths = [[NSMutableArray alloc] initWithCapacity:25];
     for (NSInteger index=0; index < self.episodes.count; index += 1) {
         [insertIndexPaths addObject:[NSIndexPath indexPathForItem:index inSection:0]];
@@ -157,10 +155,10 @@
     UITableView *tv = self.tableView;
     [tv beginUpdates];
     if (self.episodes.count == self.countBeforeRefresh) {
-        [tv reloadRowsAtIndexPaths:insertIndexPaths withRowAnimation:UITableViewRowAnimationTop];
+        [tv reloadRowsAtIndexPaths:insertIndexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
     } else {
-        [tv insertRowsAtIndexPaths:insertIndexPaths withRowAnimation:UITableViewRowAnimationTop];
-        [tv deleteRowsAtIndexPaths:deleteIndexPaths withRowAnimation:UITableViewRowAnimationBottom];
+        [tv insertRowsAtIndexPaths:insertIndexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
+        [tv deleteRowsAtIndexPaths:deleteIndexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
     }
     [tv endUpdates];
 }
