@@ -40,8 +40,9 @@
     [self beginRefresh];
 }
 
-- (void)viewDidLayoutSubviews
+- (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
     if (self.refreshControl.isRefreshing) {
         [self showRefreshControl];
     }
