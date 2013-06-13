@@ -44,7 +44,7 @@
 {
     [super viewWillAppear:animated];
     if (self.refreshControl.isRefreshing) {
-        [self showRefreshControl];
+        //[self showRefreshControl];
     }
 }
 
@@ -58,19 +58,23 @@
 - (void)showRefreshControl
 {
     CGRect newBounds = self.tableView.bounds;
-    newBounds.origin.y = -(self.refreshControl.bounds.size.height);
+    NSLog(@"Before showRefreshControl, y = %.0f", newBounds.origin.y);
+    newBounds.origin.y = -(self.refreshControl.bounds.size.height + self.searchDisplayController.searchBar.bounds.size.height);
     self.tableView.bounds = newBounds;
+    NSLog(@"After showRefreshControl, y = %.0f", newBounds.origin.y);
 }
 
 - (void)hideSearchBar
 {
     CGRect bounds = self.tableView.bounds;
+    NSLog(@"Before hideSearchBar, y = %.0f", bounds.origin.y);
     if (bounds.origin.y <= 0.0f) {
-        bounds.origin.y = self.searchDisplayController.searchBar.bounds.size.height;
+        bounds.origin.y = self.navigationController.navigationBar.bounds.size.height - self.searchDisplayController.searchBar.bounds.size.height - [UIApplication sharedApplication].statusBarFrame.size.height;
         [UIView animateWithDuration:0.4f animations:^{
             self.tableView.bounds = bounds;
         }];
     }
+    NSLog(@"After hideSearchBar, y = %.0f", bounds.origin.y);
 }
 
 - (NSDateFormatter *)dateFormatter
