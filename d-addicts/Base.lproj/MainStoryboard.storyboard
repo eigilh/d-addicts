@@ -39,7 +39,6 @@
                                         <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="hcI-r3-gxa">
                                             <rect key="frame" x="62" y="27" width="42" height="14"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
-                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         </label>
                                         <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="jp.png" id="sia-GS-V42">
@@ -49,7 +48,6 @@
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
-                                <color key="tintColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
                                     <segue destination="rFz-Vm-JdZ" kind="push" identifier="showEpisodeDetail" id="yu3-s4-sJP"/>
                                 </connections>
@@ -171,21 +169,6 @@
         <image name="jp.png" width="32" height="32"/>
         <image name="upchevron.png" width="20" height="20"/>
     </resources>
-    <classes>
-        <class className="DramaDetailViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/DramaDetailViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="upDownPressed:" candidateClass="UISegmentedControl"/>
-                <relationship kind="outlet" name="upDownButtons" candidateClass="UISegmentedControl"/>
-            </relationships>
-        </class>
-        <class className="DramaViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/DramaViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="refreshPressed:"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

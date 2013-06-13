@@ -77,16 +77,19 @@
             break;
             
         case SUBTITLE:
+            cell.imageView.image = [UIImage imageNamed:@"placeholdericon"];
             cell.textLabel.text = self.episode.sub;
             cell.detailTextLabel.text = @"Subtitle";
             break;
             
         case SIZE:
+            cell.imageView.image = [UIImage imageNamed:@"placeholdericon"];
             cell.textLabel.text = self.episode.size;
             cell.detailTextLabel.text = @"Size";
             break;
             
         case ADDED_BY:
+            cell.imageView.image = [UIImage imageNamed:@"placeholdericon"];
             cell.textLabel.text = self.episode.addedBy;
             cell.detailTextLabel.text = @"Added by";
             break;

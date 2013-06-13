@@ -277,6 +277,7 @@
 //    cell.detailTextLabel.font = [UIFont systemFontOfSize:DETAIL_TEXT_SIZE];
     cell.detailTextLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleFootnote];
     cell.detailTextLabel.text = episode.type;
+    cell.detailTextLabel.textColor = self.tableView.tintColor;
     cell.imageView.image = [UIImage imageNamed:episode.iso];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     

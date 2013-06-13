@@ -23,6 +23,7 @@
     else if ([t isEqualToString:@"j-tv"]) isoCode = @"jp";
     else if ([t isEqualToString:@"k-tv"]) isoCode = @"kr";
     else if ([t isEqualToString:@"hk-tv"]) isoCode = @"hk";
+    else isoCode = @"placeholdericon";
     
     return isoCode;
 }
