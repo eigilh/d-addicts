@@ -33,7 +33,6 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     self.tableView.rowHeight = ROW_HEIGHT;
-    self.tableView.tintColor = [UIColor cyanColor];
     [self beginRefresh];
 }
 
