@@ -31,13 +31,13 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="bD2-dd-POj">
-                                            <rect key="frame" x="62" y="8" width="27" height="17"/>
-                                            <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead1"/>
+                                            <rect key="frame" x="62" y="7" width="32" height="20"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline1"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="hcI-r3-gxa">
-                                            <rect key="frame" x="62" y="25" width="42" height="14"/>
+                                            <rect key="frame" x="62" y="27" width="42" height="14"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -49,6 +49,7 @@
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
+                                <color key="tintColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
                                     <segue destination="rFz-Vm-JdZ" kind="push" identifier="showEpisodeDetail" id="yu3-s4-sJP"/>
                                 </connections>
@@ -60,12 +61,14 @@
                         </connections>
                     </tableView>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="d-addicts" id="Ad4-Op-5Jn"/>
+                    <navigationItem key="navigationItem" title="d-addicts" id="Ad4-Op-5Jn">
+                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="3XJ-YH-lrx">
+                            <connections>
+                                <action selector="refreshPressed:" destination="kyr-hZ-I7l" id="vgR-Ld-HgV"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
-                    <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="mKF-g8-VXv">
-                        <autoresizingMask key="autoresizingMask"/>
-                        <attributedString key="attributedTitle"/>
-                    </refreshControl>
                     <connections>
                         <outlet property="searchDisplayController" destination="5ag-i9-4cy" id="Q3K-ex-sll"/>
                     </connections>
@@ -88,12 +91,13 @@
             <objects>
                 <tableViewController id="rFz-Vm-JdZ" customClass="DramaDetailViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="vNC-Bs-lOd">
-                        <rect key="frame" x="0.0" y="64" width="320" height="372"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="tintColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="detail" textLabel="ULx-nN-Sr9" detailTextLabel="gF1-h4-Kdl" style="IBUITableViewCellStyleSubtitle" id="wHN-sw-9e2">
-                                <rect key="frame" x="0.0" y="55" width="320" height="45"/>
+                                <rect key="frame" x="0.0" y="119" width="320" height="45"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -121,24 +125,23 @@
                             <outlet property="delegate" destination="rFz-Vm-JdZ" id="3T2-gY-veg"/>
                         </connections>
                     </tableView>
-                    <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" id="MGU-nY-EaX">
-                        <barButtonItem key="rightBarButtonItem" id="gW3-1B-FdN">
-                            <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bordered" momentary="YES" id="QrW-3W-jUF">
+                        <barButtonItem key="rightBarButtonItem" id="9mn-hq-Wfb">
+                            <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" momentary="YES" id="bup-Wv-hCU">
                                 <rect key="frame" x="233" y="7" width="71" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <segments>
-                                    <segment title="" image="up.png"/>
-                                    <segment title="" image="down.png"/>
+                                    <segment title="" image="upchevron.png"/>
+                                    <segment title="" image="downchevron.png"/>
                                 </segments>
                                 <connections>
-                                    <action selector="upDownPressed:" destination="rFz-Vm-JdZ" eventType="valueChanged" id="iBP-id-bVe"/>
+                                    <action selector="upDownPressed:" destination="rFz-Vm-JdZ" eventType="valueChanged" id="gXd-Pa-Swi"/>
                                 </connections>
                             </segmentedControl>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="upDownButtons" destination="QrW-3W-jUF" id="sG6-pB-OZ1"/>
+                        <outlet property="upDownButtons" destination="bup-Wv-hCU" id="52p-yb-Z8q"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wgq-uD-1NX" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -149,11 +152,11 @@
         <scene sceneID="Oci-N4-N14">
             <objects>
                 <navigationController id="mON-Np-V9N" sceneMemberID="viewController">
-                    <extendedEdge key="edgesForExtendedLayout"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="BQe-UZ-5rO">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="1" green="0.50196081399917603" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -166,10 +169,25 @@
         </scene>
     </scenes>
     <resources>
-        <image name="down.png" width="17" height="16"/>
+        <image name="downchevron.png" width="20" height="20"/>
         <image name="jp.png" width="32" height="32"/>
-        <image name="up.png" width="17" height="16"/>
+        <image name="upchevron.png" width="20" height="20"/>
     </resources>
+    <classes>
+        <class className="DramaDetailViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/DramaDetailViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="upDownPressed:" candidateClass="UISegmentedControl"/>
+                <relationship kind="outlet" name="upDownButtons" candidateClass="UISegmentedControl"/>
+            </relationships>
+        </class>
+        <class className="DramaViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/DramaViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="refreshPressed:"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

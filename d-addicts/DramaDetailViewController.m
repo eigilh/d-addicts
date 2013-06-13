@@ -18,6 +18,12 @@
 
 @implementation DramaDetailViewController
 
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    self.tableView.tintColor = [UIColor cyanColor];
+}
+
 - (NSDateFormatter *)dateFormatter
 {
     if (_dateFormatter == nil) {

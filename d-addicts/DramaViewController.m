@@ -32,20 +32,14 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    [self.refreshControl addTarget:self
-                            action:@selector(beginRefresh)
-                  forControlEvents:UIControlEventValueChanged];
     self.tableView.rowHeight = ROW_HEIGHT;
-    [self.refreshControl beginRefreshing];
+    self.tableView.tintColor = [UIColor cyanColor];
     [self beginRefresh];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    if (self.refreshControl.isRefreshing) {
-        //[self showRefreshControl];
-    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -55,26 +49,17 @@
     self.dateParser = nil;
 }
 
-- (void)showRefreshControl
-{
-    CGRect newBounds = self.tableView.bounds;
-    NSLog(@"Before showRefreshControl, y = %.0f", newBounds.origin.y);
-    newBounds.origin.y = -(self.refreshControl.bounds.size.height + self.searchDisplayController.searchBar.bounds.size.height);
-    self.tableView.bounds = newBounds;
-    NSLog(@"After showRefreshControl, y = %.0f", newBounds.origin.y);
-}
-
 - (void)hideSearchBar
 {
     CGRect bounds = self.tableView.bounds;
-    NSLog(@"Before hideSearchBar, y = %.0f", bounds.origin.y);
+    //NSLog(@"Before hideSearchBar, y = %.0f", bounds.origin.y);
     if (bounds.origin.y <= 0.0f) {
         bounds.origin.y = self.navigationController.navigationBar.bounds.size.height - self.searchDisplayController.searchBar.bounds.size.height - [UIApplication sharedApplication].statusBarFrame.size.height;
         [UIView animateWithDuration:0.4f animations:^{
             self.tableView.bounds = bounds;
         }];
     }
-    NSLog(@"After hideSearchBar, y = %.0f", bounds.origin.y);
+    //NSLog(@"After hideSearchBar, y = %.0f", bounds.origin.y);
 }
 
 - (NSDateFormatter *)dateFormatter
@@ -104,16 +89,12 @@
 {
     // save the number of items in the table
     self.countBeforeRefresh = self.episodes.count;
-    self.refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:@"Updating RSS feed..."];
     [self fetchRSS];
 }
 
 - (void)endRefresh
 {
-    NSString *status = NSLocalizedString(@"Updated", @"Status text suffixed with date");
-    self.refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@ %@", status, [self.dateFormatter stringFromDate:[NSDate date]]]];
     [self hideSearchBar];
-    [self.refreshControl endRefreshing];
 }
 
 - (NSMutableArray *)episodes
@@ -202,6 +183,11 @@
     // Clear out any old data in the table view
     [self.tableView reloadData];
     [self endRefresh];
+}
+
+- (IBAction)refreshPressed:(id)sender {
+    //[self.refreshControl beginRefreshing];
+    [self beginRefresh];
 }
 
 #pragma mark - UIAlertView Delegate
