@@ -33,6 +33,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     self.tableView.rowHeight = ROW_HEIGHT;
+    //self.searchDisplayController.displaysSearchBarInNavigationBar = YES;
     [self beginRefresh];
 }
 
@@ -50,15 +51,17 @@
 
 - (void)hideSearchBar
 {
+    CGPoint offset = self.tableView.contentOffset;
+    NSLog(@"Before hideSearchBar, contentOffset.y = %.0f", offset.y);
     CGRect bounds = self.tableView.bounds;
-    //NSLog(@"Before hideSearchBar, y = %.0f", bounds.origin.y);
+    NSLog(@"Before hideSearchBar, y = %.0f", bounds.origin.y);
     if (bounds.origin.y <= 0.0f) {
-        bounds.origin.y = self.navigationController.navigationBar.bounds.size.height - self.searchDisplayController.searchBar.bounds.size.height - [UIApplication sharedApplication].statusBarFrame.size.height;
+        bounds.origin.y = bounds.origin.y + 44;
         [UIView animateWithDuration:0.4f animations:^{
             self.tableView.bounds = bounds;
         }];
     }
-    //NSLog(@"After hideSearchBar, y = %.0f", bounds.origin.y);
+    NSLog(@"After hideSearchBar, y = %.0f", bounds.origin.y);
 }
 
 - (NSDateFormatter *)dateFormatter

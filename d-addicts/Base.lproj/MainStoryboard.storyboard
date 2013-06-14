@@ -60,7 +60,7 @@
                     </tableView>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="d-addicts" id="Ad4-Op-5Jn">
-                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="3XJ-YH-lrx">
+                        <barButtonItem key="leftBarButtonItem" systemItem="refresh" id="3XJ-YH-lrx">
                             <connections>
                                 <action selector="refreshPressed:" destination="kyr-hZ-I7l" id="vgR-Ld-HgV"/>
                             </connections>
