@@ -55,8 +55,8 @@
     NSLog(@"Before hideSearchBar, contentOffset.y = %.0f", offset.y);
     CGRect bounds = self.tableView.bounds;
     NSLog(@"Before hideSearchBar, y = %.0f", bounds.origin.y);
-    if (bounds.origin.y <= 0.0f) {
-        bounds.origin.y = bounds.origin.y + 44;
+    if (bounds.origin.y == -64.0f) {
+        bounds.origin.y = -20.0f;
         [UIView animateWithDuration:0.4f animations:^{
             self.tableView.bounds = bounds;
         }];

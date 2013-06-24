@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>E2693FC6-BB0B-4815-BE95-F9EED1F4538F</string>
+	<key>IDESourceControlProjectName</key>
+	<string>d-addicts</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>2E354963-9BF3-466C-911C-F0564B8B2A9E</key>
+		<string>ssh://github.com/eigilh/d-addicts.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>d-addicts.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>2E354963-9BF3-466C-911C-F0564B8B2A9E</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>ssh://github.com/eigilh/d-addicts.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>2E354963-9BF3-466C-911C-F0564B8B2A9E</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>2E354963-9BF3-466C-911C-F0564B8B2A9E</string>
+			<key>IDESourceControlWCCName</key>
+			<string>d-addicts</string>
+		</dict>
+	</array>
+</dict>
+</plist>
