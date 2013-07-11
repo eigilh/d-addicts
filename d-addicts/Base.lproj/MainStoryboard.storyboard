@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4457.9" systemVersion="12E55" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="mON-Np-V9N">
     <dependencies>
-        <deployment defaultVersion="1552" identifier="iOS"/>
+        <deployment defaultVersion="1792" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3682.9"/>
     </dependencies>
     <scenes>
@@ -9,7 +9,7 @@
         <scene sceneID="xCg-eK-usf">
             <objects>
                 <tableViewController id="kyr-hZ-I7l" customClass="DramaViewController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="48" sectionHeaderHeight="22" sectionFooterHeight="22" id="tWc-B5-sDd">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="55" sectionHeaderHeight="22" sectionFooterHeight="22" id="tWc-B5-sDd">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -22,32 +22,42 @@
                             </connections>
                         </searchBar>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="EpisodeCell" textLabel="bD2-dd-POj" detailTextLabel="hcI-r3-gxa" imageView="sia-GS-V42" rowHeight="48" style="IBUITableViewCellStyleSubtitle" id="uUs-dH-7Ht">
-                                <rect key="frame" x="0.0" y="130" width="320" height="48"/>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="EpisodeCell" rowHeight="55" id="uUs-dH-7Ht" customClass="DramaCell">
+                                <rect key="frame" x="0.0" y="130" width="320" height="55"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="287" height="47"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="287" height="54"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="bD2-dd-POj">
-                                            <rect key="frame" x="62" y="7" width="32" height="20"/>
-                                            <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline1"/>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ETz-EQ-Zm1">
+                                            <rect key="frame" x="20" y="11" width="32" height="32"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="32" id="F9i-yv-DbU"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="characterWrap" numberOfLines="2" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="227" translatesAutoresizingMaskIntoConstraints="NO" id="fEv-mX-s9b">
+                                            <rect key="frame" x="60" y="0.0" width="227" height="54"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead1"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="hcI-r3-gxa">
-                                            <rect key="frame" x="62" y="27" width="42" height="14"/>
-                                            <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
-                                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        </label>
-                                        <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="jp.png" id="sia-GS-V42">
-                                            <rect key="frame" x="15" y="7" width="32" height="32"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </imageView>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
+                                <constraints>
+                                    <constraint firstItem="fEv-mX-s9b" firstAttribute="top" secondItem="uUs-dH-7Ht" secondAttribute="top" id="FQD-Ea-3Rv"/>
+                                    <constraint firstItem="fEv-mX-s9b" firstAttribute="centerY" secondItem="uUs-dH-7Ht" secondAttribute="centerY" id="Hf1-1M-yvT"/>
+                                    <constraint firstItem="fEv-mX-s9b" firstAttribute="leading" secondItem="ETz-EQ-Zm1" secondAttribute="trailing" constant="8" symbolic="YES" id="Nke-YN-BwZ"/>
+                                    <constraint firstAttribute="trailing" secondItem="fEv-mX-s9b" secondAttribute="trailing" constant="33" id="V1A-1X-FJg"/>
+                                    <constraint firstItem="ETz-EQ-Zm1" firstAttribute="top" secondItem="uUs-dH-7Ht" secondAttribute="top" constant="11" id="foJ-yV-tIk"/>
+                                    <constraint firstItem="ETz-EQ-Zm1" firstAttribute="leading" secondItem="uUs-dH-7Ht" secondAttribute="leading" constant="20" id="iJY-zV-pUM"/>
+                                    <constraint firstItem="ETz-EQ-Zm1" firstAttribute="centerY" secondItem="fEv-mX-s9b" secondAttribute="centerY" id="s7w-ym-C3P"/>
+                                </constraints>
                                 <connections>
+                                    <outlet property="flagImage" destination="ETz-EQ-Zm1" id="FPd-1W-d6P"/>
+                                    <outlet property="titleLabel" destination="fEv-mX-s9b" id="Aq1-Ax-YDJ"/>
                                     <segue destination="rFz-Vm-JdZ" kind="push" identifier="showEpisodeDetail" id="yu3-s4-sJP"/>
                                 </connections>
                             </tableViewCell>
@@ -165,7 +175,6 @@
     </scenes>
     <resources>
         <image name="downchevron.png" width="20" height="20"/>
-        <image name="jp.png" width="32" height="32"/>
         <image name="upchevron.png" width="20" height="20"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

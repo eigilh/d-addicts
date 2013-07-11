@@ -9,6 +9,7 @@
 #import "DramaViewController.h"
 #import "DramaDetailViewController.h"
 #import "Episode.h"
+#import "DramaCell.h"
 
 @interface DramaViewController ()
 
@@ -259,12 +260,11 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *episodeCell = @"EpisodeCell";
-    UITableViewCell *cell;
     Episode *episode;
     
-    cell = [tableView dequeueReusableCellWithIdentifier:episodeCell];
+    DramaCell *cell = (DramaCell *)[tableView dequeueReusableCellWithIdentifier:episodeCell];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:episodeCell];
+        cell = [[DramaCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:episodeCell];
     }
     // Get cell and episode for Table View or Search Results
     if (tableView == self.searchDisplayController.searchResultsTableView) {
@@ -274,16 +274,19 @@
     }
     
     // Configure cell
-//    cell.textLabel.font = [UIFont boldSystemFontOfSize:TEXT_SIZE];
-    cell.textLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleSubheadline1];
-    cell.textLabel.text = episode.title;
-//    cell.detailTextLabel.font = [UIFont systemFontOfSize:DETAIL_TEXT_SIZE];
-    cell.detailTextLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleFootnote];
-    cell.detailTextLabel.text = episode.type;
-    cell.detailTextLabel.textColor = self.tableView.tintColor;
-    cell.imageView.image = [UIImage imageNamed:episode.iso];
+//    cell.textLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleSubheadline1];
+//    cell.textLabel.text = episode.title;
+//    cell.detailTextLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleFootnote];
+//    cell.detailTextLabel.text = episode.type;
+//    cell.detailTextLabel.textColor = self.tableView.tintColor;
+//    cell.imageView.image = [UIImage imageNamed:episode.iso];
+//    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+
+    cell.titleLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleSubheadline2];
+    cell.titleLabel.text = episode.title;
+    cell.flagImage.image = [UIImage imageNamed:episode.iso];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    
+
     return cell;
 }
 
