@@ -282,7 +282,7 @@
 //    cell.imageView.image = [UIImage imageNamed:episode.iso];
 //    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 
-    cell.titleLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleSubheadline2];
+    cell.titleLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleSubheadline];
     cell.titleLabel.text = episode.title;
     cell.flagImage.image = [UIImage imageNamed:episode.iso];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
