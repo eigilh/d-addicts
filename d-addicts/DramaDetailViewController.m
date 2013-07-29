@@ -14,6 +14,12 @@
 @property (weak, nonatomic) IBOutlet UISegmentedControl *upDownButtons;
 @property (strong, nonatomic) NSDateFormatter *dateFormatter;
 
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *flagImage;
+@property (weak, nonatomic) IBOutlet UILabel *typeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *subtitleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *sizeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *addedByLabel;
 @end
 
 @implementation DramaDetailViewController
@@ -21,6 +27,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self configureView];
 }
 
 - (NSDateFormatter *)dateFormatter
@@ -50,7 +57,6 @@
     _currentRow = newRow;
     if (self.torrents) {
         self.episode = self.torrents[newRow];
-        [self.tableView reloadData];
     }
 }
 
@@ -58,75 +64,13 @@
 {
     if (self.episode) {
         self.navigationItem.title = [NSString stringWithFormat:@"%d of %d", self.currentRow+1, [self.torrents count]];
+        self.titleLabel.text = self.episode.title;
+        self.flagImage.image = [UIImage imageNamed:self.episode.iso];
+        self.typeLabel.text = self.episode.type;
+        self.subtitleLabel.text = self.episode.sub;
+        self.addedByLabel.text = self.episode.addedBy;
     }
     [self enableUpDownButtons];
-}
-
-#define TYPE 0
-#define SUBTITLE 1
-#define SIZE 2
-#define ADDED_BY 3
-
-- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
-{
-    switch (indexPath.row) {
-        case TYPE:
-            cell.imageView.image = [UIImage imageNamed:self.episode.iso];
-            cell.textLabel.text = self.episode.type;
-            cell.detailTextLabel.text = @"Type";
-            break;
-            
-        case SUBTITLE:
-            cell.imageView.image = [UIImage imageNamed:@"placeholdericon"];
-            cell.textLabel.text = self.episode.sub;
-            cell.detailTextLabel.text = @"Subtitle";
-            break;
-            
-        case SIZE:
-            cell.imageView.image = [UIImage imageNamed:@"placeholdericon"];
-            cell.textLabel.text = self.episode.size;
-            cell.detailTextLabel.text = @"Size";
-            break;
-            
-        case ADDED_BY:
-            cell.imageView.image = [UIImage imageNamed:@"placeholdericon"];
-            cell.textLabel.text = self.episode.addedBy;
-            cell.detailTextLabel.text = @"Added by";
-            break;
-            
-        default:
-            break;
-    }
-}
-
-#pragma mark - Table View Date Source
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    return 1;
-}
-
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
-{
-    return self.episode.title;
-}
-
-- (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
-{
-    return [self.dateFormatter stringFromDate:self.episode.pubDate];
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return 4;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    static NSString *detailID = @"detail";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:detailID forIndexPath:indexPath];
-    [self configureCell:cell atIndexPath:indexPath];
-    return cell;
 }
 
 #define UP 0

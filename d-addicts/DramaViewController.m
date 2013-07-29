@@ -38,11 +38,6 @@
     [self beginRefresh];
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-}
-
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -52,17 +47,13 @@
 
 - (void)hideSearchBar
 {
-    CGPoint offset = self.tableView.contentOffset;
-    NSLog(@"Before hideSearchBar, contentOffset.y = %.0f", offset.y);
     CGRect bounds = self.tableView.bounds;
-    NSLog(@"Before hideSearchBar, y = %.0f", bounds.origin.y);
     if (bounds.origin.y == -64.0f) {
         bounds.origin.y = -20.0f;
         [UIView animateWithDuration:0.4f animations:^{
             self.tableView.bounds = bounds;
         }];
     }
-    NSLog(@"After hideSearchBar, y = %.0f", bounds.origin.y);
 }
 
 - (NSDateFormatter *)dateFormatter
@@ -76,6 +67,7 @@
     return _dateFormatter;
 }
 
+// Parses the date format specific to the d-addicts feed
 - (NSDateFormatter *)dateParser
 {
     if (_dateParser == nil) {
@@ -129,7 +121,7 @@
     }
 }
 
-- (void)insertAndDeleteRows
+- (void)updateRows
 {
     NSMutableArray *deleteIndexPaths = [[NSMutableArray alloc] initWithCapacity:self.countBeforeRefresh];
     for (NSInteger index=0; index < self.countBeforeRefresh; index += 1) {
@@ -168,7 +160,7 @@
 
 - (void)didEndParse
 {
-    [self insertAndDeleteRows];
+    [self updateRows];
     [self endRefresh];
 }
 

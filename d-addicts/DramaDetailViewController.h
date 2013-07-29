@@ -10,7 +10,7 @@
 
 @class Episode;
 
-@interface DramaDetailViewController : UITableViewController
+@interface DramaDetailViewController : UIViewController
 
 @property (strong, nonatomic) NSArray *torrents;
 @property (nonatomic) NSInteger currentRow;
