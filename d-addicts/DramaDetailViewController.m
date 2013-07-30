@@ -69,6 +69,7 @@
         self.flagImage.image = [UIImage imageNamed:self.episode.iso];
         self.typeLabel.text = self.episode.type;
         self.subtitleLabel.text = self.episode.sub;
+        self.sizeLabel.text = self.episode.size;
         self.addedByLabel.text = self.episode.addedBy;
         [self.descriptionView loadHTMLString:self.episode.description baseURL:nil];
     }
