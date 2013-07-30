@@ -20,6 +20,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *subtitleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *sizeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *addedByLabel;
+@property (weak, nonatomic) IBOutlet UIWebView *descriptionView;
 @end
 
 @implementation DramaDetailViewController
@@ -69,6 +70,7 @@
         self.typeLabel.text = self.episode.type;
         self.subtitleLabel.text = self.episode.sub;
         self.addedByLabel.text = self.episode.addedBy;
+        [self.descriptionView loadHTMLString:self.episode.description baseURL:nil];
     }
     [self enableUpDownButtons];
 }

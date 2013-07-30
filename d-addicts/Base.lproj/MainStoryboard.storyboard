@@ -182,11 +182,18 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qNv-bC-BWJ">
+                                <rect key="frame" x="20" y="256" width="280" height="160"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </webView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="qNv-bC-BWJ" secondAttribute="trailing" constant="20" id="0QI-ck-jfN"/>
                             <constraint firstItem="ohD-TH-VKe" firstAttribute="trailing" secondItem="8hd-zD-dYC" secondAttribute="trailing" id="22J-xg-HvD"/>
                             <constraint firstItem="FK3-qJ-ae2" firstAttribute="top" secondItem="dah-w6-dfI" secondAttribute="bottom" constant="8" symbolic="YES" id="2He-Ph-scU"/>
+                            <constraint firstItem="qNv-bC-BWJ" firstAttribute="leading" secondItem="gRb-MD-N7w" secondAttribute="leading" constant="20" id="3DB-uO-O8r"/>
                             <constraint firstItem="FK3-qJ-ae2" firstAttribute="leading" secondItem="Ifq-mD-kAt" secondAttribute="trailing" constant="8" symbolic="YES" id="6Rp-gM-rvG"/>
                             <constraint firstItem="Ifq-mD-kAt" firstAttribute="baseline" secondItem="FK3-qJ-ae2" secondAttribute="baseline" id="A5c-fU-vTX"/>
                             <constraint firstItem="FK3-qJ-ae2" firstAttribute="trailing" secondItem="dah-w6-dfI" secondAttribute="trailing" id="AsJ-D9-3eY"/>
@@ -202,9 +209,11 @@
                             <constraint firstItem="dah-w6-dfI" firstAttribute="trailing" secondItem="8hd-zD-dYC" secondAttribute="trailing" id="O10-jA-3UI"/>
                             <constraint firstItem="dah-w6-dfI" firstAttribute="top" secondItem="8hd-zD-dYC" secondAttribute="bottom" constant="8" symbolic="YES" id="POj-XR-buX"/>
                             <constraint firstItem="lpb-dl-Nve" firstAttribute="top" secondItem="L6u-pW-YXs" secondAttribute="bottom" constant="8" id="SCI-oH-BYP"/>
+                            <constraint firstItem="qNv-bC-BWJ" firstAttribute="top" secondItem="Ifq-mD-kAt" secondAttribute="bottom" constant="8" id="Ws3-HC-Uda"/>
                             <constraint firstItem="lpb-dl-Nve" firstAttribute="baseline" secondItem="dah-w6-dfI" secondAttribute="baseline" id="Y3T-Eb-XK4"/>
                             <constraint firstItem="Lss-5t-W5i" firstAttribute="leading" secondItem="L6u-pW-YXs" secondAttribute="leading" id="bBU-kS-2Kf"/>
                             <constraint firstItem="SL6-qh-daK" firstAttribute="top" secondItem="BK6-PZ-sj5" secondAttribute="bottom" constant="8" id="bjz-E6-fGe"/>
+                            <constraint firstItem="mZn-6q-cuX" firstAttribute="top" secondItem="qNv-bC-BWJ" secondAttribute="bottom" constant="20" id="fnQ-LD-TpE"/>
                             <constraint firstItem="8hd-zD-dYC" firstAttribute="leading" secondItem="L6u-pW-YXs" secondAttribute="trailing" constant="24" id="gUw-4Z-E3x"/>
                             <constraint firstItem="ohD-TH-VKe" firstAttribute="baseline" secondItem="Lss-5t-W5i" secondAttribute="baseline" id="hhP-mp-TKd"/>
                             <constraint firstItem="SL6-qh-daK" firstAttribute="leading" secondItem="gRb-MD-N7w" secondAttribute="leading" constant="20" id="lVN-jf-ozh"/>
@@ -238,6 +247,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="addedByLabel" destination="FK3-qJ-ae2" id="mdH-Et-8by"/>
+                        <outlet property="descriptionView" destination="qNv-bC-BWJ" id="Q2A-PH-PRf"/>
                         <outlet property="flagImage" destination="SL6-qh-daK" id="4Bt-0g-SIh"/>
                         <outlet property="sizeLabel" destination="dah-w6-dfI" id="bwu-Sd-JfR"/>
                         <outlet property="subtitleLabel" destination="8hd-zD-dYC" id="rXS-be-THz"/>
