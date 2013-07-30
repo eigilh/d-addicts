@@ -281,6 +281,11 @@
 				CLASSPREFIX = Drama;
 				LastUpgradeCheck = 0460;
 				ORGANIZATIONNAME = "Eigil Hansen";
+				TargetAttributes = {
+					A9F0745F1716B1D500605669 = {
+						DevelopmentTeam = VDYJGP76Y4;
+					};
+				};
 			};
 			buildConfigurationList = A9F0745B1716B1D500605669 /* Build configuration list for PBXProject "d-addicts" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -449,13 +454,14 @@
 		A9F074871716B1D600605669 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "d-addicts/d-addicts-Prefix.pch";
 				INFOPLIST_FILE = "d-addicts/d-addicts-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "F3A720B1-9B97-47EC-A50E-6EB04277C8BF";
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -463,13 +469,14 @@
 		A9F074881716B1D600605669 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "d-addicts/d-addicts-Prefix.pch";
 				INFOPLIST_FILE = "d-addicts/d-addicts-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "F3A720B1-9B97-47EC-A50E-6EB04277C8BF";
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
