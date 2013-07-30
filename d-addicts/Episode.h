@@ -18,6 +18,8 @@
 @property (nonatomic, strong) NSString *addedBy;
 @property (nonatomic, strong) NSString *type;
 @property (nonatomic, strong) NSString *sub;
+@property (nonatomic, strong) NSString *links;
+@property (nonatomic, strong) NSString *description;
 
 @property (readonly) NSString *iso;
 

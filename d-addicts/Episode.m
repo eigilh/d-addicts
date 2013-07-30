@@ -64,6 +64,8 @@
         self.addedBy = [itemList valueForKey:@"Added by"];
         self.type = [itemList valueForKey:@"Type"];
         self.sub = [itemList valueForKey:@"Sub"];
+        self.links = [itemList valueForKey:@"Links"];
+        self.description = description;
     }
     return self;
 }
