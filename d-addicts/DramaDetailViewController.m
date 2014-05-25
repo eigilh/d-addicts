@@ -64,14 +64,14 @@
 - (void)configureView
 {
     if (self.episode) {
-        self.navigationItem.title = [NSString stringWithFormat:@"%d of %d", self.currentRow+1, [self.torrents count]];
+        self.navigationItem.title = [NSString stringWithFormat:@"%d of %lu", self.currentRow+1, (unsigned long)[self.torrents count]];
         self.titleLabel.text = self.episode.title;
         self.flagImage.image = [UIImage imageNamed:self.episode.iso];
         self.typeLabel.text = self.episode.type;
         self.subtitleLabel.text = self.episode.sub;
         self.sizeLabel.text = self.episode.size;
         self.addedByLabel.text = self.episode.addedBy;
-        [self.descriptionView loadHTMLString:self.episode.description baseURL:nil];
+        //[self.descriptionView loadHTMLString:self.episode.description baseURL:nil];
     }
     [self enableUpDownButtons];
 }
