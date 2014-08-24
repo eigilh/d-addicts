@@ -14,7 +14,7 @@
 @interface DramaViewController ()
 
 @property (nonatomic, strong) NSMutableArray *episodes;
-@property (nonatomic, strong) NSArray *filteredEpisodes;
+@property (nonatomic, strong) NSMutableArray *searchResults;
 @property (nonatomic) NSUInteger countBeforeRefresh;
 
 @property (nonatomic, strong) NSDateFormatter *dateFormatter;
@@ -34,6 +34,9 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     self.tableView.rowHeight = ROW_HEIGHT;
+
+    self.searchResults = [NSMutableArray arrayWithCapacity:[self.episodes count]];
+
     //self.searchDisplayController.displaysSearchBarInNavigationBar = YES;
     [self beginRefresh];
 }
@@ -206,7 +209,7 @@
 	// Update the filtered array based on the search text and scope.
 	// Filter the array using NSPredicate
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF.title contains[c] %@",searchText];
-    self.filteredEpisodes = [self.episodes filteredArrayUsingPredicate:predicate];
+    self.searchResults = [[self.episodes filteredArrayUsingPredicate:predicate] mutableCopy];
 }
 
 #pragma mark - UISearchDisplay Delegate
@@ -242,26 +245,31 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Check to see whether the normal table or search results table is being displayed and return the count from the appropriate array
-    if (tableView == self.searchDisplayController.searchResultsTableView) {
-        return self.filteredEpisodes.count;
-    } else {
-        return self.episodes.count;
+    if (tableView == self.searchDisplayController.searchResultsTableView)
+    {
+        return [self.searchResults count];
+    }
+    else
+    {
+        return [self.episodes count];
     }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *episodeCell = @"EpisodeCell";
-    Episode *episode;
-    
-    DramaCell *cell = (DramaCell *)[tableView dequeueReusableCellWithIdentifier:episodeCell];
-    if (cell == nil) {
-        cell = [[DramaCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:episodeCell];
-    }
+
+    DramaCell *cell = (DramaCell *)[self.tableView dequeueReusableCellWithIdentifier:episodeCell];
+
     // Get cell and episode for Table View or Search Results
-    if (tableView == self.searchDisplayController.searchResultsTableView) {
-        episode = [self.filteredEpisodes objectAtIndex:indexPath.row];
-    } else {
+    Episode *episode;
+
+    if (tableView == self.searchDisplayController.searchResultsTableView)
+    {
+        episode = [self.searchResults objectAtIndex:indexPath.row];
+    }
+    else
+    {
         episode = [self objectInListAtIndex:indexPath.row];
     }
     
@@ -277,24 +285,9 @@
     cell.titleLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleSubheadline];
     cell.titleLabel.text = episode.title;
     cell.flagImage.image = [UIImage imageNamed:episode.iso];
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+//    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 
     return cell;
-}
-
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return NO;
-}
-
-#pragma mark - Table View Delegate
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Perform segue to episode detail
-    if (tableView == self.searchDisplayController.searchResultsTableView) {
-        [self performSegueWithIdentifier:@"showEpisodeDetail" sender:tableView];
-    }
 }
 
 #pragma mark - Segues
@@ -302,18 +295,22 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([[segue identifier] isEqualToString:@"showEpisodeDetail"]) {
-        DramaDetailViewController *detailViewController = [segue destinationViewController];
-        if (sender == self.searchDisplayController.searchResultsTableView) {
-            detailViewController.torrents = self.filteredEpisodes;
-            NSIndexPath *indexPath = [sender indexPathForSelectedRow];
-            detailViewController.currentRow = indexPath.row;
-            [sender deselectRowAtIndexPath:indexPath animated:YES];
-        } else {
-            detailViewController.torrents = self.episodes;
-            NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-            detailViewController.currentRow = indexPath.row;
-            [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+
+        NSArray *sourceArray;
+        NSIndexPath *indexPath = [self.searchDisplayController.searchResultsTableView indexPathForCell:(UITableViewCell *)sender];
+        if (indexPath != nil)
+        {
+            sourceArray = self.searchResults;
         }
+        else
+        {
+            indexPath = [self.tableView indexPathForCell:(UITableViewCell *)sender];
+            sourceArray = self.episodes;
+        }
+
+        DramaDetailViewController *detailViewController = segue.destinationViewController;
+        detailViewController.torrents = sourceArray;
+        detailViewController.currentRow = indexPath.row;
     }
 }
 
