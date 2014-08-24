@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="mON-Np-V9N">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="mON-Np-V9N">
     <dependencies>
         <deployment defaultVersion="1792" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
@@ -39,23 +39,24 @@
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="characterWrap" numberOfLines="2" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="220" translatesAutoresizingMaskIntoConstraints="NO" id="fEv-mX-s9b">
                                             <rect key="frame" x="60" y="0.0" width="220" height="54"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="54" id="yTT-8y-qbM"/>
+                                            </constraints>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstAttribute="centerY" secondItem="fEv-mX-s9b" secondAttribute="centerY" id="00b-C7-ded"/>
                                         <constraint firstItem="ETz-EQ-Zm1" firstAttribute="centerY" secondItem="fEv-mX-s9b" secondAttribute="centerY" constant="1" id="1j8-pe-0fM"/>
+                                        <constraint firstAttribute="centerY" secondItem="ETz-EQ-Zm1" secondAttribute="centerY" constant="-1" id="EIA-GW-dVL"/>
                                         <constraint firstItem="ETz-EQ-Zm1" firstAttribute="top" secondItem="lEJ-bj-Lmp" secondAttribute="top" constant="12" id="VjA-hm-nn2"/>
+                                        <constraint firstAttribute="trailing" secondItem="fEv-mX-s9b" secondAttribute="trailing" constant="7" id="l0X-Q8-u9z"/>
                                         <constraint firstItem="fEv-mX-s9b" firstAttribute="leading" secondItem="ETz-EQ-Zm1" secondAttribute="trailing" constant="8" symbolic="YES" id="lH5-M6-O1N"/>
                                         <constraint firstItem="ETz-EQ-Zm1" firstAttribute="leading" secondItem="lEJ-bj-Lmp" secondAttribute="leading" constant="20" symbolic="YES" id="n9p-If-i0k"/>
                                     </constraints>
                                 </tableViewCellContentView>
-                                <constraints>
-                                    <constraint firstItem="fEv-mX-s9b" firstAttribute="top" secondItem="uUs-dH-7Ht" secondAttribute="top" id="Yxf-hc-OrG"/>
-                                    <constraint firstItem="fEv-mX-s9b" firstAttribute="centerY" secondItem="uUs-dH-7Ht" secondAttribute="centerY" id="gfF-0L-Cme"/>
-                                    <constraint firstAttribute="trailing" secondItem="fEv-mX-s9b" secondAttribute="trailing" constant="40" id="php-Bw-DdN"/>
-                                </constraints>
                                 <connections>
                                     <outlet property="flagImage" destination="ETz-EQ-Zm1" id="FPd-1W-d6P"/>
                                     <outlet property="titleLabel" destination="fEv-mX-s9b" id="Aq1-Ax-YDJ"/>
