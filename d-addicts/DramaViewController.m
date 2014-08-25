@@ -272,7 +272,7 @@
 
     cell.titleLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleSubheadline];
     cell.titleLabel.text = episode.title;
-    cell.flagImage.image = [UIImage imageNamed:episode.iso];
+    cell.flagImage.image = [UIImage imageNamed:episode.isoCountryCode];
 //    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 
     return cell;

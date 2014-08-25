@@ -52,7 +52,7 @@
 
     self.navigationItem.title = [NSString stringWithFormat:@"%ld of %lu", self.currentRow+1, (unsigned long)[self.torrents count]];
     self.titleLabel.text = episode.title;
-    self.flagImage.image = [UIImage imageNamed:episode.iso];
+    self.flagImage.image = [UIImage imageNamed:episode.isoCountryCode];
     self.typeLabel.text = episode.type;
     self.subtitleLabel.text = episode.sub;
     self.sizeLabel.text = episode.size;

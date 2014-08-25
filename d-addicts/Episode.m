@@ -28,7 +28,7 @@
     return isoCode;
 }
 
-- (NSString *)iso
+- (NSString *)isoCountryCode
 {
     return [Episode isoFromType:self.type];
 }

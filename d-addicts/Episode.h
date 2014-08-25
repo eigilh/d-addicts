@@ -21,7 +21,7 @@
 @property (nonatomic, strong) NSString *links;
 @property (nonatomic, strong) NSString *description;
 
-@property (readonly) NSString *iso;
+@property (readonly) NSString *isoCountryCode;
 
 - (id)initWithTitle:(NSString *)title link:(NSString *)link description:(NSString *)description date:(NSDate *)date;
 
