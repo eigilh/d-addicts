@@ -25,14 +25,10 @@
 @implementation DramaViewController
 
 
-#define ROW_HEIGHT 54.0
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    self.tableView.rowHeight = ROW_HEIGHT;
-
     self.searchResults = [NSMutableArray arrayWithCapacity:[self.episodes count]];
 
     [self beginRefresh];
@@ -202,11 +198,6 @@
 
 #pragma mark - UISearchDisplay Delegate
 
-- (void)searchDisplayController:(UISearchDisplayController *)controller didLoadSearchResultsTableView:(UITableView *)tableView
-{
-    tableView.rowHeight = ROW_HEIGHT;
-}
-
 - (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString {
     // Tells the table data source to reload when text changes
     [self filterContentForSearchText:searchString scope:
@@ -270,7 +261,7 @@
 //    cell.imageView.image = [UIImage imageNamed:episode.iso];
 //    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 
-    cell.titleLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleSubheadline];
+    cell.titleLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleCaption1];
     cell.titleLabel.text = episode.title;
     cell.flagImage.image = [UIImage imageNamed:episode.isoCountryCode];
 //    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
