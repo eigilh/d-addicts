@@ -25,9 +25,7 @@
 @implementation DramaViewController
 
 
-#define TEXT_SIZE 14.0f
-#define DETAIL_TEXT_SIZE 13.0f
-#define ROW_HEIGHT (TEXT_SIZE+DETAIL_TEXT_SIZE)*2.0f
+#define ROW_HEIGHT 54.0
 
 - (void)viewDidLoad
 {
@@ -37,7 +35,6 @@
 
     self.searchResults = [NSMutableArray arrayWithCapacity:[self.episodes count]];
 
-    //self.searchDisplayController.displaysSearchBarInNavigationBar = YES;
     [self beginRefresh];
 }
 
@@ -53,7 +50,7 @@
     CGRect bounds = self.tableView.bounds;
     if (bounds.origin.y == -64.0f) {
         bounds.origin.y = -20.0f;
-        [UIView animateWithDuration:0.4f animations:^{
+        [UIView animateWithDuration:0.2f animations:^{
             self.tableView.bounds = bounds;
         }];
     }
@@ -87,11 +84,14 @@
 {
     // save the number of items in the table
     self.countBeforeRefresh = self.episodes.count;
+
+    [self.refreshControl beginRefreshing];
     [self fetchRSS];
 }
 
 - (void)endRefresh
 {
+    [self.refreshControl endRefreshing];
     [self hideSearchBar];
 }
 
@@ -184,23 +184,7 @@
 }
 
 - (IBAction)refreshPressed:(id)sender {
-    //[self.refreshControl beginRefreshing];
     [self beginRefresh];
-}
-
-#pragma mark - UIAlertView Delegate
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    
-}
-
-#pragma mark - UISearchBar Delegate
-
-- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
-{
-    // Hide the Search Bar behind the Navigation Bar
-    [self hideSearchBar];
 }
 
 #pragma mark - UISearchDisplay
@@ -209,7 +193,11 @@
 	// Update the filtered array based on the search text and scope.
 	// Filter the array using NSPredicate
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF.title contains[c] %@",searchText];
-    self.searchResults = [[self.episodes filteredArrayUsingPredicate:predicate] mutableCopy];
+    if (self.searchResults.count > 0) {
+        [self.searchResults removeAllObjects];
+    }
+    NSArray* filteredArray = [self.episodes filteredArrayUsingPredicate:predicate];
+    [self.searchResults addObjectsFromArray:filteredArray];
 }
 
 #pragma mark - UISearchDisplay Delegate

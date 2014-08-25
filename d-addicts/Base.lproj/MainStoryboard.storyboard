@@ -78,6 +78,17 @@
                         </barButtonItem>
                     </navigationItem>
                     <size key="freeformSize" width="320" height="568"/>
+                    <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="vmk-Ds-Jcf">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <attributedString key="attributedTitle">
+                            <fragment content="Updating feed...">
+                                <attributes>
+                                    <font key="NSFont" metaFont="toolTip"/>
+                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                </attributes>
+                            </fragment>
+                        </attributedString>
+                    </refreshControl>
                     <connections>
                         <outlet property="searchDisplayController" destination="5ag-i9-4cy" id="Q3K-ex-sll"/>
                     </connections>
@@ -202,31 +213,26 @@
                             <constraint firstItem="FK3-qJ-ae2" firstAttribute="trailing" secondItem="dah-w6-dfI" secondAttribute="trailing" id="yta-2b-ZWD"/>
                         </constraints>
                     </view>
-                    <extendedEdge key="edgesForExtendedLayout" top="YES"/>
                     <navigationItem key="navigationItem" id="S21-AN-7eg">
-                        <barButtonItem key="rightBarButtonItem" id="vVG-oZ-dnK">
-                            <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" momentary="YES" id="KLm-gn-dQi">
-                                <rect key="frame" x="233" y="7" width="71" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <segments>
-                                    <segment title="" image="upchevron.png"/>
-                                    <segment title="" image="downchevron.png"/>
-                                </segments>
+                        <barButtonItem key="rightBarButtonItem" id="hWw-ll-LoM">
+                            <stepper key="customView" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="24" id="Tzl-jg-TUE">
+                                <rect key="frame" x="210" y="7" width="94" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <connections>
-                                    <action selector="upDownPressed:" destination="aqO-SA-mdS" eventType="valueChanged" id="EAn-h0-QBQ"/>
+                                    <action selector="step:" destination="aqO-SA-mdS" eventType="valueChanged" id="jk8-f9-NE0"/>
                                 </connections>
-                            </segmentedControl>
+                            </stepper>
                         </barButtonItem>
                     </navigationItem>
                     <size key="freeformSize" width="320" height="568"/>
                     <connections>
                         <outlet property="addedByLabel" destination="FK3-qJ-ae2" id="mdH-Et-8by"/>
+                        <outlet property="episodeStepper" destination="Tzl-jg-TUE" id="bTW-MN-UV6"/>
                         <outlet property="flagImage" destination="SL6-qh-daK" id="4Bt-0g-SIh"/>
                         <outlet property="sizeLabel" destination="dah-w6-dfI" id="bwu-Sd-JfR"/>
                         <outlet property="subtitleLabel" destination="8hd-zD-dYC" id="rXS-be-THz"/>
                         <outlet property="titleLabel" destination="BK6-PZ-sj5" id="C3M-dh-H1C"/>
                         <outlet property="typeLabel" destination="ohD-TH-VKe" id="Hz9-KB-Yes"/>
-                        <outlet property="upDownButtons" destination="KLm-gn-dQi" id="fWy-LE-x1g"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KjW-EY-nBC" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -252,10 +258,6 @@
             <point key="canvasLocation" x="1144" y="-696"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="downchevron.png" width="20" height="20"/>
-        <image name="upchevron.png" width="20" height="20"/>
-    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

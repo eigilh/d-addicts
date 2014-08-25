@@ -11,8 +11,9 @@
 
 @interface DramaDetailViewController ()
 
-@property (weak, nonatomic) IBOutlet UISegmentedControl *upDownButtons;
 @property (strong, nonatomic) NSDateFormatter *dateFormatter;
+
+@property (weak, nonatomic) IBOutlet UIStepper *episodeStepper;
 
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *flagImage;
@@ -20,16 +21,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *subtitleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *sizeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *addedByLabel;
-@property (weak, nonatomic) IBOutlet UIWebView *descriptionView;
 @end
 
 @implementation DramaDetailViewController
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    [self configureView];
-}
 
 - (NSDateFormatter *)dateFormatter
 {
@@ -41,68 +35,34 @@
     return _dateFormatter;
 }
 
-#pragma mark - Managing the detail item
-
-- (void)setEpisode:(Episode *)newEpisode
+- (void)viewDidLoad
 {
-    if (_episode != newEpisode) {
-        _episode = newEpisode;
-        
-        // Update the view.
-        [self configureView];
-    }
-}
+    [super viewDidLoad];
 
-- (void)setCurrentRow:(NSInteger)newRow
-{
-    _currentRow = newRow;
-    if (self.torrents) {
-        self.episode = self.torrents[newRow];
-    }
+    self.episodeStepper.minimumValue = 0;
+    self.episodeStepper.maximumValue = self.torrents.count - 1;
+    self.episodeStepper.value = self.currentRow;
+
+    [self configureView];
 }
 
 - (void)configureView
 {
-    if (self.episode) {
-        self.navigationItem.title = [NSString stringWithFormat:@"%d of %lu", self.currentRow+1, (unsigned long)[self.torrents count]];
-        self.titleLabel.text = self.episode.title;
-        self.flagImage.image = [UIImage imageNamed:self.episode.iso];
-        self.typeLabel.text = self.episode.type;
-        self.subtitleLabel.text = self.episode.sub;
-        self.sizeLabel.text = self.episode.size;
-        self.addedByLabel.text = self.episode.addedBy;
-        //[self.descriptionView loadHTMLString:self.episode.description baseURL:nil];
-    }
-    [self enableUpDownButtons];
+    Episode *episode = self.torrents[self.currentRow];
+
+    self.navigationItem.title = [NSString stringWithFormat:@"%ld of %lu", self.currentRow+1, (unsigned long)[self.torrents count]];
+    self.titleLabel.text = episode.title;
+    self.flagImage.image = [UIImage imageNamed:episode.iso];
+    self.typeLabel.text = episode.type;
+    self.subtitleLabel.text = episode.sub;
+    self.sizeLabel.text = episode.size;
+    self.addedByLabel.text = episode.addedBy;
 }
 
-#define UP 0
-#define DOWN 1
-
-- (void)enableUpDownButtons
-{
-    if (self.currentRow == 0) {
-        [self.upDownButtons setEnabled:NO forSegmentAtIndex:UP];
-    } else {
-        [self.upDownButtons setEnabled:YES forSegmentAtIndex:UP];
-    }
-    if (self.currentRow == [self.torrents count]-1) {
-        [self.upDownButtons setEnabled:NO forSegmentAtIndex:DOWN];
-    } else {
-        [self.upDownButtons setEnabled:YES forSegmentAtIndex:DOWN];
-    }
+- (IBAction)step:(UIStepper*)sender {
+    self.currentRow = sender.value;
+    [self configureView];
 }
 
-- (IBAction)upDownPressed:(UISegmentedControl *)sender {
-    NSInteger button = sender.selectedSegmentIndex;
-    switch (button) {
-        case UP:
-            if (self.currentRow > 0) self.currentRow -= 1;
-            break;
-        case DOWN:
-            if (self.currentRow < [self.torrents count] - 1) self.currentRow += 1;
-            break;
-    }
-}
 
 @end

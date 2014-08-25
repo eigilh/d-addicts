@@ -14,6 +14,5 @@
 
 @property (strong, nonatomic) NSArray *torrents;
 @property (nonatomic) NSInteger currentRow;
-@property (strong, nonatomic) Episode *episode;
 
 @end
