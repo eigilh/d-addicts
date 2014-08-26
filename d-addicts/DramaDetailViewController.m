@@ -50,7 +50,7 @@
 {
     Episode *episode = self.torrents[self.currentRow];
 
-    self.navigationItem.title = [NSString stringWithFormat:@"%ld of %lu", self.currentRow+1, (unsigned long)[self.torrents count]];
+    self.navigationItem.title = [NSString stringWithFormat:@"%ld of %lu", (long)(self.currentRow+1), (unsigned long)[self.torrents count]];
     self.titleLabel.text = episode.title;
     self.flagImage.image = [UIImage imageNamed:episode.isoCountryCode];
     self.typeLabel.text = episode.type;

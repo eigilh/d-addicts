@@ -253,18 +253,10 @@
     }
     
     // Configure cell
-//    cell.textLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleSubheadline1];
-//    cell.textLabel.text = episode.title;
-//    cell.detailTextLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleFootnote];
-//    cell.detailTextLabel.text = episode.type;
-//    cell.detailTextLabel.textColor = self.tableView.tintColor;
-//    cell.imageView.image = [UIImage imageNamed:episode.iso];
-//    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 
     cell.titleLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleCaption1];
     cell.titleLabel.text = episode.title;
     cell.flagImage.image = [UIImage imageNamed:episode.isoCountryCode];
-//    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 
     return cell;
 }
