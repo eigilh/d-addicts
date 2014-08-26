@@ -46,7 +46,7 @@
     CGRect bounds = self.tableView.bounds;
     if (bounds.origin.y == -64.0f) {
         bounds.origin.y = -20.0f;
-        [UIView animateWithDuration:0.2f animations:^{
+        [UIView animateWithDuration:0.4f animations:^{
             self.tableView.bounds = bounds;
         }];
     }
@@ -197,6 +197,11 @@
 }
 
 #pragma mark - UISearchDisplay Delegate
+
+- (void)searchDisplayController:(UISearchDisplayController *)controller didHideSearchResultsTableView:(UITableView *)tableView
+{
+    [self hideSearchBar];
+}
 
 - (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString {
     // Tells the table data source to reload when text changes
