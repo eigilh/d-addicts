@@ -43,13 +43,9 @@
 
 - (void)hideSearchBar
 {
-    CGRect bounds = self.tableView.bounds;
-    if (bounds.origin.y == -64.0f) {
-        bounds.origin.y = -20.0f;
-        [UIView animateWithDuration:0.4f animations:^{
-            self.tableView.bounds = bounds;
-        }];
-    }
+    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]
+                          atScrollPosition:UITableViewScrollPositionTop
+                                  animated:YES];
 }
 
 - (NSDateFormatter *)dateFormatter
@@ -181,6 +177,14 @@
 
 - (IBAction)refreshPressed:(id)sender {
     [self beginRefresh];
+}
+
+#pragma mark - UISearchBar Delegate
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
+{
+    // Hide the Search Bar behind the Navigation Bar
+    [self hideSearchBar];
 }
 
 #pragma mark - UISearchDisplay
