@@ -43,9 +43,11 @@
 
 - (void)hideSearchBar
 {
-    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]
-                          atScrollPosition:UITableViewScrollPositionTop
-                                  animated:YES];
+    dispatch_async(dispatch_get_main_queue(), ^(void){
+        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]
+                              atScrollPosition:UITableViewScrollPositionTop
+                                      animated:YES];
+    });
 }
 
 - (NSDateFormatter *)dateFormatter
@@ -184,7 +186,7 @@
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
 {
     // Hide the Search Bar behind the Navigation Bar
-    dispatch_async(dispatch_get_main_queue(), ^(void){ [self hideSearchBar]; });
+    [self hideSearchBar];
 }
 
 #pragma mark - UISearchDisplay
