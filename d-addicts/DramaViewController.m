@@ -184,7 +184,7 @@
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
 {
     // Hide the Search Bar behind the Navigation Bar
-    [self hideSearchBar];
+    dispatch_async(dispatch_get_main_queue(), ^(void){ [self hideSearchBar]; });
 }
 
 #pragma mark - UISearchDisplay
@@ -201,11 +201,6 @@
 }
 
 #pragma mark - UISearchDisplay Delegate
-
-- (void)searchDisplayController:(UISearchDisplayController *)controller didHideSearchResultsTableView:(UITableView *)tableView
-{
-    [self hideSearchBar];
-}
 
 - (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString {
     // Tells the table data source to reload when text changes
