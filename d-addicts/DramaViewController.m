@@ -29,7 +29,6 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    self.searchResults = [NSMutableArray arrayWithCapacity:[self.episodes count]];
 
     [self beginRefresh];
 }
@@ -91,8 +90,18 @@
 
 - (NSMutableArray *)episodes
 {
-    if (!_episodes) _episodes = [[NSMutableArray alloc] init];
+    if (!_episodes) {
+        _episodes = [[NSMutableArray alloc] initWithCapacity:25];
+    }
     return _episodes;
+}
+
+- (NSMutableArray *)searchResults
+{
+    if (!_searchResults) {
+        _searchResults = [[NSMutableArray alloc] initWithCapacity:25];
+    }
+    return _searchResults;
 }
 
 - (Episode *)objectInListAtIndex:(NSUInteger)theIndex
