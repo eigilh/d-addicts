@@ -186,6 +186,12 @@
     [self endRefresh];
 }
 
+#pragma mark - Bar Button Item Actions
+
+- (IBAction)searchPressed:(UIBarButtonItem *)sender {
+    [self.searchDisplayController setActive:YES animated:YES];
+}
+
 - (IBAction)refreshPressed:(id)sender {
     [self beginRefresh];
 }
