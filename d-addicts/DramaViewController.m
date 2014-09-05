@@ -157,7 +157,7 @@
     NSDate *date = [self.dateParser dateFromString:[dict valueForKey:RSS_PUBDATE]];
     Episode *episode = [[Episode alloc] initWithTitle:[dict valueForKey:RSS_TITLE]
                                                  link:[dict valueForKey:RSS_LINK]
-                                          description:[dict valueForKey:RSS_DESCRIPTION]
+                                          itemDescription:[dict valueForKey:RSS_DESCRIPTION]
                                                  date:date];
     if (episode) {
         [self.episodes addObject:episode];

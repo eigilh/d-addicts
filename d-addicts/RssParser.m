@@ -13,7 +13,7 @@
 @property (nonatomic, strong) NSMutableDictionary *item;
 @property (nonatomic, strong) NSMutableString *title;
 @property (nonatomic, strong) NSMutableString *link;
-@property (nonatomic, strong) NSMutableString *description;
+@property (nonatomic, strong) NSMutableString *itemDescription;
 @property (nonatomic, strong) NSMutableString *pubDate;
 @property (nonatomic, strong) NSString *element;
 
@@ -105,7 +105,7 @@
         self.item       = [[NSMutableDictionary alloc] init];
         self.title      = [[NSMutableString alloc] init];
         self.link       = [[NSMutableString alloc] init];
-        self.description = [[NSMutableString alloc] init];
+        self.itemDescription = [[NSMutableString alloc] init];
         self.pubDate    = [[NSMutableString alloc] init];
     }
 }
@@ -117,7 +117,7 @@
     } else if ([self.element isEqualToString:RSS_LINK]) {
         [self.link appendString:string];
     } else if ([self.element isEqualToString:RSS_DESCRIPTION]) {
-        [self.description appendString:string];
+        [self.itemDescription appendString:string];
     } else if ([self.element isEqualToString:RSS_PUBDATE]) {
         [self.pubDate appendString:string];
     }
@@ -130,7 +130,7 @@
                       forKey:RSS_TITLE];
         [self.item setObject:[self.link stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]
                       forKey:RSS_LINK];
-        [self.item setObject:[self.description stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]
+        [self.item setObject:[self.itemDescription stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]
                       forKey:RSS_DESCRIPTION];
         [self.item setObject:[self.pubDate stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]
                       forKey:RSS_PUBDATE];

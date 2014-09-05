@@ -33,9 +33,9 @@
     return [Episode isoFromType:self.type];
 }
 
-- (NSDictionary *)descriptionItemList:(NSString *)description
+- (NSDictionary *)descriptionItemList:(NSString *)itemDescription
 {
-    NSArray *descriptionItems = [description componentsSeparatedByString:@"<br/>"];
+    NSArray *descriptionItems = [itemDescription componentsSeparatedByString:@"<br/>"];
     NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
     for (NSString *item in descriptionItems) {
         NSArray *keyValue = [item componentsSeparatedByString:@": "];
@@ -50,7 +50,7 @@
 
 - (id)initWithTitle:(NSString *)title
                link:(NSString *)link
-        description:(NSString *)description
+    itemDescription:(NSString *)itemDescription
                date:(NSDate *)date
 {
     self = [super init];
@@ -58,14 +58,14 @@
         self.title = title;
         self.link = link;
         self.pubDate = date;
-        NSDictionary *itemList = [self descriptionItemList:description];
-        self.infoHash = [itemList valueForKey:@"Info_hash"];
-        self.size = [itemList valueForKey:@"Size"];
-        self.addedBy = [itemList valueForKey:@"Added by"];
-        self.type = [itemList valueForKey:@"Type"];
-        self.sub = [itemList valueForKey:@"Sub"];
-        self.links = [itemList valueForKey:@"Links"];
-        self.description = description;
+        NSDictionary *itemList = [self descriptionItemList:itemDescription];
+        self.infoHash = itemList[@"Info_hash"];
+        self.size = itemList[@"Size"];
+        self.addedBy = itemList[@"Added by"];
+        self.type = itemList[@"Type"];
+        self.sub = itemList[@"Sub"];
+        self.links = itemList[@"Links"];
+        self.itemDescription = itemDescription;
     }
     return self;
 }
