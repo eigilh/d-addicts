@@ -11,14 +11,15 @@
 
 @interface DetailTableViewController ()
 
-@property (strong, nonatomic) NSDateFormatter *dateFormatter;
-
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *flagImage;
 @property (weak, nonatomic) IBOutlet UILabel *typeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *subtitleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *sizeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *addedByLabel;
+@property (weak, nonatomic) IBOutlet UILabel *pubDateLabel;
+
+@property (nonatomic, strong) NSDateFormatter *dateFormatter;
 
 @end
 
@@ -26,13 +27,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
     [self configureView];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (void)setEpisode:(Episode *)newEpisode
@@ -53,7 +48,19 @@
         self.subtitleLabel.text = self.episode.sub;
         self.sizeLabel.text = self.episode.size;
         self.addedByLabel.text = self.episode.addedBy;
+        self.pubDateLabel.text = [self.dateFormatter stringFromDate:self.episode.pubDate];
     }
+}
+
+- (NSDateFormatter *)dateFormatter
+{
+    if (_dateFormatter == nil) {
+        _dateFormatter = [[NSDateFormatter alloc] init];
+        [_dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+        [_dateFormatter setTimeStyle:NSDateFormatterShortStyle];
+        [_dateFormatter setLocale:[NSLocale currentLocale]];
+    }
+    return _dateFormatter;
 }
 
 @end

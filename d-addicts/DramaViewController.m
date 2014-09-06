@@ -35,13 +35,13 @@
 
 - (void)dataDidFailWithError:(NSString *)error
 {
-        [self.tableView reloadData];
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error while fetching feed"
-                                                        message:error
-                                                       delegate:self
-                                              cancelButtonTitle:@"Ok"
-                                              otherButtonTitles:nil, nil];
-        [alert show];
+    [self.tableView reloadData];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error while fetching feed"
+                                                    message:error
+                                                   delegate:self
+                                          cancelButtonTitle:@"Ok"
+                                          otherButtonTitles:nil, nil];
+    [alert show];
 }
 
 #pragma mark - Table View Data Source

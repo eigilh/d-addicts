@@ -11,7 +11,6 @@
 
 @interface EpisodeDataController ()
 @property (nonatomic, strong) NSMutableArray *episodeList;
-@property (nonatomic, strong) NSDateFormatter *dateFormatter;
 @property (nonatomic, strong) NSDateFormatter *dateParser;
 @end
 
@@ -40,17 +39,6 @@
         [parser start];
     }
 
-}
-
-- (NSDateFormatter *)dateFormatter
-{
-    if (_dateFormatter == nil) {
-        _dateFormatter = [[NSDateFormatter alloc] init];
-        [_dateFormatter setDateStyle:NSDateFormatterShortStyle];
-        [_dateFormatter setTimeStyle:NSDateFormatterShortStyle];
-        [_dateFormatter setLocale:[NSLocale currentLocale]];
-    }
-    return _dateFormatter;
 }
 
 // Parses the date format specific to the d-addicts feed
@@ -99,7 +87,14 @@
 
 - (Episode *)episodeAtIndex:(NSUInteger)index
 {
-    return [self.episodeList objectAtIndex:index];
+    if (index < self.episodeCount)
+    {
+        return [self.episodeList objectAtIndex:index];
+    }
+    else
+    {
+        return nil;
+    }
 }
 
 @end
