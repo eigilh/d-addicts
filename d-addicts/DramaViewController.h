@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "RssParser.h"
 
-@interface DramaViewController : UITableViewController <UISearchBarDelegate, UISearchDisplayDelegate, UIAlertViewDelegate, RssDelegate>
+@interface DramaViewController : UITableViewController <UITableViewDataSource, UIAlertViewDelegate>
 
 @end

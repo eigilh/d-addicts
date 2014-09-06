@@ -7,232 +7,48 @@
 //
 
 #import "DramaViewController.h"
-#import "DramaDetailViewController.h"
+#import "DetailTableViewController.h"
+#import "EpisodeDataController.h"
 #import "Episode.h"
 #import "DramaCell.h"
 
 @interface DramaViewController ()
-
-@property (nonatomic, strong) NSMutableArray *episodes;
-@property (nonatomic, strong) NSMutableArray *searchResults;
-@property (nonatomic) NSUInteger countBeforeRefresh;
-
-@property (nonatomic, strong) NSDateFormatter *dateFormatter;
-@property (nonatomic, strong) NSDateFormatter *dateParser;
-
+@property (nonatomic, strong) EpisodeDataController *episodeDataController;
 @end
 
 @implementation DramaViewController
 
+- (void)awakeFromNib {
+    [super awakeFromNib];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataControllerDidFinish:) name:kEndParseNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataControllerDidFinish:) name:kFailParseNotification object:nil];
+    self.episodeDataController = [[EpisodeDataController alloc] init];
+}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-
-    [self beginRefresh];
 }
 
-- (void)didReceiveMemoryWarning
+- (void)viewWillDisappear:(BOOL)animated
 {
-    [super didReceiveMemoryWarning];
-    self.dateFormatter = nil;
-    self.dateParser = nil;
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (void)hideSearchBar
+- (void)dataControllerDidFinish:(NSNotification *)notification
 {
-    dispatch_async(dispatch_get_main_queue(), ^(void){
-        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]
-                              atScrollPosition:UITableViewScrollPositionTop
-                                      animated:YES];
-    });
-}
-
-- (NSDateFormatter *)dateFormatter
-{
-    if (_dateFormatter == nil) {
-        _dateFormatter = [[NSDateFormatter alloc] init];
-        [_dateFormatter setDateStyle:NSDateFormatterShortStyle];
-        [_dateFormatter setTimeStyle:NSDateFormatterShortStyle];
-        [_dateFormatter setLocale:[NSLocale currentLocale]];
+    if ([notification.name isEqualToString:kEndParseNotification]) {
+        [self.tableView reloadData];
     }
-    return _dateFormatter;
-}
-
-// Parses the date format specific to the d-addicts feed
-- (NSDateFormatter *)dateParser
-{
-    if (_dateParser == nil) {
-        _dateParser = [[NSDateFormatter alloc] init];
-        [_dateParser setDateFormat:@"EEEEE, dd MMMMM yyyy HH:mm:ss zzz"];
-        NSLocale *enLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"en"];
-        [_dateParser setLocale:enLocale];
-        [_dateParser setFormatterBehavior:NSDateFormatterBehaviorDefault];
-    }
-    return _dateParser;
-}
-
-- (void)beginRefresh
-{
-    // save the number of items in the table
-    self.countBeforeRefresh = self.episodes.count;
-
-    [self.refreshControl beginRefreshing];
-    [self fetchRSS];
-}
-
-- (void)endRefresh
-{
-    [self.refreshControl endRefreshing];
-    [self hideSearchBar];
-}
-
-- (NSMutableArray *)episodes
-{
-    if (!_episodes) {
-        _episodes = [[NSMutableArray alloc] initWithCapacity:25];
-    }
-    return _episodes;
-}
-
-- (NSMutableArray *)searchResults
-{
-    if (!_searchResults) {
-        _searchResults = [[NSMutableArray alloc] initWithCapacity:25];
-    }
-    return _searchResults;
-}
-
-- (Episode *)objectInListAtIndex:(NSUInteger)theIndex
-{
-    if (theIndex < self.episodes.count)
-        return [self.episodes objectAtIndex:theIndex];
-    else
-        return nil;
-}
-
-- (void)fetchRSS
-{
-    // For offline and error testing
-    //    NSURL *url = [[NSBundle bundleForClass:[self class]] URLForResource:@"rss" withExtension:@"xml"];
-    //    NSURL *url = [[NSBundle bundleForClass:[self class]] URLForResource:@"bad" withExtension:@"xml"];
-    //    RssParser *parser = [[RssParser alloc] initWithURL:url];
-    
-    RssParser *parser = [[RssParser alloc] initWithURL:[NSURL URLWithString:@"http://www.d-addicts.com/rss.xml"]];
-    if (parser != nil) {
-        [self.episodes removeAllObjects];
-        [parser setDelegate:self];
-        [parser start];
-    }
-}
-
-- (void)updateRows
-{
-    NSMutableArray *deleteIndexPaths = [[NSMutableArray alloc] initWithCapacity:self.countBeforeRefresh];
-    for (NSInteger index=0; index < self.countBeforeRefresh; index += 1) {
-        [deleteIndexPaths addObject:[NSIndexPath indexPathForItem:index inSection:0]];
-    }
-
-    NSMutableArray *insertIndexPaths = [[NSMutableArray alloc] initWithCapacity:25];
-    for (NSInteger index=0; index < self.episodes.count; index += 1) {
-        [insertIndexPaths addObject:[NSIndexPath indexPathForItem:index inSection:0]];
-    }
-    
-    UITableView *tv = self.tableView;
-    [tv beginUpdates];
-    if (self.episodes.count == self.countBeforeRefresh) {
-        [tv reloadRowsAtIndexPaths:insertIndexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
-    } else {
-        [tv insertRowsAtIndexPaths:insertIndexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
-        [tv deleteRowsAtIndexPaths:deleteIndexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
-    }
-    [tv endUpdates];
-}
-
-#pragma mark - RssDelegate
-
-- (void)didParseItem:(NSDictionary *)dict
-{
-    NSDate *date = [self.dateParser dateFromString:[dict valueForKey:RSS_PUBDATE]];
-    Episode *episode = [[Episode alloc] initWithTitle:[dict valueForKey:RSS_TITLE]
-                                                 link:[dict valueForKey:RSS_LINK]
-                                          itemDescription:[dict valueForKey:RSS_DESCRIPTION]
-                                                 date:date];
-    if (episode) {
-        [self.episodes addObject:episode];
-    }
-}
-
-- (void)didEndParse
-{
-    [self updateRows];
-    [self endRefresh];
-}
-
-- (void)didFailParseWithError:(NSError *)error
-{
-    if (error) {
-        NSLog(@"Error: %@", [error localizedDescription]);
+    if ([notification.name isEqualToString:kFailParseNotification]) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error while fetching feed"
-                                                        message:[error localizedDescription]
+                                                        message:notification.userInfo[@"error"]
                                                        delegate:self
                                               cancelButtonTitle:@"Ok"
                                               otherButtonTitles:nil, nil];
         [alert show];
     }
-    // Clear out any old data in the table view
-    [self.tableView reloadData];
-    [self endRefresh];
-}
-
-#pragma mark - Bar Button Item Actions
-
-- (IBAction)searchPressed:(UIBarButtonItem *)sender {
-    [self.searchDisplayController setActive:YES animated:YES];
-}
-
-- (IBAction)refreshPressed:(id)sender {
-    [self beginRefresh];
-}
-
-#pragma mark - UISearchBar Delegate
-
-- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
-{
-    // Hide the Search Bar behind the Navigation Bar
-    [self hideSearchBar];
-}
-
-#pragma mark - UISearchDisplay
-
--(void)filterContentForSearchText:(NSString*)searchText scope:(NSString*)scope {
-	// Update the filtered array based on the search text and scope.
-	// Filter the array using NSPredicate
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF.title contains[c] %@",searchText];
-    if (self.searchResults.count > 0) {
-        [self.searchResults removeAllObjects];
-    }
-    NSArray* filteredArray = [self.episodes filteredArrayUsingPredicate:predicate];
-    [self.searchResults addObjectsFromArray:filteredArray];
-}
-
-#pragma mark - UISearchDisplay Delegate
-
-- (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString {
-    // Tells the table data source to reload when text changes
-    [self filterContentForSearchText:searchString scope:
-     [[self.searchDisplayController.searchBar scopeButtonTitles] objectAtIndex:[self.searchDisplayController.searchBar selectedScopeButtonIndex]]];
-    // Return YES to cause the search result table view to be reloaded.
-    return YES;
-}
-
-- (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchScope:(NSInteger)searchOption {
-    // Tells the table data source to reload when scope bar selection changes
-    [self filterContentForSearchText:self.searchDisplayController.searchBar.text scope:
-     [[self.searchDisplayController.searchBar scopeButtonTitles] objectAtIndex:searchOption]];
-    // Return YES to cause the search result table view to be reloaded.
-    return YES;
 }
 
 #pragma mark - Table View Data Source
@@ -244,37 +60,15 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    // Check to see whether the normal table or search results table is being displayed and return the count from the appropriate array
-    if (tableView == self.searchDisplayController.searchResultsTableView)
-    {
-        return [self.searchResults count];
-    }
-    else
-    {
-        return [self.episodes count];
-    }
+    return [self.episodeDataController episodeCount];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *episodeCell = @"EpisodeCell";
+    DramaCell *cell = (DramaCell *)[self.tableView dequeueReusableCellWithIdentifier:@"EpisodeCell"];
+    Episode *episode = [self.episodeDataController episodeAtIndex:indexPath.row];
 
-    DramaCell *cell = (DramaCell *)[self.tableView dequeueReusableCellWithIdentifier:episodeCell];
-
-    // Get cell and episode for Table View or Search Results
-    Episode *episode;
-
-    if (tableView == self.searchDisplayController.searchResultsTableView)
-    {
-        episode = [self.searchResults objectAtIndex:indexPath.row];
-    }
-    else
-    {
-        episode = [self objectInListAtIndex:indexPath.row];
-    }
-    
     // Configure cell
-
     cell.titleLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleCaption1];
     cell.titleLabel.text = episode.title;
     cell.flagImage.image = [UIImage imageNamed:episode.isoCountryCode];
@@ -286,23 +80,11 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([[segue identifier] isEqualToString:@"showEpisodeDetail"]) {
-
-        NSArray *sourceArray;
-        NSIndexPath *indexPath = [self.searchDisplayController.searchResultsTableView indexPathForCell:(UITableViewCell *)sender];
-        if (indexPath != nil)
-        {
-            sourceArray = self.searchResults;
-        }
-        else
-        {
-            indexPath = [self.tableView indexPathForCell:(UITableViewCell *)sender];
-            sourceArray = self.episodes;
-        }
-
-        DramaDetailViewController *detailViewController = segue.destinationViewController;
-        detailViewController.torrents = sourceArray;
-        detailViewController.currentRow = indexPath.row;
+    if ([[segue identifier] isEqualToString:@"ShowEpisodeDetail"])
+    {
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:(UITableViewCell *)sender];
+        DetailTableViewController *detailViewController = segue.destinationViewController;
+        detailViewController.episode = [self.episodeDataController episodeAtIndex:indexPath.row];
     }
 }
 
