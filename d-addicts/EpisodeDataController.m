@@ -17,17 +17,17 @@
 
 @implementation EpisodeDataController
 
-- (id)init
+- (id)initWithDelegate:(id)delegate
 {
     self = [super init];
     if (self) {
-        _episodeList = [[NSMutableArray alloc] init];
-        [self initializeEpisodeList];
+        self.episodeList = [[NSMutableArray alloc] init];
+        self.delegate = delegate;
     }
     return self;
 }
 
-- (void)initializeEpisodeList
+- (void)load
 {
     // For offline and error testing
     //    NSURL *url = [[NSBundle bundleForClass:[self class]] URLForResource:@"rss" withExtension:@"xml"];
@@ -82,15 +82,13 @@
 
 - (void)didEndParse
 {
-    NSLog(@"Finished parsing %lu items", (unsigned long)[self episodeCount]);
-    [[NSNotificationCenter defaultCenter] postNotificationName:kEndParseNotification object:self];
+    [self.delegate dataDidLoad];
 }
 
 - (void)didFailParseWithError:(NSError *)error
 {
     if (error) {
-        NSDictionary *userInfo = @{ @"error" : [error localizedDescription] };
-        [[NSNotificationCenter defaultCenter] postNotificationName:kEndParseNotification object:self userInfo:userInfo];
+        [self.delegate dataDidFailWithError:error.localizedDescription];
     }
 }
 

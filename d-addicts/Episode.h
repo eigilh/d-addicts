@@ -23,6 +23,12 @@
 
 @property (readonly) NSString *isoCountryCode;
 
-- (id)initWithTitle:(NSString *)title link:(NSString *)link itemDescription:(NSString *)itemDescription date:(NSDate *)date;
+/**
+ *  The designated initializer
+ */
+- (id)initWithTitle:(NSString *)title
+               link:(NSString *)link
+    itemDescription:(NSString *)itemDescription
+               date:(NSDate *)date;
 
 @end

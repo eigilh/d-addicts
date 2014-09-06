@@ -18,37 +18,30 @@
 
 @implementation DramaViewController
 
-- (void)awakeFromNib {
-    [super awakeFromNib];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataControllerDidFinish:) name:kEndParseNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataControllerDidFinish:) name:kFailParseNotification object:nil];
-    self.episodeDataController = [[EpisodeDataController alloc] init];
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    self.episodeDataController = [[EpisodeDataController alloc] initWithDelegate:self];
+    [self.episodeDataController load];
 }
 
-- (void)viewWillDisappear:(BOOL)animated
+#pragma mark - Episode Data Delegate
+
+- (void)dataDidLoad
 {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [self.tableView reloadData];
 }
 
-- (void)dataControllerDidFinish:(NSNotification *)notification
+- (void)dataDidFailWithError:(NSString *)error
 {
-    if ([notification.name isEqualToString:kEndParseNotification]) {
         [self.tableView reloadData];
-    }
-    if ([notification.name isEqualToString:kFailParseNotification]) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error while fetching feed"
-                                                        message:notification.userInfo[@"error"]
+                                                        message:error
                                                        delegate:self
                                               cancelButtonTitle:@"Ok"
                                               otherButtonTitles:nil, nil];
         [alert show];
-    }
 }
 
 #pragma mark - Table View Data Source

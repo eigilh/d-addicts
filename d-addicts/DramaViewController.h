@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "RssParser.h"
+#import "EpisodeDataController.h"
 
-@interface DramaViewController : UITableViewController <UITableViewDataSource, UIAlertViewDelegate>
+@interface DramaViewController : UITableViewController <UITableViewDataSource, UIAlertViewDelegate, EpisodeDataDelegate>
 
 @end

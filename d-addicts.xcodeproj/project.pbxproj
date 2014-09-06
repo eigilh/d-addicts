@@ -124,6 +124,8 @@
 				A9F0748A1716B20100605669 /* Episode.m */,
 				A9C5240D1723E77000F8CCDE /* RssParser.h */,
 				A9C5240E1723E77000F8CCDE /* RssParser.m */,
+				A9BB096019BB07BD0087D17D /* EpisodeDataController.h */,
+				A9BB096119BB07BD0087D17D /* EpisodeDataController.m */,
 				A9F0747B1716B1D600605669 /* Main.storyboard */,
 				A91D0CB91782116700AE9569 /* DramaCell.h */,
 				A91D0CBA1782116700AE9569 /* DramaCell.m */,
@@ -133,8 +135,6 @@
 				A9BB095E19BAEFAE0087D17D /* DetailTableViewController.m */,
 				A9C52410172538E000F8CCDE /* Images */,
 				A9F0746A1716B1D500605669 /* Supporting Files */,
-				A9BB096019BB07BD0087D17D /* EpisodeDataController.h */,
-				A9BB096119BB07BD0087D17D /* EpisodeDataController.m */,
 			);
 			path = "d-addicts";
 			sourceTree = "<group>";
