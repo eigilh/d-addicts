@@ -92,7 +92,9 @@
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     self.connection = nil;
     // Check the error var
-    [self.delegate didFailParseWithError:error];
+    if ([self.delegate respondsToSelector:@selector(didFailParseWithError:)]) {
+        [self.delegate didFailParseWithError:error];
+    }
 }
 
 #pragma mark - XML Parser Delegate
@@ -134,18 +136,25 @@
                       forKey:RSS_DESCRIPTION];
         [self.item setObject:[self.pubDate stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]
                       forKey:RSS_PUBDATE];
-        [self.delegate didParseItem:self.item];
+        if ([self.delegate respondsToSelector:@selector(didParseItem:)]) {
+            [self.delegate didParseItem:self.item];
+        }
     }
 }
 
 - (void)parserDidEndDocument:(NSXMLParser *)parser
 {
-    [self.delegate didEndParse];
+    if ([self.delegate respondsToSelector:@selector(didEndParse)]) {
+        [self.delegate didEndParse];
+    }
+
 }
 
 - (void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError
 {
-    [self.delegate didFailParseWithError:parseError];
+    if ([self.delegate respondsToSelector:@selector(didFailParseWithError:)]) {
+        [self.delegate didFailParseWithError:parseError];
+    }
 }
 
 @end

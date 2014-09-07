@@ -77,12 +77,15 @@
 
 - (void)didEndParse
 {
-    [self.delegate dataDidLoad];
+    if ([self.delegate respondsToSelector:@selector(dataDidLoad)]) {
+        [self.delegate dataDidLoad];
+    }
+
 }
 
 - (void)didFailParseWithError:(NSError *)error
 {
-    if (error) {
+    if (error  && [self.delegate respondsToSelector:@selector(dataDidFailWithError:)]) {
         [self.delegate dataDidFailWithError:error.localizedDescription];
     }
 }
