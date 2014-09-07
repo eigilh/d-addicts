@@ -13,7 +13,8 @@
 
 @protocol EpisodeDataDelegate;
 
-/** @class EpisodeDataController
+/*! 
+ *  @class EpisodeDataController
  *  Provide a list of the latest tv-episode posted to d-addicts.com.
  *
  *  Instantiate an EpisodeDataController to initiate loading the data
@@ -25,23 +26,23 @@
 
 @property (weak) id <EpisodeDataDelegate> delegate;
 
-/**
+/*!
  *  The designated initializer.
  */
 - (id)initWithDelegate:(id)delegate;
 
-/**
+/*!
  *  Initiate loading of data
  */
 - (void)load;
 
-/**
+/*!
  *  Return the number of items in the episode list.
- *  @return Number of episodes.
+ *  @return The number of episodes.
  */
 - (NSUInteger)episodeCount;
 
-/**
+/*!
  *  Return the Episode located at index in the episode list.
  *
  *  @param index An index within the bounds of the episode list.
@@ -53,14 +54,14 @@
 
 @protocol EpisodeDataDelegate <NSObject>
 
-/**
+/*!
  *  Tells the delegate that the data finished loading.
  *
  *  The delegate should do whatever is appropriate, like calling reloadData on a Table View.
  */
 - (void)dataDidLoad;
 
-/**
+/*!
  *  Tells the delegate that loading of data failed.
  *
  *  @param error The localized string describing the error.
