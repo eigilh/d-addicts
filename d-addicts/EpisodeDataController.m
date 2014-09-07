@@ -20,10 +20,17 @@
 {
     self = [super init];
     if (self) {
-        self.episodeList = [[NSMutableArray alloc] init];
         self.delegate = delegate;
     }
     return self;
+}
+
+- (NSMutableArray *)episodeList
+{
+    if (!_episodeList) {
+        _episodeList = [[NSMutableArray alloc] init];
+    }
+    return _episodeList;
 }
 
 - (void)load

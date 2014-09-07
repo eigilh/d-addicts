@@ -58,7 +58,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    DramaCell *cell = (DramaCell *)[self.tableView dequeueReusableCellWithIdentifier:@"EpisodeCell"];
+    DramaCell *cell = (DramaCell *)[tableView dequeueReusableCellWithIdentifier:@"EpisodeCell"];
     Episode *episode = [self.episodeDataController episodeAtIndex:indexPath.row];
 
     // Configure cell
