@@ -18,8 +18,8 @@
 @property (nonatomic, strong) NSString *element;
 
 @property (nonatomic, strong) NSURL *url;
-@property (nonatomic, strong) NSURLConnection *connection;
-@property (nonatomic, strong) NSMutableData *buffer;
+@property NSURLSession *defaultSession;
+
 @end
 
 @implementation RssParser
@@ -33,67 +33,40 @@
     return self;
 }
 
-- (NSMutableData *)buffer
+- (void)loadRss
 {
-    if (!_buffer) {
-        _buffer = [NSMutableData data];
-    }
-    return _buffer;
-}
-
-- (void)start
-{
-    // Create the request.
-    NSURLRequest *request = [NSURLRequest requestWithURL:self.url
-                                             cachePolicy:NSURLRequestUseProtocolCachePolicy
-                                         timeoutInterval:10.0];
-    // Create url connection and fire request
-    self.connection = [NSURLConnection connectionWithRequest:request delegate:self];
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+    NSURLSessionConfiguration *defaultConfigObject = [NSURLSessionConfiguration defaultSessionConfiguration];
+    self.defaultSession = [NSURLSession sessionWithConfiguration: defaultConfigObject delegate: nil delegateQueue: [NSOperationQueue mainQueue]];
+    [[self.defaultSession dataTaskWithURL:self.url
+                        completionHandler:^(NSData *data, NSURLResponse *response,
+                                            NSError *error) {
+//                            NSLog(@"Got response %@ with error %@.\n", response, error);
+//                            NSLog(@"DATA:\n%@\nEND DATA\n",
+//                                  [[NSString alloc] initWithData: data
+//                                                        encoding: NSUTF8StringEncoding]);
+                            [self processData:data withError:error];
+                        }] resume];
 }
 
-#pragma mark NSURLConnection Delegate Methods
-
-- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
-    // A response has been received
-    // Furthermore, this method is called each time there is a redirect so set length to 0
-    [self.buffer setLength:0];
-}
-
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
-    // Append the new data to the buffer
-    [self.buffer appendData:data];
-}
-
-- (NSCachedURLResponse *)connection:(NSURLConnection *)connection
-                  willCacheResponse:(NSCachedURLResponse*)cachedResponse {
-    // Return nil to indicate not necessary to store a cached response for this connection
-    return nil;
-}
-
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
-    // The request is complete and data has been received
+- (void)processData:(NSData *)data withError:(NSError *)error
+{
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-    
-    // We don't need the connection any more
-    self.connection = nil;
-    
-    // You can parse the stuff in your buffer now
-    self.parser = [[NSXMLParser alloc] initWithData:self.buffer];
-    if (self.parser != nil) {
-        [self.parser setDelegate:self];
-        [self.parser setShouldResolveExternalEntities:NO];
-        [self.parser parse];
+
+    if (error)
+    {
+        if ([self.delegate respondsToSelector:@selector(didFailParseWithError:)]) {
+            [self.delegate didFailParseWithError:error];
+        }
     }
-}
-
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
-    // The request has failed for some reason!
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-    self.connection = nil;
-    // Check the error var
-    if ([self.delegate respondsToSelector:@selector(didFailParseWithError:)]) {
-        [self.delegate didFailParseWithError:error];
+    else
+    {
+        self.parser = [[NSXMLParser alloc] initWithData:data];
+        if (self.parser != nil) {
+            [self.parser setDelegate:self];
+            [self.parser setShouldResolveExternalEntities:NO];
+            [self.parser parse];
+        }
     }
 }
 
@@ -152,6 +125,8 @@
 
 - (void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError
 {
+    NSLog(@"NSXMLParser error at line: %ld, colomn: %ld", (long)parser.lineNumber , (long)parser.columnNumber);
+
     if ([self.delegate respondsToSelector:@selector(didFailParseWithError:)]) {
         [self.delegate didFailParseWithError:parseError];
     }

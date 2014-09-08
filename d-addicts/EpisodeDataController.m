@@ -43,9 +43,26 @@
     RssParser *parser = [[RssParser alloc] initWithURL:[NSURL URLWithString:@"http://www.d-addicts.com/rss.xml"]];
     if (parser != nil) {
         [parser setDelegate:self];
-        [parser start];
+        [parser loadRss];
     }
 
+}
+
+- (NSUInteger)episodeCount
+{
+    return [self.episodeList count];
+}
+
+- (Episode *)episodeAtIndex:(NSUInteger)index
+{
+    if (index < self.episodeCount)
+    {
+        return [self.episodeList objectAtIndex:index];
+    }
+    else
+    {
+        return nil;
+    }
 }
 
 // Parses the date format specific to the d-addicts feed
@@ -85,25 +102,8 @@
 
 - (void)didFailParseWithError:(NSError *)error
 {
-    if (error  && [self.delegate respondsToSelector:@selector(dataDidFailWithError:)]) {
+    if (error && [self.delegate respondsToSelector:@selector(dataDidFailWithError:)]) {
         [self.delegate dataDidFailWithError:error.localizedDescription];
-    }
-}
-
-- (NSUInteger)episodeCount
-{
-    return [self.episodeList count];
-}
-
-- (Episode *)episodeAtIndex:(NSUInteger)index
-{
-    if (index < self.episodeCount)
-    {
-        return [self.episodeList objectAtIndex:index];
-    }
-    else
-    {
-        return nil;
     }
 }
 

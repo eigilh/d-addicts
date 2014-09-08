@@ -16,10 +16,10 @@
 
 @protocol RssDelegate;
 
-@interface RssParser : NSObject <NSURLConnectionDataDelegate, NSXMLParserDelegate>
+@interface RssParser : NSObject <NSXMLParserDelegate>
 
 - (RssParser *)initWithURL:(NSURL *)url;
-- (void)start;
+- (void)loadRss;
 
 @property (weak) id <RssDelegate> delegate;
 
