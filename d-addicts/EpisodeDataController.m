@@ -12,18 +12,10 @@
 @interface EpisodeDataController ()
 @property (nonatomic, strong) NSMutableArray *episodeList;
 @property (nonatomic, strong) NSDateFormatter *dateParser;
+@property NSURLSession *defaultSession;
 @end
 
 @implementation EpisodeDataController
-
-- (id)initWithDelegate:(id)delegate
-{
-    self = [super init];
-    if (self) {
-        self.delegate = delegate;
-    }
-    return self;
-}
 
 - (NSMutableArray *)episodeList
 {
@@ -33,20 +25,47 @@
     return _episodeList;
 }
 
-- (void)load
+- (void)connect
 {
-    // For offline and error testing
-    //    NSURL *url = [[NSBundle bundleForClass:[self class]] URLForResource:@"rss" withExtension:@"xml"];
-    //    NSURL *url = [[NSBundle bundleForClass:[self class]] URLForResource:@"bad" withExtension:@"xml"];
-    //    RssParser *parser = [[RssParser alloc] initWithURL:url];
+    NSURLSessionConfiguration *defaultConfigObject = [NSURLSessionConfiguration defaultSessionConfiguration];
+    self.defaultSession = [NSURLSession sessionWithConfiguration:defaultConfigObject
+                                                        delegate:nil
+                                                   delegateQueue:[NSOperationQueue mainQueue]];
+}
 
-    RssParser *parser = [[RssParser alloc] initWithURL:[NSURL URLWithString:@"http://www.d-addicts.com/rss.xml"]];
-    if (parser != nil) {
-        [parser setDelegate:self];
-        [parser loadRss];
-    }
+// For offline and error testing
+//    NSURL *url = [[NSBundle bundleForClass:[self class]] URLForResource:@"rss" withExtension:@"xml"];
+//    NSURL *url = [[NSBundle bundleForClass:[self class]] URLForResource:@"bad" withExtension:@"xml"];
+//    RssParser *parser = [[RssParser alloc] initWithURL:url];
+
+-(void)start
+{
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+    [[self.defaultSession dataTaskWithURL:[NSURL URLWithString:@"http://www.d-addicts.com/rss.xml"]
+                        completionHandler:^(NSData *data, NSURLResponse *response,
+                                            NSError *error) {
+                            [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+                            [self processData:data withResponse:response error:error];
+                        }] resume];
 
 }
+
+- (void)processData:(NSData *)data withResponse:(NSURLResponse *)response error:(NSError *)error
+{
+    if (error) {
+        NSLog(@"Got response %@ with error %@.\n", response, error);
+        NSLog(@"DATA:\n%@\nEND DATA\n", [[NSString alloc] initWithData: data
+                                                              encoding: NSUTF8StringEncoding]);
+        [self.delegate dataDidFailWithError:error.localizedDescription];
+    } else {
+        RssParser *parser = [[RssParser alloc] init];
+        if (parser != nil) {
+            [parser setDelegate:self];
+            [parser parseData:data];
+        }
+    }
+}
+
 
 - (NSUInteger)episodeCount
 {
@@ -94,17 +113,14 @@
 
 - (void)didEndParse
 {
-    if ([self.delegate respondsToSelector:@selector(dataDidLoad)]) {
-        [self.delegate dataDidLoad];
-    }
-
+    [self.delegate dataDidLoad];
 }
 
 - (void)didFailParseWithError:(NSError *)error
 {
-    if (error && [self.delegate respondsToSelector:@selector(dataDidFailWithError:)]) {
-        [self.delegate dataDidFailWithError:error.localizedDescription];
-    }
+    // [self.delegate dataDidFailWithError:error.localizedDescription];
+    // Ignore error and display what we've got
+    [self.delegate dataDidLoad];
 }
 
 @end

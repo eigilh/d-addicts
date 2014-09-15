@@ -18,8 +18,7 @@
 
 @interface RssParser : NSObject <NSXMLParserDelegate>
 
-- (RssParser *)initWithURL:(NSURL *)url;
-- (void)loadRss;
+- (void)parseData:(NSData *)data;
 
 @property (weak) id <RssDelegate> delegate;
 

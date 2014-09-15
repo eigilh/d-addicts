@@ -26,15 +26,12 @@
 
 @property (weak) id <EpisodeDataDelegate> delegate;
 
-/*!
- *  The designated initializer.
- */
-- (id)initWithDelegate:(id)delegate;
+- (void)connect;
 
 /*!
- *  Initiate loading of data
+ *  start loading data
  */
-- (void)load;
+- (void)start;
 
 /*!
  *  Return the number of items in the episode list.

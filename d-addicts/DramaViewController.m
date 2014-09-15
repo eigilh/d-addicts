@@ -22,8 +22,10 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    self.episodeDataController = [[EpisodeDataController alloc] initWithDelegate:self];
-    [self.episodeDataController load];
+    self.episodeDataController = [[EpisodeDataController alloc] init];
+    self.episodeDataController.delegate = self;
+    [self.episodeDataController connect];
+    [self.episodeDataController start];
 }
 
 #pragma mark - Episode Data Delegate

@@ -17,56 +17,17 @@
 @property (nonatomic, strong) NSMutableString *pubDate;
 @property (nonatomic, strong) NSString *element;
 
-@property (nonatomic, strong) NSURL *url;
-@property NSURLSession *defaultSession;
-
 @end
 
 @implementation RssParser
 
-- (RssParser *)initWithURL:(NSURL *)url
-{
-    self = [super init];
-    if (self) {
-        self.url = url;
-    }
-    return self;
-}
 
-- (void)loadRss
+- (void)parseData:(NSData *)data
 {
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-    NSURLSessionConfiguration *defaultConfigObject = [NSURLSessionConfiguration defaultSessionConfiguration];
-    self.defaultSession = [NSURLSession sessionWithConfiguration: defaultConfigObject delegate: nil delegateQueue: [NSOperationQueue mainQueue]];
-    [[self.defaultSession dataTaskWithURL:self.url
-                        completionHandler:^(NSData *data, NSURLResponse *response,
-                                            NSError *error) {
-//                            NSLog(@"Got response %@ with error %@.\n", response, error);
-//                            NSLog(@"DATA:\n%@\nEND DATA\n",
-//                                  [[NSString alloc] initWithData: data
-//                                                        encoding: NSUTF8StringEncoding]);
-                            [self processData:data withError:error];
-                        }] resume];
-}
-
-- (void)processData:(NSData *)data withError:(NSError *)error
-{
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-
-    if (error)
-    {
-        if ([self.delegate respondsToSelector:@selector(didFailParseWithError:)]) {
-            [self.delegate didFailParseWithError:error];
-        }
-    }
-    else
-    {
-        self.parser = [[NSXMLParser alloc] initWithData:data];
-        if (self.parser != nil) {
-            [self.parser setDelegate:self];
-            [self.parser setShouldResolveExternalEntities:NO];
-            [self.parser parse];
-        }
+    self.parser = [[NSXMLParser alloc] initWithData:data];
+    if (self.parser != nil) {
+        [self.parser setDelegate:self];
+        [self.parser parse];
     }
 }
 
@@ -117,19 +78,14 @@
 
 - (void)parserDidEndDocument:(NSXMLParser *)parser
 {
-    if ([self.delegate respondsToSelector:@selector(didEndParse)]) {
-        [self.delegate didEndParse];
-    }
-
+    [self.delegate didEndParse];
 }
 
 - (void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError
 {
     NSLog(@"NSXMLParser error at line: %ld, colomn: %ld", (long)parser.lineNumber , (long)parser.columnNumber);
 
-    if ([self.delegate respondsToSelector:@selector(didFailParseWithError:)]) {
-        [self.delegate didFailParseWithError:parseError];
-    }
+    [self.delegate didFailParseWithError:parseError];
 }
 
 @end
