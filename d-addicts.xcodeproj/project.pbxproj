@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		A91D0CBB1782116700AE9569 /* DramaCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A91D0CBA1782116700AE9569 /* DramaCell.m */; };
+		A92F686E19CB679200F54DBE /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A92F686D19CB679200F54DBE /* LaunchScreen.xib */; };
+		A92F687419CB753E00F54DBE /* XMLDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = A92F687319CB753E00F54DBE /* XMLDictionary.m */; };
 		A93028B91763B1D60072BB86 /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = A93028AF1763B1D60072BB86 /* iTunesArtwork */; };
 		A93028BA1763B1D60072BB86 /* iTunesArtwork@2x in Resources */ = {isa = PBXBuildFile; fileRef = A93028B01763B1D60072BB86 /* iTunesArtwork@2x */; };
 		A941BD0D177C908A00EC979E /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A941BD0C177C908A00EC979E /* Media.xcassets */; };
@@ -29,6 +31,9 @@
 		A91D0CB91782116700AE9569 /* DramaCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DramaCell.h; sourceTree = "<group>"; };
 		A91D0CBA1782116700AE9569 /* DramaCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DramaCell.m; sourceTree = "<group>"; };
 		A91D0CBC1782380900AE9569 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "../Default@2x.png"; sourceTree = "<group>"; };
+		A92F686D19CB679200F54DBE /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
+		A92F687219CB753E00F54DBE /* XMLDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLDictionary.h; sourceTree = "<group>"; };
+		A92F687319CB753E00F54DBE /* XMLDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLDictionary.m; sourceTree = "<group>"; };
 		A93028AF1763B1D60072BB86 /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; name = iTunesArtwork; path = Icons/iTunesArtwork; sourceTree = "<group>"; };
 		A93028B01763B1D60072BB86 /* iTunesArtwork@2x */ = {isa = PBXFileReference; lastKnownFileType = file; name = "iTunesArtwork@2x"; path = "Icons/iTunesArtwork@2x"; sourceTree = "<group>"; };
 		A941BD0C177C908A00EC979E /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
@@ -135,6 +140,7 @@
 				A9BB095E19BAEFAE0087D17D /* DetailTableViewController.m */,
 				A9C52410172538E000F8CCDE /* Images */,
 				A9F0746A1716B1D500605669 /* Supporting Files */,
+				A92F686D19CB679200F54DBE /* LaunchScreen.xib */,
 			);
 			path = "d-addicts";
 			sourceTree = "<group>";
@@ -142,6 +148,8 @@
 		A9F0746A1716B1D500605669 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				A92F687219CB753E00F54DBE /* XMLDictionary.h */,
+				A92F687319CB753E00F54DBE /* XMLDictionary.m */,
 				A93CD59317346F8500D73506 /* Icons */,
 				A9587A0717319AA100FD5629 /* rss.xml */,
 				A9B5586E17368C46001CFDEB /* bad.xml */,
@@ -219,6 +227,7 @@
 				A9F0747D1716B1D600605669 /* Main.storyboard in Resources */,
 				A941BD0D177C908A00EC979E /* Media.xcassets in Resources */,
 				A93028B91763B1D60072BB86 /* iTunesArtwork in Resources */,
+				A92F686E19CB679200F54DBE /* LaunchScreen.xib in Resources */,
 				A93028BA1763B1D60072BB86 /* iTunesArtwork@2x in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -238,6 +247,7 @@
 				A9F0748B1716B20100605669 /* Episode.m in Sources */,
 				A9C5240F1723E77000F8CCDE /* RssParser.m in Sources */,
 				A97A25FC174A61FB00B3CEBC /* DramaViewController.m in Sources */,
+				A92F687419CB753E00F54DBE /* XMLDictionary.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -325,7 +335,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -342,7 +351,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;

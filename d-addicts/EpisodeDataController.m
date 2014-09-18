@@ -8,6 +8,7 @@
 
 #import "EpisodeDataController.h"
 #import "Episode.h"
+#import "XMLDictionary.h"
 
 @interface EpisodeDataController ()
 @property (nonatomic, strong) NSMutableArray *episodeList;
@@ -58,11 +59,17 @@
                                                               encoding: NSUTF8StringEncoding]);
         [self.delegate dataDidFailWithError:error.localizedDescription];
     } else {
-        RssParser *parser = [[RssParser alloc] init];
-        if (parser != nil) {
-            [parser setDelegate:self];
-            [parser parseData:data];
+        NSDictionary *episodeDictionary = [NSDictionary dictionaryWithXMLData:data];
+        NSArray *items = [episodeDictionary valueForKeyPath:@"channel.item"];
+        for (NSDictionary *item in items) {
+            [self didParseItem:item];
         }
+        [self didEndParse];
+//        RssParser *parser = [[RssParser alloc] init];
+//        if (parser != nil) {
+//            [parser setDelegate:self];
+//            [parser parseData:data];
+//        }
     }
 }
 

@@ -42,6 +42,7 @@
 {
     if (self.episode)
     {
+//        self.titleLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleCaption1];
         self.titleLabel.text = self.episode.title;
         self.flagImage.image = [UIImage imageNamed:self.episode.isoCountryCode];
         self.typeLabel.text = self.episode.type;

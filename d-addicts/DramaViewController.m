@@ -26,6 +26,10 @@
     self.episodeDataController.delegate = self;
     [self.episodeDataController connect];
     [self.episodeDataController start];
+
+    // Required for self-sizing cells in iOS 8
+    self.tableView.estimatedRowHeight = 44.0;
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
 }
 
 #pragma mark - Episode Data Delegate
@@ -64,9 +68,9 @@
     Episode *episode = [self.episodeDataController episodeAtIndex:indexPath.row];
 
     // Configure cell
-    cell.titleLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleCaption1];
-    cell.titleLabel.text = episode.title;
-    cell.flagImage.image = [UIImage imageNamed:episode.isoCountryCode];
+//    cell.textLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleCaption1];
+    cell.textLabel.text = episode.title;
+    cell.imageView.image = [UIImage imageNamed:episode.isoCountryCode];
 
     return cell;
 }
