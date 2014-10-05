@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A91D0CBB1782116700AE9569 /* DramaCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A91D0CBA1782116700AE9569 /* DramaCell.m */; };
 		A92F686E19CB679200F54DBE /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A92F686D19CB679200F54DBE /* LaunchScreen.xib */; };
 		A92F687419CB753E00F54DBE /* XMLDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = A92F687319CB753E00F54DBE /* XMLDictionary.m */; };
 		A93028B91763B1D60072BB86 /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = A93028AF1763B1D60072BB86 /* iTunesArtwork */; };
@@ -16,7 +15,6 @@
 		A97A25FC174A61FB00B3CEBC /* DramaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A97A25FB174A61FB00B3CEBC /* DramaViewController.m */; };
 		A9BB095F19BAEFAE0087D17D /* DetailTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A9BB095E19BAEFAE0087D17D /* DetailTableViewController.m */; };
 		A9BB096219BB07BD0087D17D /* EpisodeDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = A9BB096119BB07BD0087D17D /* EpisodeDataController.m */; };
-		A9C5240F1723E77000F8CCDE /* RssParser.m in Sources */ = {isa = PBXBuildFile; fileRef = A9C5240E1723E77000F8CCDE /* RssParser.m */; };
 		A9F074641716B1D500605669 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9F074631716B1D500605669 /* UIKit.framework */; };
 		A9F074661716B1D500605669 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9F074651716B1D500605669 /* Foundation.framework */; };
 		A9F074681716B1D500605669 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9F074671716B1D500605669 /* CoreGraphics.framework */; };
@@ -28,8 +26,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		A91D0CB91782116700AE9569 /* DramaCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DramaCell.h; sourceTree = "<group>"; };
-		A91D0CBA1782116700AE9569 /* DramaCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DramaCell.m; sourceTree = "<group>"; };
 		A91D0CBC1782380900AE9569 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "../Default@2x.png"; sourceTree = "<group>"; };
 		A92F686D19CB679200F54DBE /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		A92F687219CB753E00F54DBE /* XMLDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLDictionary.h; sourceTree = "<group>"; };
@@ -48,8 +44,6 @@
 		A9BB095E19BAEFAE0087D17D /* DetailTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailTableViewController.m; sourceTree = "<group>"; };
 		A9BB096019BB07BD0087D17D /* EpisodeDataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EpisodeDataController.h; sourceTree = "<group>"; };
 		A9BB096119BB07BD0087D17D /* EpisodeDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EpisodeDataController.m; sourceTree = "<group>"; };
-		A9C5240D1723E77000F8CCDE /* RssParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RssParser.h; sourceTree = "<group>"; };
-		A9C5240E1723E77000F8CCDE /* RssParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RssParser.m; sourceTree = "<group>"; };
 		A9F074601716B1D500605669 /* d-addicts.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "d-addicts.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9F074631716B1D500605669 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		A9F074651716B1D500605669 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -127,13 +121,9 @@
 				A941BD0C177C908A00EC979E /* Media.xcassets */,
 				A9F074891716B20100605669 /* Episode.h */,
 				A9F0748A1716B20100605669 /* Episode.m */,
-				A9C5240D1723E77000F8CCDE /* RssParser.h */,
-				A9C5240E1723E77000F8CCDE /* RssParser.m */,
 				A9BB096019BB07BD0087D17D /* EpisodeDataController.h */,
 				A9BB096119BB07BD0087D17D /* EpisodeDataController.m */,
 				A9F0747B1716B1D600605669 /* Main.storyboard */,
-				A91D0CB91782116700AE9569 /* DramaCell.h */,
-				A91D0CBA1782116700AE9569 /* DramaCell.m */,
 				A97A25FA174A61FB00B3CEBC /* DramaViewController.h */,
 				A97A25FB174A61FB00B3CEBC /* DramaViewController.m */,
 				A9BB095D19BAEFAE0087D17D /* DetailTableViewController.h */,
@@ -243,9 +233,7 @@
 				A9BB096219BB07BD0087D17D /* EpisodeDataController.m in Sources */,
 				A9F074701716B1D500605669 /* main.m in Sources */,
 				A9F074741716B1D600605669 /* DramaAppDelegate.m in Sources */,
-				A91D0CBB1782116700AE9569 /* DramaCell.m in Sources */,
 				A9F0748B1716B20100605669 /* Episode.m in Sources */,
-				A9C5240F1723E77000F8CCDE /* RssParser.m in Sources */,
 				A97A25FC174A61FB00B3CEBC /* DramaViewController.m in Sources */,
 				A92F687419CB753E00F54DBE /* XMLDictionary.m in Sources */,
 			);

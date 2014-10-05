@@ -10,7 +10,6 @@
 #import "DetailTableViewController.h"
 #import "EpisodeDataController.h"
 #import "Episode.h"
-#import "DramaCell.h"
 
 @interface DramaViewController ()
 @property (nonatomic, strong) EpisodeDataController *episodeDataController;
@@ -52,11 +51,6 @@
 
 #pragma mark - Table View Data Source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    return 1;
-}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return [self.episodeDataController episodeCount];
@@ -64,7 +58,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    DramaCell *cell = (DramaCell *)[tableView dequeueReusableCellWithIdentifier:@"EpisodeCell"];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"EpisodeCell"];
     Episode *episode = [self.episodeDataController episodeAtIndex:indexPath.row];
 
     // Configure cell

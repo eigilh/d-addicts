@@ -7,7 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "RssParser.h"
+
+#define RSS_ITEM    @"item"
+#define RSS_TITLE   @"title"
+#define RSS_LINK    @"link"
+#define RSS_DESCRIPTION @"description"
+#define RSS_PUBDATE @"pubDate"
 
 @class Episode;
 
@@ -22,7 +27,7 @@
  *
  *  Implement the EpisodeDataDelegate protocol to get notified when loading of data completes.
  */
-@interface EpisodeDataController : NSObject <RssDelegate>
+@interface EpisodeDataController : NSObject
 
 @property (weak) id <EpisodeDataDelegate> delegate;
 
