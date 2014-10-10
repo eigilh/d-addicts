@@ -51,6 +51,7 @@
                                                                                       encoding: NSUTF8StringEncoding]);
                                 [self.delegate dataDidFailWithError:error.localizedDescription];
                             } else {
+                                [self.episodeList removeAllObjects];
                                 NSDictionary *episodeDictionary = [NSDictionary dictionaryWithXMLData:data];
                                 NSArray *items = [episodeDictionary valueForKeyPath:@"channel.item"];
                                 for (NSDictionary *item in items) {

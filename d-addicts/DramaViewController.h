@@ -10,5 +10,6 @@
 #import "EpisodeDataController.h"
 
 @interface DramaViewController : UITableViewController <UITableViewDataSource, UIAlertViewDelegate, EpisodeDataDelegate>
+- (IBAction)refreshPulled:(id)sender;
 
 @end

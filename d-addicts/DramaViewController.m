@@ -13,6 +13,7 @@
 
 @interface DramaViewController ()
 @property (nonatomic, strong) EpisodeDataController *episodeDataController;
+@property (nonatomic) NSUInteger countBeforeRefresh;
 @end
 
 @implementation DramaViewController
@@ -24,23 +25,58 @@
     self.episodeDataController = [[EpisodeDataController alloc] init];
     self.episodeDataController.delegate = self;
     [self.episodeDataController connect];
-    [self.episodeDataController start];
 
     // Required for self-sizing cells in iOS 8
     self.tableView.estimatedRowHeight = 44.0;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
+
+    [self.refreshControl setTintColor:[UIColor orangeColor]];
+    self.countBeforeRefresh = [self.episodeDataController episodeCount];
+    [self.refreshControl beginRefreshing];
+    [self.episodeDataController start];
 }
+
+- (void)updateRows
+{
+    NSMutableArray *deleteIndexPaths = [[NSMutableArray alloc] initWithCapacity:self.countBeforeRefresh];
+    for (NSInteger index=0; index < self.countBeforeRefresh; index += 1) {
+        [deleteIndexPaths addObject:[NSIndexPath indexPathForItem:index inSection:0]];
+    }
+
+    NSUInteger count = [self.episodeDataController episodeCount];
+    NSMutableArray *insertIndexPaths = [[NSMutableArray alloc] initWithCapacity:count];
+    for (NSInteger index=0; index < count; index += 1) {
+        [insertIndexPaths addObject:[NSIndexPath indexPathForItem:index inSection:0]];
+    }
+
+    UITableView *tv = self.tableView;
+    [tv beginUpdates];
+    if (count == self.countBeforeRefresh) {
+        [tv reloadRowsAtIndexPaths:insertIndexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
+    } else {
+        [tv insertRowsAtIndexPaths:insertIndexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
+        [tv deleteRowsAtIndexPaths:deleteIndexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
+    }
+    [tv endUpdates];
+}
+
+- (void)endDataFetch
+{
+    [self.refreshControl endRefreshing];
+    [self updateRows];
+}
+
 
 #pragma mark - Episode Data Delegate
 
 - (void)dataDidLoad
 {
-    [self.tableView reloadData];
+    [self endDataFetch];
 }
 
 - (void)dataDidFailWithError:(NSString *)error
 {
-    [self.tableView reloadData];
+    [self endDataFetch];
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error while fetching feed"
                                                     message:error
                                                    delegate:self
@@ -81,4 +117,8 @@
     }
 }
 
+- (IBAction)refreshPulled:(id)sender {
+    self.countBeforeRefresh = [self.episodeDataController episodeCount];
+    [self.episodeDataController start];
+}
 @end
