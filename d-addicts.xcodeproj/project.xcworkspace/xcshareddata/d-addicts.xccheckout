@@ -14,7 +14,7 @@
 		<string>ssh://github.com/eigilh/d-addicts.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>d-addicts.xcodeproj/project.xcworkspace</string>
+	<string>d-addicts.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>BBD0A8724474A865F5C44C8F450A0EEB22C07BCB</key>
